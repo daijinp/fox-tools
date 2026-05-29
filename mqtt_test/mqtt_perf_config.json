@@ -1,0 +1,22 @@
+{
+  "broker": "emqx-svc.foxess-cloud.svc.cluster.local",
+  "port": 8883,
+  "username": "foxessTest",
+  "password": "<>foxess",
+  "client_id": "foxess_perf_tester",
+  "cert_file": "server.pem",
+  "key_file": "server.key",
+  "ca_cert_file": "",
+  "insecure_skip_verify": true,
+  "sub_topics": [
+    "/kp23bhcpmt91n2v8/R250312J0069/#"
+  ],
+  "qos": 1,
+  "total_qps": 10,
+  "duration_seconds": 60,
+  "log_file": "mqtt_perf.log",
+  "message_file": "message.json",
+  "stats_interval_seconds": 1,
+  "connect_timeout_seconds": 10,
+  "reconnect_interval_seconds": 5
+}

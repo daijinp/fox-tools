@@ -1,0 +1,9 @@
+# debug mode
+debug = False
+# request interval (second)
+sleep_time = 0
+# domain name, do not modify it unless necessary.
+domain = 'https://test.maitian-yun.com'
+# your key
+# a1013
+key = 'admeyJpZCI6IjRlOGFkODNlLTk5NDQtNGEwZi05ZDQwLTU4NWRjMWNjYjBlMyIsInNlY3JldCI6Ijc5MGY1ZGMzZDQwYTgzMGIzMGJjYjU2ZDkyZGZiMDE1Njg5MWFlMjViZTdlNzM3NzAyYzRiMDk1YWQ5YzY4NzMiLCJwYXlsb2FkIjoiQXRhMFNvSFVRN2I5bkI2aFZDWW8zTnJwOURlOHNONjBMUm1HUlVEczlZczZ4WVcydjNVcVhLazd6WFF4NkFlekdiaUlsWFFjUGVGa29EUzQvZXJodzF1dWE1MTNFK1IyeFUrZi9ScEFvU0FuM2FoUTZ6OGtidkU0cFFVSFJMY1BqRnlESFFxYlBKaWE2YU5LaDFRaldWUTZwRmUzMEUzaWZ5ZHprcngxaVBjVzJrajgwTG1JWHhJdGpycUVBdk1sSlMrZWxwU09YYlVDQkh4eWdHR2pGMGRSc3pIMmJyWWpESkRRT09qa2o4TVBWTlI3SkxtcTFVZzVHWVIzNVhJeCJ9'

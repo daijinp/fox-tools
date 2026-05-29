@@ -1,0 +1,2 @@
+# clean_old_reports.py 仅使用 Python 标准库（json/re/pathlib/html/datetime/...）。
+# 此文件保留为空，仅作为占位，便于后续如需引入第三方依赖时统一管理。

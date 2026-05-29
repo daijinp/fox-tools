@@ -1,0 +1,10 @@
+{
+  "domain": "8.211.23.104",
+  "sn": "60HD103063UM061",
+  "a_param": "8.209.79.219",
+  "port": 14435,
+  "path": "/aba/bcb/cac",
+  "user_agent": "esp-idf/1.0 esp32",
+  "timeout": 15,
+  "verify_ssl": false
+}

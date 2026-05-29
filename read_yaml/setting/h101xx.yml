@@ -1,0 +1,5 @@
+version: "H101xx"
+parameters:
+  - name:
+      en: version h1.01.00 DoesNotSupportSettings
+      zh_CN: 版本 h1.01.00 暂不支持远程设置

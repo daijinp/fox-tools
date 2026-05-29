@@ -1,0 +1,52 @@
+[
+  {
+    "protocol_version": "ZAA10301",
+    "request_key": "zaa103__basic2",
+    "response_names": [
+      "SysOn/Off"
+    ],
+    "response_key": [
+      "zaa103__basic2__06"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10200",
+    "request_key": "zaa102__basic2",
+    "response_names": [
+      "SysOn/Off"
+    ],
+    "response_key": [
+      "zaa102__basic2__06"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10102",
+    "request_key": "zaa101__basic2",
+    "response_names": [
+      "SysOn/Off"
+    ],
+    "response_key": [
+      "zaa101__basic2__06"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10002",
+    "request_key": "zaa100__basic2",
+    "response_names": [
+      "SysOn/Off"
+    ],
+    "response_key": [
+      "zaa100__basic2__06"
+    ]
+  },
+  {
+    "protocol_version": "K10602",
+    "request_key": "k106__basic2",
+    "response_names": [
+      "SysOn/Off"
+    ],
+    "response_key": [
+      "k106__basic2__sys_switch"
+    ]
+  }
+]

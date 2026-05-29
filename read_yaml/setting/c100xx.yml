@@ -1,0 +1,5 @@
+version: "C100xx"
+parameters:
+  - name:
+      en: c1.00.xx DoesNotSupportSettings
+      zh_CN: c1.00.xx 暂不支持远程设置

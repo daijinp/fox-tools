@@ -1,0 +1,3212 @@
+version: 'X103xx'
+parameters:
+  - name:
+      en: ConfigurationInfo #参数名称
+      zh_CN: 设置配置信息
+    endian: big #大端字节序
+    start: 50200
+    external:
+      label: ConfigurationInfo
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    nocache: true
+    alias: 'grid_code'
+    clean: true
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 语言
+          en: Language
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          English: 0
+          Portuguese: 1
+          Poland: 2
+          Spanish: 3
+          Italian: 4
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 安规国家
+          en: Safetycountry
+        precision: 1
+        unit: ''
+        alias: 'safety'
+        clean: true
+        nocache: true
+        external:
+          label: Safetycountry
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1000
+        enum:
+          AS4777_AU: 0
+          AS4777_NZ: 1
+          G98_UK: 2
+          G99_UK: 3
+          EN50549_NL: 4
+          CEI021_A: 5
+          VDE0126: 6
+          VDE4105_DE: 7
+          NBR-220_BR: 8
+          NBR-240_BR: 9
+          IEC61727: 10
+          Philippines: 11
+          NRS_SA: 12
+          Vietnam: 13
+          EN50549_PL: 14
+          EN50549_PT: 15
+          PPDS_CR: 16
+          UNE_206_SP: 17
+          RD1699_SP: 18
+          Belgium: 19
+          VFR2014_FR: 20
+          UTE_FR: 21
+          Singapore: 22
+          Indonesia: 23
+          Malaysia: 24
+          Cambodia: 25
+          PEA_TH: 26
+          MEA_TH: 27
+          SriLanka: 28
+          Pakistan: 29
+          Ireland: 30
+          Denmark: 31
+          Slovakia: 32
+          Austria: 33
+          Switzerland: 34
+          Slovenia: 35
+          Hungary: 36
+          Serbia: 37
+          Croatia: 38
+          Turkey: 39
+          Cyprus: 40
+          Bulgaria: 41
+          Romania: 42
+          Greece: 43
+          Latvia: 44
+          Lithuania: 45
+          Estonia: 46
+          Sweden: 47
+          Norway: 48
+          Finland: 49
+          Argentina: 50
+          Chile: 51
+          Mexico: 52
+          USA: 53
+          Canada: 54
+          CQC_CN: 55
+          Japan: 56
+          CQC_CN-1: 57
+          Local: 58
+          SaudiArabia: 59
+          AS4777_AU-2020A: 60
+          AS4777_AU-2020B: 61
+          AS4777_AU-2020C: 62
+          AS4777_NZ-2020: 63
+          CQC_CN-2: 64
+          CEI021_B: 65
+          CEI021_Areti_A: 66
+          CEI021_Areti_B: 67
+          NBR-220_BR2022: 68
+          Spain: 69
+          CQC_CN-3: 70
+          PuertoRico: 71
+          G98_NI: 72
+          G99_NI: 73
+          USA-208: 74
+          VDE4110_DE: 75
+          KSC8564: 76
+          KSC8565: 77
+          PR-LUMA: 78
+          CEI016: 79
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: Modbus地址
+          en: Modbusaddr
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: true
+          lo: 0
+          hi: 20
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: 工厂模式
+          en: Factorymode
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+        enum:
+          Invalid: 0
+          NotFactoryMode: 1
+          FactoryMode: 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: PV输入模式配置
+          en: PVConfig
+        precision: 1
+        unit: ''
+        external:
+          label: PVConfig
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+        enum:
+          Invalid: 0
+          Single: 1
+          InParallel: 2
+      - index: 10
+        type: 'uint16:0'
+        name:
+          zh_CN: DRM使能设置
+          en: DRMEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+      # - index: 12
+      #   type: 'uint16:0'
+      #   name:
+      #     zh_CN: 蜂鸣器设置
+      #     en: MuteEnable
+      #   precision: 1
+      #   unit: ''
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 2
+      - index: 14
+        type: 'uint16:0'
+        name:
+          zh_CN: 开始自检
+          en: StartSelftest
+        precision: 1
+        unit: ''
+        level: 2
+        external:
+          label: StartSelftest
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+      - index: 16
+        type: 'uint16:0'
+        name:
+          zh_CN: 意大利安规锁
+          en: SaftyModeLock
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+      - index: 18
+        type: 'uint16:0'
+        name:
+          zh_CN: 外部开关机信号使能
+          en: DIONOFF
+        precision: 1
+        unit: ''
+        level: 2
+        external:
+          label: DIONOFF
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: 工厂复位
+          en: FactoryReset
+        precision: 1
+        unit: ''
+        enum:
+          disable: 0
+          enable: 1
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: 意大利外部控制信号
+          en: ItalyExternalsignal
+        precision: 1
+        unit: ''
+        enum:
+          disable: 0
+          enable: 1
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: EPSEnable
+          en: EPSEnable
+        precision: 1
+        unit: ''
+        level: 2
+        enum:
+          disable: 0
+          enable: 1
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: OperationMode
+          en: OperationMode
+        precision: 1
+        unit: ''
+        level: 2
+        enum:
+          disable: 0
+          enable: 1
+  - name:
+      en: StartSelftest #参数名称
+      zh_CN: 开始自检
+    endian: big #大端字节序
+    start: 50207
+    external:
+      label: ConfigurationInfo
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    nocache: true
+    clean: true
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 开始自检
+          en: StartSelftest
+        precision: 1
+        unit: ''
+        external:
+          label: StartSelftest
+          tags:
+        range:
+          enable: false
+          lo: 0
+          hi: 2
+      # - index: 38
+      #   type: 'uint16'
+      #   name:
+      #     zh_CN: TBD
+      #     en: TBD
+      #   precision: 1
+      #   unit: ''
+      #   level: 2
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 2
+      # - index: 24  #删除
+      #   type: "uint16:0"
+      #   name:
+      #     zh_CN: EPS使能开关
+      #     en: EnableEps
+      #   precision: 1
+      #   unit: ""
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 2
+      # - index: 24
+      #   type: "uint16:0"
+      #   name:
+      #     zh_CN: 工作模式
+      #     en: OperationMode
+      #   precision: 1
+      #   unit: ""
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 2
+      #   enum:
+      #     A: 0
+      #     B: 1
+  - name:
+      en: StartParameters #参数名称
+      zh_CN: 启动参数
+    alias: 'startupParameters'
+    endian: big #大端字节序
+    start: 50800
+    external:
+      label: StartParameters
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 启动连接时间
+          en: ConnectTime
+        precision: 1
+        unit: 'S'
+        external:
+          label: ConnectTime
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: 启动加载速率
+          en: LoadSpeed
+        precision: 0.1
+        unit: '%/min'
+        external:
+          label: LoadSpeed
+          tags:
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 并网重连时间
+          en: ReconnectTime
+        alias: 'ReconnectionObservationTime'
+        precision: 1
+        unit: 'S'
+        external:
+          label: ReconnectTime
+          tags:
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: 重连加载速率
+          en: ReloadSpeed
+        precision: 0.1
+        unit: '%/min'
+        external:
+          label: ReloadSpeed
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: 并网前电压上限
+          en: VgridBackHigh
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: VgridBackHigh
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+      - index: 10
+        type: 'int16'
+        name:
+          zh_CN: 并网前电压下限
+          en: VgridBackLow
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: VgridBackLow
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 100
+          hi: 2500
+      - index: 12
+        type: 'int16'
+        name:
+          zh_CN: 并网前频率上限
+          en: FgridBackHigh
+        alias: 'ConnectionUpperFrequencyValue'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: FgridBackHigh
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: 并网前频率下限
+          en: FgridBackLow
+        alias: 'ConnectionLowerFrequencyValue'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: FgridBackLow
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 16
+        type: 'int16'
+        name:
+          zh_CN: 重连电网电压上限
+          en: GridVoltageReconnectHighThreshold
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: GridVoltageReconnectHighThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3500
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: 重连电网电压下限
+          en: GridVoltageReconnectLowThreshold
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: GridVoltageReconnectLowThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 100
+          hi: 2500
+      - index: 20
+        type: 'int16'
+        name:
+          zh_CN: 重连电网频率上限
+          en: GridFrequencyReconnectHighThreshold
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: GridFrequencyReconnectHighThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: 重连电网频率下限
+          en: GridFrequencyReconnectLowThreshold
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: GridFrequencyReconnectLowThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+  - name:
+      en: GridVoltageParameters
+      zh_CN: 电网电压参数
+    alias: gridvolt
+    endian: big #大端字节序
+    start: 50900
+    external:
+      label: GridVoltageParameters
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 过压1
+          en: OVP1Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OVP1Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 过压2
+          en: OVP2Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OVP2Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 过压3
+          en: OVP3Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OVP3Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: 欠压1
+          en: UVP1Enable
+        precision: 1
+        unit: ''
+        external:
+          label: UVP1Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:4'
+        name:
+          zh_CN: 欠压2
+          en: UVP2Enable
+        precision: 1
+        unit: ''
+        external:
+          label: UVP2Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:5'
+        name:
+          zh_CN: 欠压3
+          en: UVP3Enable
+        precision: 1
+        unit: ''
+        external:
+          label: UVP3Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:6'
+        name:
+          zh_CN: 10分钟过压
+          en: OVPMovEnable
+        precision: 1
+        unit: ''
+        external:
+          label: OVPMovEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: 电网电压上限1
+          en: Vmax1Limit
+        alias: 'OVP1Value'
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmax1Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3500
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压上限1保护时间
+          en: Vmax1ProtectTime
+        alias: 'OVP1Time'
+        precision: 0.01
+        external:
+          label: Vmax1ProtectTime
+          tags:
+          # - BR
+        unit: 'S'
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: 电网电压上限2
+          en: Vmax2Limit
+        alias: 'OVP2Value'
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmax2Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3500
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压上限2保护时间
+          en: Vmax2ProtectTime
+        alias: 'OVP2Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Vmax2ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 10
+        type: 'int16'
+        name:
+          zh_CN: 电网电压上限3
+          en: Vmax3Limit
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmax3Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3500
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压上限3保护时间
+          en: Vmax3ProtectTime
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Vmax3ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: 电网电压下限1
+          en: Vmin1Limit
+        alias: 'UVP1Value'
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmin1Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 100
+          hi: 2500
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压下限1保护时间
+          en: Vmin1ProtectTime
+        alias: 'UVP1Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Vmin1ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: 电网电压下限2
+          en: Vmin2Limit
+        alias: 'UVP2Value'
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmin2Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 100
+          hi: 2500
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压下限2保护时间
+          en: Vmin2ProtectTime
+        alias: 'UVP2Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Vmin2ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: 电网电压下限3
+          en: Vmin3Limit
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vmin3Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 100
+          hi: 2500
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: 电网电压下限3保护时间
+          en: Vmin3ProtectTime
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Vmin3ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: 电网10分钟过压保护值
+          en: Vgrid10minPro
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Vgrid10minPro
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+  - name:
+      en: GridFreqParameters
+      zh_CN: 电网频率参数
+    alias: 'gridFreq'
+    endian: big #大端字节序
+    start: 51100
+    external:
+      label: GridFreqParameters
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 过频1
+          en: OFP1Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OFP1Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 过频2
+          en: OFP2Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OFP2Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 欠频1
+          en: UFP1Enable
+        precision: 1
+        unit: ''
+        external:
+          label: UFP1Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: 欠频2
+          en: UFP2Enable
+        external:
+          label: UFP2Enable
+          tags:
+            - BR
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:4'
+        name:
+          zh_CN: ROCOF
+          en: ROCOF
+        precision: 1
+        unit: ''
+        external:
+          label: ROCOF
+          tags:
+          # - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:5'
+        name:
+          zh_CN: 宽窄频
+          en: Italy
+        precision: 1
+        unit: ''
+        external:
+          label: Italy
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:6'
+        name:
+          zh_CN: 过频3
+          en: OFP3Enable
+        precision: 1
+        unit: ''
+        external:
+          label: OFP3Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:7'
+        name:
+          zh_CN: 欠频3
+          en: UFP3Enable
+        precision: 1
+        unit: ''
+        external:
+          label: UFP3Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: 电网频率上限1
+          en: Fmax1Limit
+        alias: 'OFP1Value'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: Fmax1Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率上限1保护时间
+          en: Fmax1ProtectTime
+        alias: 'OFP1Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Fmax1ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: 电网频率上限2
+          en: Fmax2Limit
+        alias: 'OFP2Value'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: Fmax2Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率上限2保护时间
+          en: Fmax2ProtectTime
+        alias: 'OFP2Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Fmax2ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 10
+        type: 'int16'
+        name:
+          zh_CN: 电网频率下限1
+          en: Fmin1Limit
+        alias: 'UFP1Value'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: Fmin1Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率下限1保护时间
+          en: Fmin1ProtectTime
+        alias: 'UFP1Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Fmin1ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: 电网频率下限2
+          en: Fmin2Limit
+        alias: 'UFP2Value'
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: Fmin2Limit
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率下限2保护时间
+          en: Fmin2ProtectTime
+        alias: 'UFP2Time'
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Fmin2ProtectTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: 频率跳转过快保护
+          en: Rocof
+        precision: 0.1
+        unit: 'Hz'
+        external:
+          label: Rocof
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 50
+      - index: 20
+        type: 'int16'
+        name:
+          zh_CN: 电网频率上限3
+          en: GridFrequencyProtectLevel3HighThreshold
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: GridFrequencyProtectLevel3HighThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率上限3保护时间
+          en: GridFrequencyProtectLevel3HighTripTime
+        precision: 0.01
+        unit: 's'
+        external:
+          label: GridFrequencyProtectLevel3HighTripTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 24
+        type: 'int16'
+        name:
+          zh_CN: 电网频率下限3
+          en: GridFrequencyLevel3LowThreshold
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: GridFrequencyLevel3LowThreshold
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: 电网频率下限3保护时间
+          en: GridFrequencyLevel3LowTripTime
+        precision: 0.01
+        unit: 's'
+        external:
+          label: GridFrequencyLevel3LowTripTime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+  - name:
+      en: PowerFreqParameters
+      zh_CN: 频率有功参数
+    endian: big #大端字节序
+    start: 51300
+    external:
+      label: PowerFreqParameters
+      tags:
+      # - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 过频降载
+          en: FreqDeratingEnable
+        precision: 1
+        unit: ''
+        external:
+          label: FreqDeratingEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 频率回弹功率变化
+          en: PowerFollowFreq
+        precision: 1
+        unit: ''
+        external:
+          label: PowerFollowFreq
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 欠频升载
+          en: UnderFreRisingEnable
+        precision: 1
+        unit: ''
+        external:
+          label: UnderFreRisingEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: 回弹功率变化
+          en: UnderFreqPowerFollowFreq
+        precision: 1
+        unit: ''
+        external:
+          label: UnderFreqPowerFollowFreq
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: 过频降载起始点
+          en: FreqPoint
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: FreqPoint
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 4
+        type: 'int16'
+        name:
+          zh_CN: 降载速率
+          en: FreqSpeed
+        precision: 0.1
+        unit: '1%/Hz'
+        external:
+          label: FreqSpeed
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: 回载频率点
+          en: FbackUp
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: FbackUp
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: 回载频率下限
+          en: FbackDown
+        precision: 0.01
+        unit: 'Hz'
+        external:
+          label: FbackDown
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 4750
+          hi: 6500
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: 回载等待时间
+          en: WaitTimeBack
+        precision: 1
+        unit: 'S'
+        external:
+          label: WaitTimeBack
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 63335
+      - index: 12
+        type: 'int16'
+        name:
+          zh_CN: 回载速率
+          en: FreqbackSpeed
+        precision: 0.1
+        unit: '1%/min'
+        external:
+          label: FreqbackSpeed
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: 过频降载等待时间
+          en: WaittimeOverFreq
+        precision: 1
+        unit: 'ms'
+        external:
+          label: WaittimeOverFreq
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 16
+        type: 'int16'
+        name:
+          zh_CN: 欠频升载起点
+          en: UnderFreqPoint
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: 欠频升载速率
+          en: UnderFreqSpeed
+        precision: 0.1
+        unit: '%/Hz'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 20
+        type: 'int16'
+        name:
+          zh_CN: 欠频升载回载频率点
+          en: FbackUpUnder
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: 欠频升载回载频率上限
+          en: FbackDownUnder
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6500
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: 欠频升载回载等待时间
+          en: WaitTimeBackUnder
+        precision: 1
+        unit: 'S'
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: 欠频升载回载速率
+          en: FreqbackSpeedUnder
+        precision: 0.1
+        unit: '%/min'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 28
+        type: 'uint16'
+        name:
+          zh_CN: 欠频升载等待时间
+          en: WaittimeUnderFreq
+        precision: 0.01
+        unit: 'S'
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+  - name:
+      en: ReactiveConfig
+      zh_CN: 无功设置
+    endian: big #大端字节序
+    start: 51500
+    external:
+      label: ReactiveConfig
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 固定cosphi超前
+          en: FixedCosphiAhead
+        precision: 1
+        unit: ''
+        external:
+          label: FixedCosphiAhead
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 固定Cosphi滞后
+          en: FixedCosphiHysteresis
+        precision: 1
+        unit: ''
+        external:
+          label: FixedCosphiHysteresis
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: PFLineMode
+          en: PFLineMode
+        precision: 1
+        unit: ''
+        external:
+          label: PFLineMode
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:4'
+        name:
+          zh_CN: 固定Qvar
+          en: FixedQvar
+        precision: 1
+        unit: ''
+        external:
+          label: FixedQvar
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:5'
+        name:
+          zh_CN: QUmode
+          en: QUMode
+        precision: 1
+        unit: ''
+        external:
+          label: QUMode
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:6'
+        name:
+          zh_CN: 电压锁定使能
+          en: VoltageLockEnable
+        precision: 1
+        unit: ''
+        external:
+          label: VoltageLockEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:7'
+        name:
+          zh_CN: 功率锁定使能
+          en: PowerLockEnable
+        precision: 1
+        unit: ''
+        external:
+          label: PowerLockEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: Pf控制模式
+          en: PFmode
+        precision: 1
+        unit: ''
+        external:
+          label: PFmode
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Invalid: 0
+          FixedCosphiAhead: 1
+          FixedCosphiHysteresis: 2
+          PFLineMode: 3
+          FixedQvar: 4
+          Q(u)mode: 5
+      - index: 4
+        type: 'int16'
+        name:
+          zh_CN: Pf固定cosphi值
+          en: Pfcosphi
+        precision: 0.01
+        unit: ''
+        external:
+          label: Pfcosphi
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: PF固定Qvar值
+          en: PFQvar
+        precision: 0.1
+        unit: '%'
+        external:
+          label: PFQvar
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点1的cosphi
+          en: Pfcosphi1
+        precision: 0.01
+        unit: ''
+        external:
+          label: Pfcosphi1
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 10
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点1的功率
+          en: Pfpowerpoint1
+        precision: 1
+        unit: '%'
+        external:
+          label: Pfpowerpoint1
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 12
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点2的cosphi
+          en: Pfcosphi2
+        precision: 0.01
+        unit: ''
+        external:
+          label: Pfcosphi2
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点2的功率
+          en: Pfpowerpoint2
+        precision: 1
+        unit: '1%'
+        external:
+          label: Pfpowerpoint2
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 16
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点3的cosphi
+          en: Pfcosphi3
+        precision: 0.01
+        unit: ''
+        external:
+          label: Pfcosphi3
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点3的功率
+          en: Pfpowerpoint3
+        precision: 1
+        unit: '1%'
+        external:
+          label: Pfpowerpoint3
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 20
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点4的cosphi
+          en: Pfcosphi4
+        precision: 0.01
+        unit: ''
+        external:
+          label: Pfcosphi4
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: PF曲线点4的功率
+          en: Pfpowerpoint4
+        precision: 1
+        unit: '1%'
+        external:
+          label: Pfpowerpoint4
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 24
+        type: 'int16'
+        name:
+          zh_CN: PFP模式触发电压
+          en: PflockinV
+        precision: 0.1
+        unit: ''
+        external:
+          label: PflockinV
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: PFP模式退出电压
+          en: PflockoutV
+        precision: 0.1
+        unit: ''
+        external:
+          label: PflockoutV
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 28
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式电压点1
+          en: VU1
+        precision: 0.1
+        unit: ''
+        external:
+          label: VU1
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 30
+        type: 'int16'
+        name:
+          zh_CN: 点1无功值
+          en: QU1
+        precision: 0.1
+        unit: '%'
+        external:
+          label: QU1
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 32
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式电压点2
+          en: VU2
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: VU2
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 34
+        type: 'int16'
+        name:
+          zh_CN: 点2无功值
+          en: QU2
+        precision: 0.1
+        unit: '%'
+        external:
+          label: QU2
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 36
+        type: 'uint16'
+        name:
+          zh_CN: Q(u)模式电压点3
+          en: VU3
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: VU3
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 38
+        type: 'int16'
+        name:
+          zh_CN: 点3无功值
+          en: QU3
+        precision: 0.1
+        unit: '%'
+        external:
+          label: QU3
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 40
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式电压点4
+          en: VU4
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: VU4
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 3500
+      - index: 42
+        type: 'int16'
+        name:
+          zh_CN: 点4无功值
+          en: QU4
+        precision: 0.1
+        unit: '%'
+        external:
+          label: QU4
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 44
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式触发功率
+          en: QulockinP
+        precision: 1
+        unit: '%'
+        external:
+          label: QulockinP
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 46
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式退出功率
+          en: QulockoutP
+        precision: 1
+        unit: '%'
+        external:
+          label: QulockoutP
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 48
+        type: 'int16'
+        name:
+          zh_CN: Q(u)模式最大Qvar
+          en: Qmax
+        precision: 0.1
+        unit: '%'
+        external:
+          label: Qmax
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 50
+        type: 'uint16'
+        name:
+          zh_CN: 延迟时间
+          en: Waittime
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Waittime
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 52
+        type: 'uint16'
+        name:
+          zh_CN: 固定q时间常数
+          en: FixedQTimeConstant
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: FixedQTimeConstant
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+  - name:
+      en: DCIConfig
+      zh_CN: DCI设置
+    endian: big #大端字节序
+    start: 51700
+    external:
+      label: DCIConfig
+      tags:
+      # - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 直流分量1级
+          en: DCI1Enable
+        precision: 1
+        unit: ''
+        external:
+          label: DCI1Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 直流分量2级
+          en: DCI2Enable
+        precision: 1
+        unit: ''
+        external:
+          label: DCI2Enable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: DCI测试注入
+          en: DCITestEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: Dci第一级保护值
+          en: Dcilimit1
+        precision: 0.001
+        unit: 'A'
+        external:
+          label: Dcilimit1
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1500
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: Dci第一级保护时间
+          en: Dcilimit1time
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Dcilimit1time
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: Dci第二级保护值
+          en: Dcilimit2
+        precision: 0.001
+        unit: 'A'
+        external:
+          label: Dcilimit2
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1500
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: Dci第二级保护时间
+          en: Dcilimit2time
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: Dcilimit2time
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: Dci测试注入值
+          en: Dcitest
+        precision: 1
+        unit: 'mA'
+        range:
+          enable: true
+          lo: 0
+          hi: 5000
+  - name:
+      en: FaultRideThrough
+      zh_CN: 电压穿越
+    endian: big #大端字节序
+    start: 51600
+    external:
+      label: FaultRideThrough
+      tags:
+      # - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: LowUnderVoltageRideThrough
+          en: LowUnderVoltageRideThrough
+        precision: 1
+        unit: ''
+        external:
+          label: LowUnderVoltageRideThrough
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: HiOverVoltageRideThrough
+          en: HiOverVoltageRideThrough
+        precision: 1
+        unit: ''
+        external:
+          label: HiOverVoltageRideThrough
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: LT1
+          en: LT1
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: LT1
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 4
+        type: 'int16'
+        name:
+          zh_CN: LV1
+          en: LV1
+        precision: 0.1
+        unit: '%'
+        external:
+          label: LV1
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: LT2
+          en: LT2
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: LT2
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: LV2
+          en: LV2
+        precision: 0.1
+        unit: '%'
+        external:
+          label: LV2
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: LT3
+          en: LT3
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: LT3
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 12
+        type: 'int16'
+        name:
+          zh_CN: LV3
+          en: LV3
+        precision: 0.1
+        unit: '%'
+        external:
+          label: LV3
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: LT4
+          en: LT4
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: LT4
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 16
+        type: 'int16'
+        name:
+          zh_CN: LV4
+          en: LV4
+        precision: 0.1
+        unit: '%'
+        external:
+          label: LV4
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: LT5
+          en: LT5
+        precision: 0.01
+        unit: 'S'
+        level: 2
+        external:
+          label: LT5
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 20
+        type: 'int16'
+        name:
+          zh_CN: LV5
+          en: LV5
+        precision: 1
+        unit: ''
+        level: 2
+        external:
+          label: LV5
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: HT1
+          en: HT1
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: HT1
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 24
+        type: 'int16'
+        name:
+          zh_CN: HV1
+          en: HV1
+        precision: 0.1
+        unit: '%'
+        external:
+          label: HV1
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: HT2
+          en: HT2
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: HT2
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 28
+        type: 'int16'
+        name:
+          zh_CN: HV2
+          en: HV2
+        precision: 0.1
+        unit: '%'
+        external:
+          label: HV2
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 30
+        type: 'uint16'
+        name:
+          zh_CN: HT3
+          en: HT3
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: HT3
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 32
+        type: 'int16'
+        name:
+          zh_CN: HV3
+          en: HV3
+        precision: 0.1
+        unit: '%'
+        external:
+          label: HV3
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 34
+        type: 'uint16'
+        name:
+          zh_CN: HT4
+          en: HT4
+        precision: 0.01
+        unit: 'S'
+        external:
+          label: HT4
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 36
+        type: 'int16'
+        name:
+          zh_CN: HV4
+          en: HV4
+        precision: 0.1
+        unit: '%'
+        external:
+          label: HV4
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 2000
+      - index: 38
+        type: 'uint16'
+        name:
+          zh_CN: HT5
+          en: HT5
+        precision: 0.01
+        unit: 'S'
+        level: 2
+        external:
+          label: HT5
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 40
+        type: 'int16'
+        name:
+          zh_CN: HV5
+          en: HV5
+        precision: 1
+        unit: ''
+        level: 2
+        external:
+          label: HV5
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+
+  - name:
+      en: ActivePowerConfig
+      zh_CN: 有功调度设置
+    endian: big #大端字节序
+    start: 51800
+    external:
+      label: ActivePowerConfig
+      tags:
+        - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 远程功率限制
+          en: RemoteDeratingEnable
+        precision: 1
+        unit: ''
+        external:
+          label: RemoteDeratingEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 远程关机
+          en: RemoteONOFFEnable
+        precision: 1
+        unit: ''
+        external:
+          label: RemoteONOFFEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: ExportLimitEnable
+          en: ExportLimitEnable
+        precision: 1
+        unit: ''
+        external:
+          label: ExportLimitEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: PowerDecreaseRateEnable
+          en: PowerDecreaseRateEnable
+        precision: 1
+        unit: ''
+        external:
+          label: PowerDecreaseRateEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 远程功率限制值
+          en: ActivePowerLimit
+        precision: 1
+        unit: '%'
+        external:
+          label: ActivePowerLimit
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 远程开关机
+          en: RemoteONorOFF
+        precision: 1
+        unit: ''
+        external:
+          label: RemoteONorOFF
+          tags:
+          # - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 100
+        enum:
+          ON: 0
+          OFF: 1
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: 允许馈网功率
+          en: ExportPower
+        precision: 1
+        unit: 'W'
+        external:
+          label: ExportPower
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 32768
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: 功率下降速率
+          en: PowerDecreaseRate
+        precision: 0.01
+        unit: '%/s'
+        external:
+          label: PowerDecreaseRate
+          tags:
+          # - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+  - name:
+      en: ACPowerDownConfig
+      zh_CN: AC过压降载设置
+    endian: big #大端字节序
+    start: 51900
+    external:
+      label: ACPowerDownConfig
+      tags:
+      # - BR
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 过高降载
+          en: ACHignPowerDownEnable
+        precision: 1
+        unit: ''
+        external:
+          label: ACHignPowerDownEnable
+          tags:
+            - BR
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: AC过高功率限制起始点
+          en: Startpoint
+        precision: 0.1
+        unit: 'V'
+        external:
+          label: Startpoint
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 2000
+          hi: 3500
+      - index: 4
+        type: 'int16'
+        name:
+          zh_CN: 降载速率
+          en: Speed
+        precision: 0.1
+        unit: '%/V'
+        external:
+          label: Speed
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: 降载等待时间
+          en: Backtime
+        precision: 0.01
+        unit: 'S'
+        range:
+          enable: true
+          lo: 0
+          hi: 65535
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: 回载速率
+          en: Backspeed
+        precision: 0.1
+        unit: '%/min'
+        external:
+          label: Backspeed
+          tags:
+            - BR
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+  - name:
+      en: SystemTime
+      zh_CN: 系统时间
+    endian: big #大端字节序
+    start: 52100
+    alias: system_time
+    disable: true
+    nocache: true
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 年
+          en: year
+        precision: 1
+        unit: ''
+        alias: year
+        level: 0
+        group:
+          enable: true
+          name: adsf
+          style: begin
+        range:
+          enable: true
+          lo: 2000
+          hi: 2100
+      - index: 2
+        type: 'uint8'
+        name:
+          zh_CN: 月
+          en: month
+        precision: 1
+        unit: ''
+        alias: month
+        level: 0
+        range:
+          enable: true
+          lo: 1
+          hi: 12
+      - index: 3
+        type: 'uint8'
+        name:
+          zh_CN: 日
+          en: day
+        precision: 1
+        unit: ''
+        alias: day
+        level: 0
+        range:
+          enable: true
+          lo: 1
+          hi: 31
+        group:
+          enable: true
+          name: adsf
+          style: end
+      - index: 4
+        type: 'uint8'
+        name:
+          zh_CN: 时
+          en: hour
+        precision: 1
+        unit: ''
+        alias: hour
+        level: 0
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 5
+        type: 'uint8'
+        name:
+          zh_CN: 分
+          en: minute
+        precision: 1
+        unit: ''
+        alias: minute
+        level: 0
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 6
+        type: 'uint8'
+        name:
+          zh_CN: 秒
+          en: second
+        precision: 1
+        unit: ''
+        level: 0
+        alias: second
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+  - name:
+      en: MeterConfig
+      zh_CN: 电表参数
+    alias: meter_config
+    endian: big #大端字节序
+    start: 52200
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 电表CT使能开关
+          en: MeterFunction
+        alias: meter_function
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Disable: 0
+          CT: 1
+          SingleMeter: 2
+          # DoubleMeter: 3
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 电表1地址
+          en: Meteraddress1
+        precision: 1
+        level: 2
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 255
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 电表2地址
+          en: Meteraddress2
+        precision: 1
+        level: 2
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 255
+  - name:
+      en: Operation
+      zh_CN: 执行命令区
+    endian: big #大端字节序
+    start: 50600
+    #alias: operation
+    methods: #可写不可读
+      write:
+        code: 0x06
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 检测用户密码
+          en: CheckUserPassword
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 9999
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 检测安装商密码
+          en: CheckInstallerPassword
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 9999
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 检测管理员密码
+          en: CheckAdministatorPassword
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 9999
+      # - index: 6
+      #   type: 'uint16:0'
+      #   name:
+      #     zh_CN: 清除当日发电量
+      #     en: ResetEToday
+      #   precision: 1
+      #   default: 'false'
+      #   unit: ''
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 1
+      - index: 8
+        type: 'uint16:0'
+        name:
+          zh_CN: 清除总发电量
+          en: ResetETotal
+        precision: 1
+        default: 'false'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 10
+        type: 'uint16:0'
+        name:
+          zh_CN: 清除事件列表
+          en: ResetEventList
+        precision: 1
+        default: 'false'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 12
+        type: 'uint16'
+        #alias: remote_control
+        name:
+          zh_CN: 远程关机
+          en: RemoteControl
+        precision: 1
+        default: ''
+        unit: ''
+        level: 2
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          ON: 0
+          OFF: 1
+      # - index: 14
+      #   type: 'uint16'
+      #   name:
+      #     zh_CN: 写入当日发电量
+      #     en: WriteEtoday
+      #   precision: 0.1
+      #   default: '0'
+      #   unit: 'kWh'
+      #   range:
+      #     enable: true
+      #     lo: 0
+      #     hi: 65535
+      - index: 20
+        type: 'uint16:0'
+        name:
+          zh_CN: 清除EPS过载错误
+          en: ClearEpsOverLoad
+        precision: 1
+        default: 'false'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 22
+        type: 'uint8'
+        name:
+          zh_CN: DRM种类
+          en: DRM
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 23
+        type: 'uint8:0'
+        name:
+          zh_CN: 执行DRM
+          en: RunDRM
+        precision: 1
+        default: 'false'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 26
+        type: 'uint16:0'
+        name:
+          zh_CN: 停机指令
+          en: STOP
+        precision: 1
+        default: 'false'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 42
+        type: 'uint16'
+        name:
+          zh_CN: 接地检测使能
+          en: Ground Fault Monitoring
+        precision: 1
+        level: 2
+        default: '--'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Enable: 0
+          Disable: 1
+  - name:
+      en: PVMonitoring
+      zh_CN: 接地监测
+    endian: big #大端字节序
+    start: 50621
+    methods: #可读可写
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 接地检测使能
+          en: Ground Fault Monitoring
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          ON: 0
+          OFF: 1
+  - name:
+      en: RemoteControl
+      zh_CN: 远程开关机
+    endian: big #大端字节序
+    start: 50606
+    methods: #可读可写
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 远程开关机
+          en: RemoteControl
+        precision: 1
+        alias: remote_control
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          ON: 0
+          OFF: 1
+  - name:
+      en: EventList
+      zh_CN: 事件列表
+    endian: big #大端字节序
+    start: 10140
+    methods: #可读可写
+      read:
+        code: 0x04
+    properties:
+      - index: 0
+        type: 'uint64'
+        name:
+          zh_CN: EventList1
+          en: EventList1
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 8
+        type: 'uint64'
+        name:
+          zh_CN: EventList2
+          en: EventList2
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 16
+        type: 'uint64'
+        name:
+          zh_CN: EventList3
+          en: EventList3
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 16
+        type: 'uint64'
+        name:
+          zh_CN: EventList3
+          en: EventList3
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 24
+        type: 'uint64'
+        name:
+          zh_CN: EventList4
+          en: EventList4
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 32
+        type: 'uint64'
+        name:
+          zh_CN: EventList5
+          en: EventList5
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 40
+        type: 'uint64'
+        name:
+          zh_CN: EventList6
+          en: EventList6
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 48
+        type: 'uint64'
+        name:
+          zh_CN: EventList7
+          en: EventList7
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 56
+        type: 'uint64'
+        name:
+          zh_CN: EventList8
+          en: EventList8
+        precision: 1
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 64
+        type: 'uint64'
+        name:
+          zh_CN: TBD
+          en: TBD
+        precision: 2
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 72
+        type: 'uint64'
+        name:
+          zh_CN: TBD
+          en: TBD
+        precision: 2
+        unit: ''
+        level: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 0

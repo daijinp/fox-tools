@@ -1,0 +1,10 @@
+{
+  "input_file": "input.sql",
+  "output_file": "output.sql",
+  "empty_map_default_type": "Float64",
+  "print_inferred_types": true,
+  "map_type_overrides": {
+    "inverter_status": "String",
+    "battery_status": "String"
+  }
+}

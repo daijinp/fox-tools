@@ -1,0 +1,3075 @@
+version: 'K103xx'
+parameters:
+  - name:
+      en: SystemTime #参数名称
+      zh_CN: 系统时间
+    endian: big #大端字节序
+    start: 40000
+    alias: system_time
+    external:
+      tags:
+        - API #api使用
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    nocache: true
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 年
+          en: year
+        precision: 1
+        unit: ''
+        alias: year
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 2000
+          hi: 2099
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 月
+          en: month
+        precision: 1
+        unit: ''
+        alias: month
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 1
+          hi: 12
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 日
+          en: day
+        precision: 1
+        unit: ''
+        alias: day
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 1
+          hi: 31
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: 时
+          en: hour
+        precision: 1
+        unit: ''
+        alias: hour
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: 分
+          en: minute
+        precision: 1
+        unit: ''
+        alias: minute
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: 秒
+          en: second
+        precision: 1
+        unit: ''
+        alias: second
+        external:
+          tags:
+            - API #api使用
+        level: 0
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+  - name:
+      en: BasicParameters1 #参数名称
+      zh_CN: 基本参数1
+    endian: big #大端字节序
+    start: 40006
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    nocache: true
+    alias: 'grid_code'
+    external:
+      tags:
+        - API #api使用
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: GridCode
+          en: GridCode
+        precision: 1
+        unit: ''
+        alias: 'safety'
+        clean: true
+        nocache: true
+        external:
+          tags:
+            - API #api使用
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          AS4777_AU: 0
+          AS4777_NZ: 1
+          G98_UK: 2
+          G99_UK: 3
+          EN50549_NL: 4
+          CEI021_A: 5
+          VDE0126: 6
+          VDE4105_DE: 7
+          NBR-220_BR: 8
+          NBR-240_BR: 9
+          IEC61727: 10
+          Philippines: 11
+          NRS_SA: 12
+          Vietnam: 13
+          EN50549_PL: 14
+          EN50549_PT: 15
+          PPDS_CR: 16
+          UNE-206_SP: 17
+          RD1699_SP: 18
+          Belgium: 19
+          VFR2019_FR: 20
+          UTE_FR: 21
+          Singapore: 22
+          Indonesia: 23
+          Malaysia: 24
+          Cambodia: 25
+          PEA_TH: 26
+          MEA_TH: 27
+          SriLanka: 28
+          Pakistan: 29
+          Ireland: 30
+          Denmark: 31
+          Slovakia: 32
+          Austria: 33
+          Switzerland: 34
+          Slovenia: 35
+          Hungary: 36
+          Serbia: 37
+          Croatia: 38
+          Turkey: 39
+          Cyprus: 40
+          Bulgaria: 41
+          Romania: 42
+          Greece: 43
+          Latvia: 44
+          Lithuania: 45
+          Estonia: 46
+          Sweden: 47
+          Norway: 48
+          Finland: 49
+          Argentina: 50
+          Chile: 51
+          Mexico: 52
+          USA: 53
+          Hawaii: 54
+          CQC_CN: 55
+          Japan: 56
+          CQC_CN-1: 57
+          Local: 58
+          SaudiArabia: 59
+          AS4777_AU-2020A: 60
+          AS4777_AU-2020B: 61
+          AS4777_AU-2020C: 62
+          AS4777_NZ-2020: 63
+          CQC_CN-2: 64
+          CEI021_B: 65
+          CEI021_Areti_A: 66
+          CEI021_Areti_B: 67
+          NBR-220_BR2022: 68
+          Spain: 69
+          CQC_CN-3: 70
+          PuertoRico: 71
+          G98_NI: 72
+          G99_NI: 73
+          USA-208: 74
+          VDE4110_DE: 75
+          KSC8564: 76
+          KSC8565: 77
+          PR-LUM: 78
+          CEI016: 79
+          DUBAI: 80
+          Denmark3.2.2: 81
+          TR3.3.1-DK1: 82
+          TR3.3.1-DK2: 83
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: Language
+          en: Language
+        precision: 1
+        alias: 'language'
+        unit: ''
+        external:
+          tags:
+            - API #api使用
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          English: 0
+          Deutsch: 1
+          Polski: 2
+          French: 3
+          Portuguese: 4
+          Spanish: 5
+          Italian: 6
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: PVConfig
+          en: PVConfig
+        precision: 1
+        unit: ''
+        external:
+          tags:
+            - API #api使用
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          invalid: 0
+          independent: 1
+          in-parallel: 2
+      - index: 6
+        type: 'uint16:0'
+        name:
+          zh_CN: DRM0State
+          en: DRM0State
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: Meter1/CT1
+          en: Meter1/CT1
+        alias: meter1_enable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Meter: 0
+          CT: 1
+          disable: 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: Meter2/CT2
+          en: Meter2/CT2
+        alias: meter2_enable
+        precision: 1
+        external:
+          tags:
+            - API #api使用
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Meter: 0
+          CT: 1
+          disable: 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: ModbusAddress
+          en: ModbusAddress
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 1
+          hi: 247
+        level: 1 #可见不可改变
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: Password
+          en: Password
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 9999
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: WifiPushTimeInterval
+          en: WifiPushTimeInterval
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 30
+          hi: 600
+        level: 2
+      - index: 38
+        type: 'uint16'
+        name:
+          zh_CN: TBD
+          en: TBD
+        precision: 1
+        unit: ''
+        level: 2
+  - name:
+      en: WorkModeParameters #参数名称
+      zh_CN: 工作模式参数
+    endian: big #大端字节序
+    start: 41000
+    alias: operation_mode
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    external:
+      tags:
+        - API #api使用
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: WorkMode
+          en: WorkMode
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: work_mode
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          SelfUse: 0
+          Feedin: 1
+  - name:
+      en: ChargingTime #参数名称
+      zh_CN: 充电时间
+    endian: big #大端字节序
+    start: 41001
+    alias: charge_time
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    external:
+      tags:
+        - API #api使用
+    tips: |-
+      1.Only filling the four period settings with all zero can disable force-charge period.
+      2.The following two checkboxes means:
+       (checked) During force-charge period, both grid and PV can charge battery.
+       (unchecked) During force-charge period, only PV can charge battery.
+    properties:
+      - index: 2
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime1Hour
+          en: ChargeStartTime1Hour
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: start_time1_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 3
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime1Minute
+          en: ChargeStartTime1Minute
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: start_time1_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 4
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime1Hour
+          en: ChargeEndTime1Hour
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: end_time1_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 5
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime1Minute
+          en: ChargeEndTime1Minute
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: end_time1_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: P1GridChargeFlag
+          en: P1GridChargeFlag
+        precision: 1
+        alias: grid_flag1
+        external:
+          tags:
+            - API #api使用
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 8
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime2Hour
+          en: ChargeStartTime2Hour
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: start_time2_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 9
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime2Minute
+          en: ChargeStartTime2Minute
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: start_time2_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 10
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime2Hour
+          en: ChargeEndTime2Hour
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: end_time2_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+      - index: 11
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime2Minute
+          en: ChargeEndTime2Minute
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: end_time2_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+      - index: 6
+        type: 'uint16:0'
+        name:
+          zh_CN: P2GridChargeFlag
+          en: P2GridChargeFlag
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: grid_flag2
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+  - name:
+      en: BasicParameters2 #参数名称
+      zh_CN: 基本参数2
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 41007
+    alias: basic2
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSetChargeCurrent
+          en: MaximumSetChargeCurrent
+        alias: max_set_charge_current
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'A'
+        range:
+          enable: true
+          lo: 0
+          hi: 500
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSetDischargeCurrent
+          en: MaximumSetDischargeCurrent
+        alias: max_set_discharge_current
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'A'
+        range:
+          enable: true
+          lo: 0
+          hi: 500
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: MinimumSoC
+          en: MinimumSoC
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: minsoc
+        unit: '%'
+        range:
+          enable: true
+          lo: 0 #10
+          hi: 100
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSoC
+          en: MaximumSoC
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 10
+          hi: 100
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: MinimumSoC-OnGrid
+          en: MinimumSoC-OnGrid
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        alias: minsoc_ongrid
+        unit: '%'
+        range:
+          enable: true
+          lo: 0 #10
+          hi: 100
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: SysOn/Off
+          en: SysOn/Off
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          On: 1
+          Off: 0
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: EpsFrequencySelect
+          en: EpsFrequencySelect
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+        enum:
+          Invalid: 0
+          50Hz: 1
+          60Hz: 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: EpsOutput
+          en: EpsOutput
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        enum:
+          Disable: 0
+          EpsMode: 2
+          UpsMode: 3
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: PowerLimit
+          en: PowerLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: ByPassRelay
+          en: ByPassRelay
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 100
+        enum:
+          External: 0
+          Internal: 1
+        level: 2
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: GroundProtection
+          en: GroundProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          On: 0
+          Off: 1
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: EpsRatedVoltage
+          en: EpsRatedVoltage
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 2500
+      - index: 26
+        type: 'uint16:0'
+        name:
+          zh_CN: EpsOverloadAutoRecovery
+          en: EpsOverloadAutoRecovery
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 28
+        type: 'uint16:0'
+        name:
+          zh_CN: IdleState
+          en: IdleState
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        level: 2
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 30
+        type: 'uint16:0'
+        name:
+          zh_CN: UpsOutput
+          en: UpsOutput
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        level: 2
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 32
+        type: 'int32'
+        name:
+          zh_CN: ExportLimitedPower
+          en: ExportLimitedPower
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'W'
+        range:
+          enable: true
+          lo: 0
+          hi: 30000
+      - index: 36
+        type: 'uint16'
+        name:
+          zh_CN: GridChargeCurrentLimited
+          en: GridChargeCurrentLimited
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'A'
+        range:
+          enable: true
+          lo: 20
+          hi: 500
+      - index: 58
+        type: 'uint16'
+        name:
+          zh_CN: TBD
+          en: TBD
+        alias: tbd
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+        level: 2
+
+  - name:
+      zh_CN: 安规启动参数
+      en: SafetyStartParameters #参数名称
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42000
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: VoltParameter
+          en: VoltParameter
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: FrequenceParameter
+          en: FrequenceParameter
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: SoftStart
+          en: SoftStart
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: ConnectTime
+          en: ConnectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'S'
+        range:
+          enable: true
+          lo: 15
+          hi: 1800
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: ConnectPowerGradient
+          en: ConnectPowerGradient
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '0.1%'
+        range:
+          enable: true
+          lo: 10
+          hi: 1000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: ReconnectTime
+          en: ReconnectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'S'
+        range:
+          enable: true
+          lo: 15
+          hi: 1800
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: ReconnectPowerGradient
+          en: ReconnectPowerGradient
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '0.1%'
+        range:
+          enable: true
+          lo: 10
+          hi: 1000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: ConnectVoltagHeighLimit
+          en: ConnectVoltagHeighLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2300
+          hi: 3000
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: ConnectVoltagLowLimit
+          en: ConnectVoltagLowLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 2300
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: ConnectFrequencyHighLimit
+          en: ConnectFrequencyHighLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: ConnectFrequencyLowLimit
+          en: ConnectFrequencyLowLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4700
+          hi: 6000
+  - name:
+      en: SafetyVoltageParameters #参数名称
+      zh_CN: 安规电压参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42100
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 一级保护
+          en: PrimaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 二级保护
+          en: SecondaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 三级保护
+          en: Three-levelProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: 十分钟过压保护
+          en: TenMinutesOvervoltageProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit1
+          en: VoltageHighLimit1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2300
+          hi: 3000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit1ProtectTime
+          en: VoltageHighLimit1ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit2
+          en: VoltageHighLimit2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2300
+          hi: 3200
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit2ProtectTime
+          en: VoltageHighLimit2ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit3
+          en: VoltageHighLimit3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2300
+          hi: 3200
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit3ProtectTime
+          en: VoltageHighLimit3ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit1
+          en: VoltageLowLimit1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 230
+          hi: 2300
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit1ProtectTime
+          en: VoltageLowLimit1ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit2
+          en: VoltageLowLimit2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 230
+          hi: 2300
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit2ProtectTime
+          en: VoltageLowLimit2ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: 10minVoltageHighLimit
+          en: 10minVoltageHighLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2300
+          hi: 3500
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit3
+          en: VoltageLowLimit3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 230
+          hi: 2300
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit3ProtectTime
+          en: VoltageLowLimit3ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+  - name:
+      en: SafetyFrequency #参数名称
+      zh_CN: 安规频率参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42200
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 一级保护
+          en: PrimaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 二级保护
+          en: SecondaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: Rocof
+          en: Rocof
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit1
+          en: FrequencyHighLimit1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit1ProtectTime
+          en: FrequencyHighLimit1ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit2
+          en: FrequencyHighLimit2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit2ProtectTime
+          en: FrequencyHighLimit2ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit1
+          en: FrequencyLowLimit1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6000
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit1ProtectTime
+          en: FrequencyLowLimit1ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit2
+          en: FrequencyLowLimit2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6000
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit2ProtectTime
+          en: FrequencyLowLimit2ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 5000
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: Rocof
+          en: Rocof
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'Hz/s'
+        range:
+          enable: false
+          lo: 50
+          hi: 500
+  - name:
+      en: Safety-P(f) #参数名称
+      zh_CN: 安规-P(f)参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42300
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: P(f) flag
+          en: P(f) flag
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: UnderFrequencyPointRecover
+          en: UnderFrequencyPointRecover
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: UnderFrequencyPointEnter
+          en: UnderFrequencyPointEnter
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: UnderFrequencyPointExit
+          en: UnderFrequencyPointExit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4500
+          hi: 6000
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: UnderFrequencyPowerDeclineSlope
+          en: UnderFrequencyPowerDeclineSlope
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%/Hz'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: OverFrequencyPointRecover
+          en: OverFrequencyPointRecover
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: OverFrequencyPointEnter
+          en: OverFrequencyPointEnter
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: OverFrequencyPointExit
+          en: OverFrequencyPointExit
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 5010
+          hi: 6500
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: OverFrequencyPowerDeclineSlope
+          en: OverFrequencyPowerDeclineSlope
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%/Hz'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: P(f)EnterDelay
+          en: P(f)EnterDelay
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 0
+          hi: 15000
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: P(f)ExitDelay
+          en: P(f)ExitDelay
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'S'
+        range:
+          enable: true
+          lo: 0
+          hi: 15000
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: P(f)PowerIncreaseGradient
+          en: P(f)PowerIncreaseGradient
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%Pn/min'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: UnderFrequencyStopPointDeclineSlope
+          en: UnderFrequencyStopPointDeclineSlope
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: OverFrequencyStopPointDeclineSlope
+          en: OverFrequencyStopPointDeclineSlope
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 28
+        type: 'uint16:0'
+        name:
+          zh_CN: p(f)Enable
+          en: p(f)Enable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1000
+  - name:
+      en: Safety-LVRT
+      zh_CN: 安规-LVRT
+    external:
+      tags:
+        - API
+    endian: big
+    start: 42400
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: Enable
+          en: Enable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: NominalGridVol
+          en: NominalGridVol
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: LT1
+          en: LT1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 6
+        type: 'int16'
+        name:
+          zh_CN: LV1
+          en: LV1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: LT2
+          en: LT2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 10
+        type: 'int16'
+        name:
+          zh_CN: LV2
+          en: LV2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: LT3
+          en: LT3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: LV3
+          en: LV3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: LT4
+          en: LT4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: LV4
+          en: LV4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: LT5
+          en: LT5
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        level: 2
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: LV5
+          en: LV5
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        level: 2
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: HT1
+          en: HT1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: HV1
+          en: HV1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 28
+        type: 'uint16'
+        name:
+          zh_CN: HT2
+          en: HT2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 30
+        type: 'int16'
+        name:
+          zh_CN: HV2
+          en: HV2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 32
+        type: 'uint16'
+        name:
+          zh_CN: HT3
+          en: HT3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 34
+        type: 'int16'
+        name:
+          zh_CN: HV3
+          en: HV3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 36
+        type: 'uint16'
+        name:
+          zh_CN: HT4
+          en: HT4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 38
+        type: 'int16'
+        name:
+          zh_CN: HV4
+          en: HV4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 40
+        type: 'uint16'
+        name:
+          zh_CN: HT5
+          en: HT5
+        external:
+          tags:
+            - API #api使用
+        precision: 01
+        unit: 'sec'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        level: 2
+      - index: 42
+        type: 'uint16'
+        name:
+          zh_CN: HV5
+          en: HV5
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        level: 2
+  - name:
+      en: Safety-P(u) #参数名称
+      zh_CN: 安规-P(u)参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42700
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: P(u)flag
+          en: P(u)flag
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        level: 0
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: V1
+          en: V1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: V2
+          en: V2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: V3
+          en: V3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: V4
+          en: V4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P(U)Delay
+          en: P(U)Delay
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 0
+          hi: 15000
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: P(U)PowerIncreaseGradient
+          en: P(U)PowerIncreaseGradient
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: '%Pn/min'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 14
+        type: 'uint16:0'
+        name:
+          zh_CN: p(u)Enable
+          en: p(u)Enable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1000
+  - name:
+      en: Safety-DCI #参数名称
+      zh_CN: 安规-DCI参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 42800
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 一级保护
+          en: PrimaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 二级保护
+          en: SecondaryProtection
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: DCIHighLimit1
+          en: DCIHighLimit1
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'mA'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: DCIHighLimit1ProtectTime
+          en: DCIHighLimit1ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 250
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: DCIHighLimit2
+          en: DCIHighLimit2
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'mA'
+        range:
+          enable: true
+          lo: 0
+          hi: 1000
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: DCIHighLimit2ProtectTime
+          en: DCIHighLimit2ProtectTime
+        external:
+          tags:
+            - API #api使用
+        precision: 10
+        unit: 'ms'
+        range:
+          enable: true
+          lo: 1
+          hi: 250
+  - name:
+      en: Safety-Reactive #参数名称
+      zh_CN: 安规-无功参数
+    external:
+      tags:
+        - API #api使用
+    endian: big #大端字节序
+    start: 43000
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 无效模式
+          en: InvalidMode
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: 固定cosphi超前
+          en: FixedCosphiAhead
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:2'
+        name:
+          zh_CN: 固定Cosphi滞后
+          en: FixedCosphiHysteresis
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:3'
+        name:
+          zh_CN: PFLineMode
+          en: PFLineMode
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:4'
+        name:
+          zh_CN: 固定Qvar
+          en: FixedQvar
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:5'
+        name:
+          zh_CN: Q(u) mode
+          en: Q(u) mode
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+
+      - index: 0
+        type: 'uint16:6'
+        name:
+          zh_CN: 电压锁定
+          en: VoltageLockEnable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 0
+        type: 'uint16:7'
+        name:
+          zh_CN: 功率锁定
+          en: PowerLockEnable
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: ReactivePowerControlMode
+          en: ReactivePowerControlMode
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          VarNo: 0
+          UnderExcited: 1
+          OverExcited: 2
+          PFPower: 3
+          FixedQ: 4
+          QVoltage: 5
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: ReactivePowerRiseTime
+          en: ReactivePowerRiseTime
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: FixedPF
+          en: FixedPF
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: FixedQ
+          en: FixedQ
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '‰'
+        range:
+          enable: true
+          lo: -1000
+          hi: 1000
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPLockinV
+          en: CosphiPLockinV
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPLockoutV
+          en: CosphiPLockoutV
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF1
+          en: CosphiPPF1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP1
+          en: CosphiPP1
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 18
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF2
+          en: CosphiPPF2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP2
+          en: CosphiPP2
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF3
+          en: CosphiPPF3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP3
+          en: CosphiPP3
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF4
+          en: CosphiPPF4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+      - index: 28
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP4
+          en: CosphiPP4
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 30
+        type: 'uint16'
+        name:
+          zh_CN: QuV1
+          en: QuV1
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 32
+        type: 'int16'
+        name:
+          zh_CN: QuQ1
+          en: QuQ1
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 3000
+      - index: 34
+        type: 'uint16'
+        name:
+          zh_CN: QuV2
+          en: QuV2
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 36
+        type: 'int16'
+        name:
+          zh_CN: QuQ2
+          en: QuQ2
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 3000
+      - index: 38
+        type: 'uint16'
+        name:
+          zh_CN: QuV3
+          en: QuV3
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 40
+        type: 'int16'
+        name:
+          zh_CN: QuQ3
+          en: QuQ3
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 3000
+      - index: 42
+        type: 'uint16'
+        name:
+          zh_CN: QuV4
+          en: QuV4
+        external:
+          tags:
+            - API #api使用
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+      - index: 44
+        type: 'int16'
+        name:
+          zh_CN: QuQ4
+          en: QuQ4
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 3000
+      - index: 46
+        type: 'uint16'
+        name:
+          zh_CN: QuLockinPRatio
+          en: QuLockinPRatio
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 48
+        type: 'uint16'
+        name:
+          zh_CN: QuLockoutPRatio
+          en: QuLockoutPRatio
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 50
+        type: 'int16'
+        name:
+          zh_CN: QuQLimit
+          en: QuQLimit
+        external:
+          tags:
+            - API #api使用
+        precision: 1
+        unit: 'Var'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+      - index: 52
+        type: 'uint16'
+        name:
+          zh_CN: QuEnterDelay
+          en: QuEnterDelay
+        external:
+          tags:
+            - API #api使用
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+
+  - name:
+      en: AFCI
+      zh_CN: AFCI
+    endian: big #大端字节序
+    start: 53000
+    methods: #可写不可读
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'int16'
+        name:
+          zh_CN: StrengthIndex
+          en: StrengthIndex
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'int16'
+        name:
+          zh_CN: TimeIndex
+          en: TimeIndex
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 38
+        type: 'uint16'
+        name:
+          zh_CN: TBD
+          en: TBD
+        alias: tbd
+        precision: 1
+        level: 2
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 3
+
+  - name:
+      en: PeakShaving #参数名称
+      zh_CN: PeakShaving
+    endian: big #大端字节序
+    start: 53100
+    alias: peak_shaving_set
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'int32'
+        name:
+          zh_CN: Importlimit
+          en: Importlimit
+        precision: 1
+        alias: import_limit
+        unit: 'W'
+        range:
+          enable: true
+          lo: 0
+          hi: 100000
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: ThresholdSOC
+          en: ThresholdSOC
+        precision: 1
+        alias: thresholdsoc
+        unit: '%'
+        range:
+          enable: true
+          lo: 10
+          hi: 100
+      - index: 6
+        type: 'uint32'
+        name:
+          zh_CN: Exportpeaklimit
+          en: Exportpeaklimit
+        precision: 1
+        unit: 'W'
+        range:
+          enable: true
+          lo: 0
+          hi: 100000
+
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: ChrInLowImport
+          en: ChrInLowImport
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          NOMode: 0x00
+          NCMode: 0x01
+          TimingMode: 0x02
+      - index: 12
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowStartTime1Hour
+          en: ChrInLowStartTime1Hour
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 13
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowStartTime1Minute
+          en: ChrInLowStartTime1Minute
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+
+      - index: 14
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowEndTime1Hour
+          en: ChrInLowEndTime1Hour
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 15
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowEndTime1Minute
+          en: ChrInLowEndTime1Minute
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 16
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowStartTime2Hour
+          en: ChrInLowStartTime2Hour
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 17
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowStartTime2Minute
+          en: ChrInLowStartTime2Minute
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 18
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowEndTime2Hour
+          en: ChrInLowEndTime2Hour
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 19
+        type: 'uint8'
+        name:
+          zh_CN: ChrInLowEndTime2Minute
+          en: ChrInLowEndTime2Minute
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+  - name:
+      en: Operation
+      zh_CN: 执行命令区
+    endian: big #大端字节序
+    start: 45000
+    alias: operation
+    methods: #可写不可读
+      write:
+        code: 0x06
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        alias: test
+        name:
+          zh_CN: 清事件
+          en: ClearEvents
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 9999
+      - index: 2
+        type: 'uint16:0'
+        name:
+          zh_CN: 清电量
+          en: ClearEnergy
+        precision: 1
+        default: '0'
+        unit: ''
+        level: 0
+        range:
+          enable: false
+          lo: 0
+          hi: 9999
+      - index: 4
+        type: 'uint16:0'
+        name:
+          zh_CN: 恢复出厂设置
+          en: FactoryReset
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 6
+        type: 'uint16:0'
+        name:
+          zh_CN: BMS远程激活
+          en: BatteryPowerActive
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0
+      - index: 8
+        type: 'uint16:0'
+        name:
+          zh_CN: ClearArcFault
+          en: ClearArcFault
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 0

@@ -1,0 +1,2681 @@
+version: 'D100xx'
+parameters:
+  - name:
+      en: RTCTime
+      zh_CN: 系统时间
+    endian: big #大端字节序
+    alias: system_time
+    nocache: true
+    start: 40000
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: 年
+          en: Year
+        precision: 1
+        unit: ''
+        alias: year
+        range:
+          enable: true
+          lo: 0
+          hi: 99
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 月
+          en: Month
+        precision: 1
+        unit: ''
+        alias: month
+        range:
+          enable: true
+          lo: 1
+          hi: 12
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 日
+          en: Day
+        precision: 1
+        unit: ''
+        alias: day
+        range:
+          enable: true
+          lo: 1
+          hi: 31
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: 时
+          en: Hour
+        precision: 1
+        unit: ''
+        alias: hour
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: 分
+          en: Minute
+        precision: 1
+        unit: ''
+        alias: minute
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: 秒
+          en: Second
+        precision: 1
+        unit: ''
+        alias: second
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+            - 3
+          operable:
+            - 1
+            - 2
+  - name:
+      en: Safety
+      zh_CN: 安规类型/外设配置
+    endian: big #大端字节序
+    start: 40006
+    alias: 'grid_code'
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    nocache: true
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: GridCode
+          en: GridCode
+        precision: 1
+        unit: ''
+        alias: 'safety'
+        clean: true
+        nocache: true
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          AS4777_AU: 0
+          AS4777_NZ: 1
+          G98_1: 2
+          G99_1: 3
+          Netherlands: 4
+          CEI_021: 5
+          VDE0126: 6
+          ARN4105: 7
+          Brasil_220: 8
+          Brasil_240: 9
+          IEC61727: 10
+          Philippines: 11
+          NRS097_2_1: 12
+          Vietnam: 13
+          Poland: 14
+          Portugal: 15
+          PPDS: 16
+          UNE_206: 17
+          RD1699: 18
+          Belgium: 19
+          VFR2014: 20
+          UTE_C15_712_1: 21
+          Singapore: 22
+          Indonesia: 23
+          Malaysia: 24
+          Cambodia: 25
+          PEA: 26
+          MEA: 27
+          SriLanka: 28
+          Pakistan: 29
+          Ireland: 30
+          Denmark: 31
+          Slovakia: 32
+          Austria: 33
+          Switzerland: 34
+          Slovenia: 35
+          Hungary: 36
+          Serbia: 37
+          Croatia: 38
+          Turkey: 39
+          Cyprus: 40
+          Bulgaria: 41
+          Romania: 42
+          Greece: 43
+          Latvia: 44
+          Lithuania: 45
+          Estonia: 46
+          Sweden: 47
+          Norway: 48
+          Finland: 49
+          Argentina: 50
+          Chile: 51
+          Mexico: 52
+          USA: 53
+          Canada: 54
+          China: 55
+          Japan: 56
+          China-1: 57
+          Local: 58
+          SaudiArabia: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: DRM0State
+          en: DRM0State
+        precision: 1
+        unit: ''
+        enum:
+          Disable: 0
+          Enable: 1
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: Meter
+          en: Meter
+        precision: 1
+        unit: ''
+        enum:
+          Disable: 1
+          Enable: 0
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: ModbusAddr
+          en: ModbusAddr
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 1
+          hi: 247
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: WifiPushTimeInterval
+          en: WifiPushTimeInterval
+        precision: 1
+        unit: ''
+        range:
+          enable: true
+          lo: 30
+          hi: 600
+        level: 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: DrmCtrlHw
+          en: DrmCtrlHw
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          100%: 0x01
+          60%: 0x02
+          30%: 0x04
+          0%: 0x08
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: DrmCtrlWf
+          en: DrmCtrlWf
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          100%: 0x01
+          60%: 0x02
+          30%: 0x04
+          0%: 0x08
+  - name:
+      en: OperationMode
+      zh_CN: 工作模式
+    endian: big #大端字节序
+    start: 41000
+    alias: operation_mode
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: WorkMode
+          en: WorkMode
+        precision: 1
+        alias: work_mode
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 3
+        enum:
+          SelfUse: 0
+          Feedin: 1
+          Backup: 2
+          PowerStation: 3
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+  - name:
+      en: ChargingTime
+      zh_CN: 充电时间
+    endian: big #大端字节序
+    start: 41001
+    alias: charge_time
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    tips: |-
+      1.Only filling the four period settings with all zero can disable force-charge period.
+      2.The following two checkboxes means:
+       (checked) During force-charge period, both grid and PV can charge battery.
+       (unchecked) During force-charge period, only PV can charge battery.
+    properties:
+      - index: 2
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime1Hour
+          en: ChargeStartTime1Hour
+        precision: 1
+        alias: start_time1_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 3
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime1Minute
+          en: ChargeStartTime1Minute
+        precision: 1
+        alias: start_time1_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 4
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime1Hour
+          en: ChargeEndTime1Hour
+        precision: 1
+        alias: end_time1_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 5
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime1Minute
+          en: ChargeEndTime1Minute
+        precision: 1
+        alias: end_time1_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: P1GridChargeFlag
+          en: P1GridChargeFlag
+        precision: 1
+        alias: grid_flag1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 8
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime2Hour
+          en: ChargeStartTime2Hour
+        precision: 1
+        alias: start_time2_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 9
+        type: 'uint8'
+        name:
+          zh_CN: ChargeStartTime2Minute
+          en: ChargeStartTime2Minute
+        precision: 1
+        alias: start_time2_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 10
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime2Hour
+          en: ChargeEndTime2Hour
+        precision: 1
+        alias: end_time2_hour
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 23
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 11
+        type: 'uint8'
+        name:
+          zh_CN: ChargeEndTime2Minute
+          en: ChargeEndTime2Minute
+        precision: 1
+        alias: end_time2_minute
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 59
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+      - index: 6
+        type: 'uint16:0'
+        name:
+          zh_CN: P2GridChargeFlag
+          en: P2GridChargeFlag
+        precision: 1
+        alias: grid_flag2
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+            - 3
+  - name:
+      en: Battery/SysOnOff
+      zh_CN: 电池配置/开关机
+    endian: big #大端字节序
+    start: 41007
+    alias: basic2
+    methods:
+      write:
+        code: 0x06
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSetChargeCurrent
+          en: MaximumSetChargeCurrent
+        alias: max_set_charge_current
+        precision: 0.1
+        unit: 'A'
+        range:
+          enable: true
+          lo: 0
+          hi: 260
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSetDischargeCurrent
+          en: MaximumSetDischargeCurrent
+        alias: max_set_discharge_current
+        precision: 0.1
+        unit: 'A'
+        range:
+          enable: true
+          lo: 0
+          hi: 260
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: MinimumSoC
+          en: MinimumSoC
+        precision: 1
+        alias: minsoc
+        unit: '%'
+        range:
+          enable: true
+          lo: 0 #5
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: MaximumSoC
+          en: MaximumSoC
+        precision: 1
+        unit: '%'
+        range:
+          enable: true
+          lo: 5
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: MinimumSoC-OnGrid
+          en: MinimumSoC-OnGrid
+        precision: 1
+        alias: minsoc_ongrid
+        unit: '%'
+        range:
+          enable: true
+          lo: 0 #5
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: SysOn/Off
+          en: SysOn/Off
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          On: 1
+          Off: 0
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16:0'
+        name:
+          zh_CN: Grounding
+          en: Grounding
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: ExportLimit
+      zh_CN: 并网功率限制值
+    endian: big #大端字节序
+    start: 41050
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint32'
+        name:
+          zh_CN: ExportLimit
+          en: ExportLimit
+        precision: 1
+        unit: 'W'
+        range:
+          enable: true
+          lo: 0
+          hi: 100000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: OffGridParameters
+      zh_CN: 离网参数
+    endian: big #大端字节序
+    start: 41100
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: EpsOverloadAutoRecovery
+          en: RemoteDeratingEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          Disable: 0
+          Enable: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: EpsRecoverSOC
+          en: EpsRecoverSOC
+        precision: 1
+        unit: '%'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: EpsRecoverVolt
+          en: EpsRecoverVolt
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: EpsFrequencySelect
+          en: EpsFrequencySelect
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          50Hz: 0
+          60Hz: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: SafetyStartParameters
+      zh_CN: 安规启动参数
+    endian: big #大端字节序
+    start: 42000
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: SoftStart_En
+          en: SoftStart_En
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: ConnectTime
+          en: ConnectTime
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 20
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: ConnectPowerGradient
+          en: ConnectPowerGradient
+        precision: 0.1
+        unit: '%Pn/min'
+        range:
+          enable: true
+          lo: 100
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: ReconnectTime
+          en: ReconnectTime
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 50
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: ReconnectPowerGradient
+          en: ReconnectPowerGradient
+        precision: 0.1
+        unit: '%Pn/min'
+        range:
+          enable: false
+          lo: 100
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: ConnectVoltageHighLimit
+          en: ConnectVoltageHighLimit
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: ConnectVoltageLowLimit
+          en: ConnectVoltageLowLimit
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 400
+          hi: 2300
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: ConnectFrequencyHighLimit
+          en: ConnectFrequencyHighLimit
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: ConnectFrequencyLowLimit
+          en: ConnectFrequencyLowLimit
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: SafetyVoltage
+      zh_CN: 安规电压参数
+    endian: big #大端字节序
+    start: 42100
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: VoltageProtectEnable
+          en: VoltageProtectEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit1
+          en: VoltageHighLimit1
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit1ProtectTime
+          en: VoltageHighLimit1ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit2
+          en: VoltageHighLimit2
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit2ProtectTime
+          en: VoltageHighLimit2ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit3
+          en: VoltageHighLimit3
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: VoltageHighLimit3ProtectTime
+          en: VoltageHighLimit3ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit1
+          en: VoltageLowLimit1
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit1ProtectTime
+          en: VoltageLowLimit1ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit2
+          en: VoltageLowLimit2
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: VoltageLowLimit2ProtectTime
+          en: VoltageLowLimit2ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: 10minVoltageHighLimit
+          en: 10minVoltageHighLimit
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: SafetyFrequency
+      zh_CN: 安规频率参数
+    endian: big #大端字节序
+    start: 42200
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: FrequencyProtectEnable
+          en: FrequencyProtectEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit1
+          en: FrequencyHighLimit1
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit1ProtectTime
+          en: FrequencyHighLimit1ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit2
+          en: FrequencyHighLimit2
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyHighLimit2ProtectTime
+          en: FrequencyHighLimit2ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit1
+          en: FrequencyLowLimit1
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit1ProtectTime
+          en: FrequencyLowLimit1ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit2
+          en: FrequencyLowLimit2
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: FrequencyLowLimit2ProtectTime
+          en: FrequencyLowLimit2ProtectTime
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 2
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: Safety-P(f) #参数名称
+      zh_CN: 安规-P(f)参数
+    endian: big #大端字节序
+    start: 42300
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: DroopOverFreqmode
+          en: DroopOverFreqmode
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 0
+        type: 'uint16:1'
+        name:
+          zh_CN: DroopUnderFreqmode
+          en: DroopUnderFreqmode
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      # - index: 0
+      #   type: "uint16"
+      #   name:
+      #     zh_CN: PowerSoftupAfterConnect
+      #     en: PowerSoftupAfterConnect
+      #   precision: 1
+      #   unit: ""
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 1
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: 欠频进入点频率
+          en: DroopUnderFreqPointEnter
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: 欠频退出点频率
+          en: DroopUnderFreqPointExit
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: 欠频功率变化率
+          en: DroopUnderDecSlop
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: true
+          lo: 10
+          hi: 1000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: 过频进入点频率
+          en: DroopOverFreqPointEnter
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: 过频退出点频率
+          en: DroopOverFreqPointExit
+        precision: 0.01
+        unit: 'Hz'
+        range:
+          enable: true
+          lo: 4000
+          hi: 7000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: 过频功率变化率
+          en: DroopOverDecSlop
+        precision: 0.1
+        unit: '%'
+        range:
+          enable: true
+          lo: 10
+          hi: 1000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: UnderFreq_ExitDelay
+          en: UnderFreq_ExitDelay
+        precision: 1
+        unit: 's'
+        range:
+          enable: false
+          lo: 0
+          hi: 65535
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: OverFreq_ExitDelay
+          en: OverFreq_ExitDelay
+        precision: 1
+        unit: 's'
+        range:
+          enable: false
+          lo: 0
+          hi: 65535
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: 功率恢复斜率
+          en: DroopIncPwrGradient
+        precision: 0.01
+        unit: '%Pn/min'
+        range:
+          enable: true
+          lo: 100
+          hi: 60000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+  - name:
+      en: Safety-P(u) #参数名称
+      zh_CN: 安规-P(u)参数
+    endian: big #大端字节序
+    start: 42700
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: P(U)Enable
+          en: P(U)Enable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: V1
+          en: V1
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: V2
+          en: V2
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: V3
+          en: V3
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: V4
+          en: V4
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P(U)Delay
+          en: P(U)Delay
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 60
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: P(U)PowerGradient
+          en: P(U)PowerGradient
+        precision: 1
+        export: 'noExport'
+        unit: '%Pn/min'
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10  #此处以下为假数据
+        type: 'uint16'
+        name:
+          zh_CN: TauValue
+          en: TauValue
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 60
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P1
+          en: P1
+        precision: 1
+        unit: '%Pn'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P2
+          en: P2
+        precision: 1
+        unit: '%Pn'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P3
+          en: P3
+        precision: 1
+        unit: '%Pn'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: P4
+          en: P4
+        precision: 1
+        unit: '%Pn'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+  - name:
+      en: Safety-Reactive #参数名称
+      zh_CN: 安规-无功参数
+    endian: big #大端字节序
+    start: 43000
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: ReactivePowerModeEnable
+          en: ReactivePowerModeEnable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: ReactivePowerControlMode
+          en: ReactivePowerControlMode
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 1
+        enum:
+          OFF: 0
+          FixedPFOver: 1
+          FixedPFUnder: 2
+          Qppf: 3
+          FixedQ: 4
+          Qu: 5
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: ReactivePowerRiseTime
+          en: ReactivePowerRiseTime
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: FixedPF
+          en: FixedPF
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 80
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 8
+        type: 'int16'
+        name:
+          zh_CN: FixedQ
+          en: FixedQ
+        precision: 1
+        unit: 'Var'
+        range:
+          enable: true
+          lo: -30000
+          hi: 30000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPLockinV
+          en: CosphiPLockinV
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPLockoutV
+          en: CosphiPLockoutV
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 1500
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF1
+          en: CosphiPPF1
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP1
+          en: CosphiPP1
+        precision: 1
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPPF2
+          en: CosphiPPF2
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP2
+          en: CosphiPP2
+        precision: 1
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 22
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF3
+          en: CosphiPPF3
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: CosphiPP3
+          en: CosphiPP3
+        precision: 1
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 26
+        type: 'int16'
+        name:
+          zh_CN: CosphiPPF4
+          en: CosphiPPF4
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 28
+        type: 'int16'
+        name:
+          zh_CN: CosphiPP4
+          en: CosphiPP4
+        precision: 1
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 30
+        type: 'uint16'
+        name:
+          zh_CN: QuV1
+          en: QuV1
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 32
+        type: 'int16'
+        name:
+          zh_CN: QuQ1
+          en: QuQ1
+        precision: 0.1
+        unit: '%Sn'
+        range:
+          enable: true
+          lo: -500
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 34
+        type: 'uint16'
+        name:
+          zh_CN: QuV2
+          en: QuV2
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 36
+        type: 'int16'
+        name:
+          zh_CN: QuQ2
+          en: QuQ2
+        precision: 0.1
+        unit: '%Sn'
+        range:
+          enable: true
+          lo: -500
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 38
+        type: 'uint16'
+        name:
+          zh_CN: QuV3
+          en: QuV3
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 40
+        type: 'int16'
+        name:
+          zh_CN: QuQ3
+          en: QuQ3
+        precision: 0.1
+        unit: '%Sn'
+        range:
+          enable: true
+          lo: -500
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 42
+        type: 'uint16'
+        name:
+          zh_CN: QuV4
+          en: QuV4
+        precision: 0.1
+        unit: 'V'
+        range:
+          enable: true
+          lo: 2000
+          hi: 3000
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 44
+        type: 'int16'
+        name:
+          zh_CN: QuQ4
+          en: QuQ4
+        precision: 0.1
+        unit: '%Sn'
+        range:
+          enable: true
+          lo: -500
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 46
+        type: 'uint16'
+        name:
+          zh_CN: QulockinP
+          en: QulockinP
+        precision: 1
+        export: 'noExport'
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+            - 1
+            - 2
+          operable:
+      - index: 48
+        type: 'uint16'
+        name:
+          zh_CN: QulockoutP
+          en: QulockoutP
+        precision: 1
+        export: 'noExport'
+        unit: 'Pn%'
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+        access:
+          enable: true
+          visible:
+            - 1
+            - 2
+          operable:
+      - index: 50
+        type: 'uint16'
+        name:
+          zh_CN: QuQLimit
+          en: QuQLimit
+        precision: 1
+        unit: 'Var'
+        range:
+          enable: true
+          lo: 0
+          hi: 60000
+        access:
+          enable: true
+          visible:
+            - 1
+            - 2
+          operable:
+      - index: 52
+        type: 'uint16'
+        name:
+          zh_CN: QuEnterDelay
+          en: QuEnterDelay
+        precision: 1
+        unit: 's'
+        range:
+          enable: true
+          lo: 6
+          hi: 500
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+            - 2
+      - index: 6 #以下模型
+        type: 'uint16'
+        name:
+          zh_CN: MinCosφValue
+          en: MinCosφValue
+        precision: 0.01
+        unit: ''
+        range:
+          enable: true
+          lo: 40
+          hi: 100
+      - index: 14
+        type: 'int16'
+        name:
+          zh_CN: TauValue
+          en: TauValue
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+  - name:
+      en: Operation
+      zh_CN: 执行命令区
+    endian: big #大端字节序
+    start: 45000
+    methods: #可写不可读
+      write:
+        code: 0x06
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        alias: test
+        name:
+          zh_CN: 清事件
+          en: ClearEvents
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 9999
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+      # - index: 2
+      #   type: 'uint16:0'
+      #   name:
+      #     zh_CN: 清电量
+      #     en: ClearEnergy
+      #   precision: 1
+      #   default: '0'
+      #   unit: ''
+      #   level: 0
+      #   range:
+      #     enable: false
+      #     lo: 0
+      #     hi: 9999
+      - index: 4
+        type: 'uint16:0'
+        name:
+          zh_CN: 恢复出厂设置
+          en: FactoryReset
+        precision: 1
+        default: '0'
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+        access:
+          enable: true
+          visible:
+          operable:
+            - 1
+  - name:
+      en: LVRT
+      zh_CN: 低电压穿越
+    endian: big #大端字节序
+    start: 65000
+    type: model
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 使能
+          en: Enable
+        precision: 1
+        unit: ''
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: T1
+          en: T1
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default: 0
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: V1
+          en: V1
+        precision: 1
+        unit: '%Un'
+        default: 15
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: T2
+          en: T2
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default: 0.15
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: V2
+          en: V2
+        precision: 1
+        unit: '%Un'
+        default: 15
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: T3
+          en: T3
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default: 1.5
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: V3
+          en: V3
+        precision: 1
+        unit: '%Un'
+        default: 85
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: T4
+          en: T4
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: V4
+          en: V4
+        precision: 1
+        unit: '%Un'
+        default:
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: T5
+          en: T5
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: V5
+          en: V5
+        precision: 1
+        unit: '%Un'
+        default:
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: T6
+          en: T6
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: V6
+          en: V6
+        precision: 1
+        unit: '%Un'
+        default:
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+      - index: 24
+        type: 'uint16:0'
+        name:
+          zh_CN: Zero Current Mode Enable
+          en: Zero Current Mode Enable
+        precision: 1
+        unit: ''
+        range:
+          enable: false
+          lo: 0
+          hi: 6000
+        default:
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: V7
+          en: V7
+        precision: 1
+        unit: '%Un'
+        default:
+        range:
+          enable: true
+          lo: 0
+          hi: 100
+  - name:
+      en: HVRT
+      zh_CN: 高电压穿越
+    endian: big #大端字节序
+    start: 65100
+    type: model
+    methods:
+      write:
+        code: 0x10
+      read:
+        code: 0x03
+    properties:
+      - index: 0
+        type: 'uint16:0'
+        name:
+          zh_CN: 使能
+          en: Enable
+        precision: 1
+        unit: ''
+      - index: 0
+        type: 'uint16'
+        name:
+          zh_CN: T1
+          en: T1
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 2
+        type: 'uint16'
+        name:
+          zh_CN: V1
+          en: V1
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 4
+        type: 'uint16'
+        name:
+          zh_CN: T2
+          en: T2
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 6
+        type: 'uint16'
+        name:
+          zh_CN: V2
+          en: V2
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 8
+        type: 'uint16'
+        name:
+          zh_CN: T3
+          en: T3
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 10
+        type: 'uint16'
+        name:
+          zh_CN: V3
+          en: V3
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 12
+        type: 'uint16'
+        name:
+          zh_CN: T4
+          en: T4
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 14
+        type: 'uint16'
+        name:
+          zh_CN: V4
+          en: V4
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 16
+        type: 'uint16'
+        name:
+          zh_CN: T5
+          en: T5
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 18
+        type: 'uint16'
+        name:
+          zh_CN: V5
+          en: V5
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 20
+        type: 'uint16'
+        name:
+          zh_CN: T6
+          en: T6
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 22
+        type: 'uint16'
+        name:
+          zh_CN: V6
+          en: V6
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135
+      - index: 24
+        type: 'uint16'
+        name:
+          zh_CN: T7
+          en: T7
+        precision: 0.01
+        unit: 's'
+        range:
+          enable: true
+          lo: 0
+          hi: 6000
+        default:
+      - index: 26
+        type: 'uint16'
+        name:
+          zh_CN: V7
+          en: V7
+        precision: 1
+        unit: '%Un'
+        default: 100
+        range:
+          enable: true
+          lo: 100
+          hi: 135

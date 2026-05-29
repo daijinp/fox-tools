@@ -1,0 +1,140 @@
+"""
+create table foxess.devices
+(
+    id             bigint auto_increment
+        primary key,
+    device_id      varchar(64)                    not null,
+    device_sn      varchar(128)                   not null,
+    capacity       double           default (0.0) null,
+    device_type    varchar(32)      default ''    null,
+    communication  int              default (2)   null,
+    fault          int              default (0)   null,
+    feedin_date    bigint                         null,
+    created_date   bigint                         not null,
+    created_userid varchar(64)                    not null,
+    product_type   varchar(16)      default ''    null,
+    factory        int              default (1)   null,
+    upgrade        int              default -1    null,
+    is_hub         tinyint unsigned default '0'   not null comment '1:正常hub 2:临时hub',
+    constraint device_id
+        unique (device_id),
+    constraint device_sn
+        unique (device_sn),
+    constraint id
+        unique (id)
+);
+
+
+CREATE TABLE `versions` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `model_id` varchar(64) NOT NULL,
+  `model_type` varchar(16) NOT NULL,
+  `hard_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `soft_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `master_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `slave_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `manager_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `protocol_version` varchar(16) DEFAULT (_utf8mb4'--'),
+  `timestamp` bigint NOT NULL,
+  `afci_version` varchar(16) DEFAULT '',
+  `ota_version` varchar(16) DEFAULT '',
+  `web_version` varchar(16) DEFAULT '--',
+  `hmi_version` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_cs_0900_ai_ci DEFAULT '--',
+  `hmi_ui_version` varchar(16) DEFAULT '--',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `model_id` (`model_id`),
+  KEY `model_id_2` (`model_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=58195959 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+2025年11月24日 16:16:33
+这个脚本用来完成device setting 支持的最低协议支持的、所有机型的、对应的最低软件版本号
+
+1.列出所有协议的最低版本，最低版本看最后两位。例如A102的就是A10200
+协议版本
+
+ＳＱＬ：查询所有协议的最低版本号：
+select min(protocol_version) from versions where protocol_version like 'A102%' group by protocol_version;
+遍历以下元组，将每个元组中的协议版本号替换到SQL中，然后执行SQL，将结果保存到ｅｘｃｅｌ文件中
+（'A102%',
+'Y100%',
+'P100%',
+'B001%',
+'D100%',
+'J100%',
+'F100%',
+'K001%',
+'X100%',
+'QX00%',
+'M100%',
+'U100%',
+'ZAA100%',
+'B101%',
+'R100%',
+'A101%',
+'M102%',
+'E100%',
+'I100%',
+'H102%',
+'N100%',
+'Q100%',
+'G100%'）
+２.遍历步骤１得到的结果，执行以下ＳＱＬ
+
+"""
+
+
+
+
+
+'A10100',
+'A10200',
+'B00100',
+'B10100',
+'D10000',
+'E10000',
+'F10000',
+'G10000',
+'H10200',
+'I10000',
+'J10000',
+'M10000',
+'M10200',
+'N10000',
+'P10000',
+'R10000',
+'U10000',
+'X10000',
+'ZAA100'
+
+
+
+
+
+
+
+
+
+Y100xx
+P100xx
+B001xx
+D100xx
+J100xx
+F100xx
+K001xx
+X100xx
+QX00xx
+M100xx
+U100xx
+ZAA100xx
+B101xx
+R100xx
+A101xx
+M102xx
+E100xx
+I100xx
+H102xx
+N100xx
+Q100xx
+G100xx

@@ -1,0 +1,18 @@
+{
+    "domain": "https://www.foxesscloud.com",
+    "debug": false,
+    "sleep_time": 1,
+    "login": {
+        "user": "daijinpeng",
+        "password": "c8522ba359b4e819f6064d7df23e881f"
+    },
+    "getui": {
+        "read_names": [["SysOn/Off"]]
+    },
+    "get_setting": {
+        "input_file": "812_all_0528.csv",
+        "concurrency": 300,
+        "request_timeout": 300,
+        "skip_protocols": []
+    }
+}

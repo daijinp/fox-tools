@@ -1,0 +1,20 @@
+{
+  "device_count": 30000,
+  "duration_seconds": 300,
+  "sn_file": "devices_k.csv",
+  "sn_start_index": 40001,
+  "report_dir": "reports",
+  "domain": "https://www.foxesscloud.com",
+  "api_token": "3b8c6b63-7fb0-42c0-b475-eb7288cb0baa",
+  "api_path": "/op/v2/device/scheduler/get",
+  "progress_interval_seconds": 10,
+  "request_timeout_seconds": 30,
+  "drop_with_log_errnos": [
+    41970,
+    41200
+  ],
+  "drop_silent_errnos": [
+    -1,
+    41935
+  ]
+}
