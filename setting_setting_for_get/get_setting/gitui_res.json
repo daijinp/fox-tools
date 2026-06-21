@@ -247,10 +247,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "100%",
                 "60%",
                 "30%",
-                "0%"
+                "0%",
+                "100%"
               ]
             },
             "unit": "",
@@ -265,10 +265,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "100%",
                 "60%",
                 "30%",
-                "0%"
+                "0%",
+                "100%"
               ]
             },
             "unit": "",
@@ -283,8 +283,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -299,8 +299,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -315,8 +315,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -2039,12 +2039,12 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "OFF",
+                "FixedPFOver",
                 "FixedPFUnder",
                 "Qppf",
                 "FixedQ",
-                "Qu",
-                "OFF",
-                "FixedPFOver"
+                "Qu"
               ]
             },
             "unit": "",

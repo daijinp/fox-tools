@@ -1,0 +1,4 @@
+# 统一仓库内文本文件的换行符为 LF。
+# 避免 Windows/Mac/Linux 的 Git 或编辑器换行设置不同，
+# 导致文件内容没变却被批量标记为已修改。
+* text=auto eol=lf

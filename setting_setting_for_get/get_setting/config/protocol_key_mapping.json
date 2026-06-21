@@ -73,14 +73,14 @@
   },
   {
     "protocol_version": "Q11100",
-    "request_key": "q111__afci_para",
+    "request_key": "q114__afci_para",
     "response_names": [
       "AFCIStrengthThres",
       "AFCICounterThres"
     ],
     "response_key": [
-      "q111__afci_para__strenthi",
-      "q111__afci_para__timei"
+      "q114__afci_para__strenthi",
+      "q114__afci_para__timei"
     ]
   },
   {
