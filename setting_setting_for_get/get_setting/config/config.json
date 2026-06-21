@@ -7,11 +7,11 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
-        "read_names": [["AFCIStrengthThres","AFCICounterThres"]]
+        "read_names": [["GridCode"]]
     },
     "get_setting": {
-        "input_file": "H3-G2-all-0610.csv",
-        "concurrency": 300,
+        "input_file": "weichu_de_0621.csv",
+        "concurrency": 1500,
         "request_timeout": 300,
         "skip_protocols": []
     }

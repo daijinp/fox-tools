@@ -1,158 +1,42 @@
 [
   {
-    "protocol_version": "Q10300",
-    "request_key": "q103__15",
+    "protocol_version": "I10300",
+    "request_key": "i103__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q103__15__00",
-      "q103__15__01"
+      "i103__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q11300",
-    "request_key": "q113__afci_para",
+    "protocol_version": "I10400",
+    "request_key": "i104__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q113__afci_para__strenthi",
-      "q113__afci_para__timei"
+      "i104__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q10900",
-    "request_key": "q109__afci_para",
+    "protocol_version": "I10200",
+    "request_key": "i102__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q109__afci_para__strenthi",
-      "q109__afci_para__timei"
+      "i102__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q11000",
-    "request_key": "q110__afci_para",
+    "protocol_version": "I10001",
+    "request_key": "i100__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q110__afci_para__strenthi",
-      "q110__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10500",
-    "request_key": "q105__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q105__afci_para__strenthi",
-      "q105__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10200",
-    "request_key": "q102__14",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q102__14__00",
-      "q102__14__01"
-    ]
-  },
-  {
-    "protocol_version": "Q11100",
-    "request_key": "q114__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q114__afci_para__strenthi",
-      "q114__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10400",
-    "request_key": "q104__15",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q104__15__00",
-      "q104__15__01"
-    ]
-  },
-  {
-    "protocol_version": "Q11200",
-    "request_key": "q112__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q112__afci_para__strenthi",
-      "q112__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10800",
-    "request_key": "q108__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q108__afci_para__strenthi",
-      "q108__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q11400",
-    "request_key": "q114__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q114__afci_para__strenthi",
-      "q114__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10700",
-    "request_key": "q107__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q107__afci_para__strenthi",
-      "q107__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10600",
-    "request_key": "q106__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q106__afci_para__strenthi",
-      "q106__afci_para__timei"
+      "i100__grid_code__safety"
     ]
   }
 ]

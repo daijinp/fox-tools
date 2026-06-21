@@ -1,0 +1,10 @@
+{
+  "input_file": "success.csv",
+  "target_name": "ExportLimitedPower",
+  "target_value": "800",
+  "country_code_match": "DE",
+  "success_info_value_match": "VDE4105_DE",
+  "concurrency": 800,
+  "request_timeout": 300,
+  "max_retry_rounds": 3
+}
