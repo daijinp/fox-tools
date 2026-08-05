@@ -12,13 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent
 INPUT_CSV = BASE_DIR / "device_data" / "success.csv"
 OUTPUT_XLSX = BASE_DIR / "device_data" / "scheduler_report.xlsx"
 
-TARGET_MODES = [
-    "ForceCharge",
-    "ForceDischarge",
-    "ForceCharge(BAT)",
-    "ForceDischarge(BAT)",
-]
+# None 表示导出所有 workMode；如需筛选，则改为模式名称列表。
+TARGET_MODES = None
 
+
+def output_modes(stats):
+    if TARGET_MODES is None:
+        return sorted(stats)
+    return TARGET_MODES
 
 def format_time(hour, minute):
     hour = int(hour or 0)
@@ -101,7 +102,7 @@ def load_rows():
             for group_index, group in enumerate(groups, start=1):
                 work_mode = group.get("workMode") or group.get("workmode") or ""
                 stats[work_mode] += 1
-                if work_mode not in TARGET_MODES:
+                if TARGET_MODES is not None and work_mode not in TARGET_MODES:
                     continue
 
                 extra = group.get("extraParam", {}) or {}
@@ -248,7 +249,7 @@ def build_workbook(
     ws_stats.append(["skipped_blank_json", skipped_blank_json])
     ws_stats.append(["skipped_header_rows", skipped_header_rows])
     ws_stats.append(["skipped_invalid_json", skipped_invalid_json])
-    for mode in TARGET_MODES:
+    for mode in output_modes(stats):
         ws_stats.append([mode, stats.get(mode, 0)])
     auto_fit_columns(ws_stats)
 
@@ -295,7 +296,7 @@ def main():
     print(f"跳过空 JSON 行数: {skipped_blank_json}")
     print(f"跳过重复表头行数: {skipped_header_rows}")
     print(f"跳过无效 JSON 行数: {skipped_invalid_json}")
-    for mode in TARGET_MODES:
+    for mode in output_modes(stats):
         print(f"{mode}: {stats.get(mode, 0)}")
 
 
