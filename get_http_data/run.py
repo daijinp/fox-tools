@@ -22,6 +22,10 @@ with open(os.path.join(_config_dir, 'config.json'), 'r', encoding='utf-8') as _f
 
 _setting_cfg = config.get('get_setting', {})
 
+_DEFAULT_SOURCE_HEADERS = [
+    'device_id', 'device_sn', 'protocol_version', 'master_version'
+]
+
 
 def _resolve_input_csv():
     input_file = _setting_cfg.get('input_file', '').strip()
@@ -48,18 +52,43 @@ def _resolve_input_csv():
 def _read_device_csv(file_path):
     devices = []
     with open(file_path, 'r', encoding='utf-8-sig') as f:
-        for row in csv.reader(f):
-            if not row or not row[0].strip():
-                continue
-            if row[0].strip().lower() == 'device_id':
-                continue
-            devices.append((
-                row[0].strip(),
-                row[1].strip() if len(row) > 1 else '',
-                row[2].strip() if len(row) > 2 else '',
-                row[3].strip() if len(row) > 3 else '',
-            ))
-    return devices
+        rows = list(csv.reader(f))
+
+    source_headers = None
+    if rows and rows[0] and rows[0][0].strip().lower() == 'device_id':
+        source_headers = [cell.strip() for cell in rows.pop(0)]
+
+        # fail.csv 会作为下一轮的输入，末尾的旧错误信息不是源数据列。
+        if source_headers and source_headers[-1].lower() == 'err_info':
+            source_headers.pop()
+            rows = [row[:-1] for row in rows]
+
+    max_columns = max((len(row) for row in rows if row), default=0)
+    if source_headers is None:
+        source_headers = _DEFAULT_SOURCE_HEADERS[:max_columns]
+        source_headers.extend(
+            f'source_column_{index}'
+            for index in range(len(source_headers) + 1, max_columns + 1)
+        )
+    elif len(source_headers) < max_columns:
+        source_headers.extend(
+            f'source_column_{index}'
+            for index in range(len(source_headers) + 1, max_columns + 1)
+        )
+
+    for row in rows:
+        if not row or not row[0].strip():
+            continue
+        padded_row = row + [''] * (len(source_headers) - len(row))
+        devices.append({
+            'device_id': row[0].strip(),
+            'device_sn': row[1].strip() if len(row) > 1 else '',
+            'protocol_version': row[2].strip() if len(row) > 2 else '',
+            'master_version': row[3].strip() if len(row) > 3 else '',
+            # 输出时使用完整原始行，保留第 5 列及后面的所有附加列。
+            'source_row': padded_row,
+        })
+    return devices, source_headers
 
 
 def _to_csv_line(row):
@@ -70,14 +99,18 @@ def _to_csv_line(row):
 
 
 class BatchState:
-    def __init__(self, output_dir):
+    def __init__(self, output_dir, source_headers):
         self.output_dir = output_dir
+        self.source_headers = source_headers
         self.log_lock = threading.Lock()
         self.success_lock = threading.Lock()
         self.fail_lock = threading.Lock()
         self.success_count = 0
         self.fail_count = 0
-        self.success_header_written = False
+        success_path = os.path.join(output_dir, 'success.csv')
+        self.success_header_written = (
+            os.path.exists(success_path) and os.path.getsize(success_path) > 0
+        )
         self.fail_header_written = False
 
 
@@ -96,17 +129,9 @@ def _append_success(state, record):
     with state.success_lock:
         lines = []
         if not state.success_header_written:
-            lines.append(_to_csv_line([
-                'device_id', 'device_sn', 'protocol_version', 'master_version', 'response_json'
-            ]))
+            lines.append(_to_csv_line(state.source_headers + ['response_json']))
             state.success_header_written = True
-        lines.append(_to_csv_line([
-            record['device_id'],
-            record['device_sn'],
-            record['protocol_version'],
-            record['master_version'],
-            record['response_json'],
-        ]))
+        lines.append(_to_csv_line(record['source_row'] + [record['response_json']]))
         with open(csv_path, 'a', encoding='utf-8-sig', newline='') as f:
             f.writelines(lines)
         state.success_count += 1
@@ -117,17 +142,9 @@ def _append_fail(state, record):
     with state.fail_lock:
         lines = []
         if not state.fail_header_written:
-            lines.append(_to_csv_line([
-                'device_id', 'device_sn', 'protocol_version', 'master_version', 'err_info'
-            ]))
+            lines.append(_to_csv_line(state.source_headers + ['err_info']))
             state.fail_header_written = True
-        lines.append(_to_csv_line([
-            record['device_id'],
-            record['device_sn'],
-            record['protocol_version'],
-            record['master_version'],
-            record['err_info'],
-        ]))
+        lines.append(_to_csv_line(record['source_row'] + [record['err_info']]))
         with open(csv_path, 'a', encoding='utf-8-sig', newline='') as f:
             f.writelines(lines)
         state.fail_count += 1
@@ -149,18 +166,15 @@ def _reset_fail_outputs(output_dir):
 
 
 def _build_failure(device_data, reason):
-    device_id, device_sn, pv, mv = device_data
     return {
-        'device_id': device_id,
-        'device_sn': device_sn,
-        'protocol_version': pv,
-        'master_version': mv,
+        'source_row': device_data['source_row'],
         'err_info': reason,
     }
 
 
 def _process_device(device_data, token, state):
-    device_id, device_sn, pv, mv = device_data
+    device_id = device_data['device_id']
+    device_sn = device_data['device_sn']
     path = '/op/v2/device/scheduler/get'
     payload = {'deviceSN': device_sn}
 
@@ -190,10 +204,7 @@ def _process_device(device_data, token, state):
 
         _write_logs(state, f'{device_id} 成功', ['success.log', 'all.log'])
         _append_success(state, {
-            'device_id': device_id,
-            'device_sn': device_sn,
-            'protocol_version': pv,
-            'master_version': mv,
+            'source_row': device_data['source_row'],
             'response_json': json.dumps(data, ensure_ascii=False, separators=(',', ':')),
         })
     except requests.Timeout:
@@ -211,7 +222,7 @@ def _process_device(device_data, token, state):
 
 
 def _run_batch(input_csv, token, output_dir, reset_fail_outputs=False):
-    devices = _read_device_csv(input_csv)
+    devices, source_headers = _read_device_csv(input_csv)
     if not devices:
         print('没有设备需要处理')
         return 0, 0
@@ -224,7 +235,7 @@ def _run_batch(input_csv, token, output_dir, reset_fail_outputs=False):
     print(f'输出目录: {output_dir}')
     print(f'开始处理 {len(devices)} 个设备, 并发: {concurrency}')
 
-    state = BatchState(output_dir)
+    state = BatchState(output_dir, source_headers)
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
         futures = [
             executor.submit(_process_device, device_data, token, state)
