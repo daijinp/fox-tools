@@ -1,11 +1,5 @@
 [
   {
-    "protocol_version": "I10300",
-    "request_key": "i103__basic2",
-    "response_name": "ExportLimitedPower",
-    "response_key": "i103__basic2__export_limit_power"
-  },
-  {
     "protocol_version": "I10400",
     "request_key": "i104__basic2",
     "response_name": "ExportLimitedPower",

@@ -1,15 +1,5 @@
 [
   {
-    "protocol_version": "I10300",
-    "request_key": "i103__grid_code",
-    "response_names": [
-      "GridCode"
-    ],
-    "response_key": [
-      "i103__grid_code__safety"
-    ]
-  },
-  {
     "protocol_version": "I10400",
     "request_key": "i104__grid_code",
     "response_names": [
@@ -17,6 +7,16 @@
     ],
     "response_key": [
       "i104__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "I10300",
+    "request_key": "i103__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "i103__grid_code__safety"
     ]
   },
   {

@@ -10,8 +10,8 @@
         "read_names": [["GridCode"]]
     },
     "get_setting": {
-        "input_file": "weichu_de_0621.csv",
-        "concurrency": 1500,
+        "input_file": "weichu_de_0626.csv",
+        "concurrency": 100,
         "request_timeout": 300,
         "skip_protocols": []
     }

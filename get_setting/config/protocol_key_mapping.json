@@ -1,158 +1,322 @@
 [
   {
-    "protocol_version": "Q10300",
-    "request_key": "q103__15",
+    "protocol_version": "P11300",
+    "request_key": "p113__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q103__15__00",
-      "q103__15__01"
+      "p113__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q11300",
-    "request_key": "q113__afci_para",
+    "protocol_version": "P12400",
+    "request_key": "p124__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q113__afci_para__strenthi",
-      "q113__afci_para__timei"
+      "p124__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q10900",
-    "request_key": "q109__afci_para",
+    "protocol_version": "P10400",
+    "request_key": "p104__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q109__afci_para__strenthi",
-      "q109__afci_para__timei"
+      "p104__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q11000",
-    "request_key": "q110__afci_para",
+    "protocol_version": "P11700",
+    "request_key": "p117__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q110__afci_para__strenthi",
-      "q110__afci_para__timei"
+      "p117__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q10500",
-    "request_key": "q105__afci_para",
+    "protocol_version": "P10800",
+    "request_key": "p108__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q105__afci_para__strenthi",
-      "q105__afci_para__timei"
+      "p108__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10500",
+    "request_key": "p105__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p105__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10600",
+    "request_key": "p106__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p106__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P11100",
+    "request_key": "p111__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p111__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P12200",
+    "request_key": "p122__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p122__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P11900",
+    "request_key": "p119__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p119__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P11800",
+    "request_key": "p118__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p118__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10700",
+    "request_key": "p107__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p107__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10200",
+    "request_key": "p102__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p102__grid_code__safety"
     ]
   },
   {
     "protocol_version": "Q10200",
-    "request_key": "q102__14",
+    "request_key": "q102__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q102__14__00",
-      "q102__14__01"
+      "q102__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10300",
+    "request_key": "q103__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q103__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10500",
+    "request_key": "q105__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q105__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10900",
+    "request_key": "q109__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q109__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q11000",
+    "request_key": "q110__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q110__grid_code__safety"
     ]
   },
   {
     "protocol_version": "Q11100",
-    "request_key": "q111__afci_para",
+    "request_key": "q111__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q111__afci_para__strenthi",
-      "q111__afci_para__timei"
+      "q111__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q10400",
-    "request_key": "q104__15",
+    "protocol_version": "Q11300",
+    "request_key": "q113__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q104__15__00",
-      "q104__15__01"
+      "q113__grid_code__safety"
     ]
   },
   {
-    "protocol_version": "Q11200",
-    "request_key": "q112__afci_para",
+    "protocol_version": "Q11500",
+    "request_key": "q115__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q112__afci_para__strenthi",
-      "q112__afci_para__timei"
-    ]
-  },
-  {
-    "protocol_version": "Q10800",
-    "request_key": "q108__afci_para",
-    "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
-    ],
-    "response_key": [
-      "q108__afci_para__strenthi",
-      "q108__afci_para__timei"
+      "q115__grid_code__safety"
     ]
   },
   {
     "protocol_version": "Q11400",
-    "request_key": "q114__afci_para",
+    "request_key": "q114__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q114__afci_para__strenthi",
-      "q114__afci_para__timei"
+      "q114__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10400",
+    "request_key": "q104__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q104__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q11200",
+    "request_key": "q112__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q112__grid_code__safety"
     ]
   },
   {
     "protocol_version": "Q10700",
-    "request_key": "q107__afci_para",
+    "request_key": "q107__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q107__afci_para__strenthi",
-      "q107__afci_para__timei"
+      "q107__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10800",
+    "request_key": "q108__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q108__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P11400",
+    "request_key": "p114__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p114__grid_code__safety"
     ]
   },
   {
     "protocol_version": "Q10600",
-    "request_key": "q106__afci_para",
+    "request_key": "q106__grid_code",
     "response_names": [
-      "AFCIStrengthThres",
-      "AFCICounterThres"
+      "GridCode"
     ],
     "response_key": [
-      "q106__afci_para__strenthi",
-      "q106__afci_para__timei"
+      "q106__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P12100",
+    "request_key": "p121__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p121__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10000",
+    "request_key": "p100__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p100__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "Q10100",
+    "request_key": "q101__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "q101__grid_code__safety"
+    ]
+  },
+  {
+    "protocol_version": "P10900",
+    "request_key": "p109__grid_code",
+    "response_names": [
+      "GridCode"
+    ],
+    "response_key": [
+      "p109__grid_code__safety"
     ]
   }
 ]

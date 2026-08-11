@@ -7,12 +7,12 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
-        "read_names": [["GridCode"]]
+        "read_names": [["MeterCompensation","GridCode"]]
     },
     "get_setting": {
-        "input_file": "all-h3g2+h3p-260811.csv",
-        "concurrency": 180,
+        "input_file": "all_h3p_260701.csv",
+        "concurrency": 1000,
         "request_timeout": 300,
-        "skip_protocols": []
+        "skip_protocols": ["P10200", "P10400", "P10500", "P10600"]
     }
 }
