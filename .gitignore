@@ -158,3 +158,4 @@ volume_test_amber/backup/*
 *.exe
 *.zip
 *arm64
+*bak

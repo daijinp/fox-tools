@@ -1,322 +1,566 @@
 [
   {
-    "protocol_version": "P11300",
-    "request_key": "p113__grid_code",
+    "protocol_version": "H10400",
+    "request_key": "h104__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p113__grid_code__safety"
+      "h104__grid_code__meter1_enable",
+      "h104__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P12400",
-    "request_key": "p124__grid_code",
+    "protocol_version": "H10600",
+    "request_key": "h106__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "h106__grid_code__meter1_enable",
+      "h106__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10400",
-    "request_key": "p104__grid_code",
+    "protocol_version": "H10700",
+    "request_key": "h107__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p104__grid_code__safety"
+      "h107__grid_code__meter1_enable",
+      "h107__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P11700",
-    "request_key": "p117__grid_code",
+    "protocol_version": "H10800",
+    "request_key": "h108__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p117__grid_code__safety"
+      "h108__grid_code__meter1_enable",
+      "h108__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10800",
-    "request_key": "p108__grid_code",
+    "protocol_version": "H10900",
+    "request_key": "h109__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p108__grid_code__safety"
+      "h109__grid_code__meter1_enable",
+      "h109__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10500",
-    "request_key": "p105__grid_code",
+    "protocol_version": "H11100",
+    "request_key": "h111__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p105__grid_code__safety"
+      "h111__grid_code__meter1_enable",
+      "h111__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10600",
-    "request_key": "p106__grid_code",
+    "protocol_version": "H11200",
+    "request_key": "h112__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p106__grid_code__safety"
+      "h112__grid_code__meter1_enable",
+      "h112__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P11100",
-    "request_key": "p111__grid_code",
+    "protocol_version": "H11300",
+    "request_key": "h113__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p111__grid_code__safety"
+      "h113__grid_code__meter1_enable",
+      "h113__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P12200",
-    "request_key": "p122__grid_code",
+    "protocol_version": "H11302",
+    "request_key": "h113__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p122__grid_code__safety"
+      "h113__grid_code__meter1_enable",
+      "h113__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P11900",
-    "request_key": "p119__grid_code",
+    "protocol_version": "H11400",
+    "request_key": "h114__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p119__grid_code__safety"
+      "h114__grid_code__meter1_enable",
+      "h114__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p118__grid_code",
+    "protocol_version": "H11500",
+    "request_key": "h115__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p118__grid_code__safety"
+      "h115__grid_code__meter1_enable",
+      "h115__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10700",
-    "request_key": "p107__grid_code",
+    "protocol_version": "H11600",
+    "request_key": "h116__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p107__grid_code__safety"
+      "h116__grid_code__meter1_enable",
+      "h116__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10200",
-    "request_key": "p102__grid_code",
+    "protocol_version": "H11700",
+    "request_key": "h117__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p102__grid_code__safety"
+      "h117__grid_code__meter1_enable",
+      "h117__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10200",
-    "request_key": "q102__grid_code",
+    "protocol_version": "H11800",
+    "request_key": "h118__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q102__grid_code__safety"
+      "h118__grid_code__meter1_enable",
+      "h118__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10300",
-    "request_key": "q103__grid_code",
+    "protocol_version": "K10101",
+    "request_key": "k101__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q103__grid_code__safety"
+      "k101__grid_code__meter1_enable",
+      "k101__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10500",
-    "request_key": "q105__grid_code",
+    "protocol_version": "K10102",
+    "request_key": "k101__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q105__grid_code__safety"
+      "k101__grid_code__meter1_enable",
+      "k101__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10900",
-    "request_key": "q109__grid_code",
+    "protocol_version": "K10200",
+    "request_key": "k102__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q109__grid_code__safety"
+      "k102__grid_code__meter1_enable",
+      "k102__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11000",
-    "request_key": "q110__grid_code",
+    "protocol_version": "K10201",
+    "request_key": "k102__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q110__grid_code__safety"
+      "k102__grid_code__meter1_enable",
+      "k102__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11100",
-    "request_key": "q111__grid_code",
+    "protocol_version": "K10400",
+    "request_key": "k104__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q111__grid_code__safety"
+      "k104__grid_code__meter1_enable",
+      "k104__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11300",
-    "request_key": "q113__grid_code",
+    "protocol_version": "K10500",
+    "request_key": "k105__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q113__grid_code__safety"
+      "k105__grid_code__meter1_enable",
+      "k105__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11500",
-    "request_key": "q115__grid_code",
+    "protocol_version": "K10601",
+    "request_key": "k106__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q115__grid_code__safety"
+      "k106__grid_code__meter1_enable",
+      "k106__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11400",
-    "request_key": "q114__grid_code",
+    "protocol_version": "K10602",
+    "request_key": "k106__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q114__grid_code__safety"
+      "k106__grid_code__meter1_enable",
+      "k106__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10400",
-    "request_key": "q104__grid_code",
+    "protocol_version": "K10702",
+    "request_key": "k107__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q104__grid_code__safety"
+      "k107__grid_code__meter1_enable",
+      "k107__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q11200",
-    "request_key": "q112__grid_code",
+    "protocol_version": "K10803",
+    "request_key": "k108__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q112__grid_code__safety"
+      "k108__grid_code__meter1_enable",
+      "k108__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10700",
-    "request_key": "q107__grid_code",
+    "protocol_version": "K10804",
+    "request_key": "k108__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q107__grid_code__safety"
+      "k108__grid_code__meter1_enable",
+      "k108__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10800",
-    "request_key": "q108__grid_code",
+    "protocol_version": "K10900",
+    "request_key": "k109__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q108__grid_code__safety"
+      "k109__grid_code__meter1_enable",
+      "k109__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P11400",
-    "request_key": "p114__grid_code",
+    "protocol_version": "K11000",
+    "request_key": "k110__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p114__grid_code__safety"
+      "k110__grid_code__meter1_enable",
+      "k110__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10600",
-    "request_key": "q106__grid_code",
+    "protocol_version": "K11101",
+    "request_key": "k111__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q106__grid_code__safety"
+      "k111__grid_code__meter1_enable",
+      "k111__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P12100",
-    "request_key": "p121__grid_code",
+    "protocol_version": "K11103",
+    "request_key": "k111__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p121__grid_code__safety"
+      "k111__grid_code__meter1_enable",
+      "k111__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10000",
-    "request_key": "p100__grid_code",
+    "protocol_version": "K11302",
+    "request_key": "k113__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p100__grid_code__safety"
+      "k113__grid_code__meter1_enable",
+      "k113__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "Q10100",
-    "request_key": "q101__grid_code",
+    "protocol_version": "K11305",
+    "request_key": "k113__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "q101__grid_code__safety"
+      "k113__grid_code__meter1_enable",
+      "k113__grid_code__meter2_enable"
     ]
   },
   {
-    "protocol_version": "P10900",
-    "request_key": "p109__grid_code",
+    "protocol_version": "K11309",
+    "request_key": "k113__grid_code",
     "response_names": [
-      "GridCode"
+      "Meter1/CT1",
+      "Meter2/CT2"
     ],
     "response_key": [
-      "p109__grid_code__safety"
+      "k113__grid_code__meter1_enable",
+      "k113__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11400",
+    "request_key": "k114__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k114__grid_code__meter1_enable",
+      "k114__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11500",
+    "request_key": "k115__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k115__grid_code__meter1_enable",
+      "k115__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11502",
+    "request_key": "k115__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k115__grid_code__meter1_enable",
+      "k115__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11600",
+    "request_key": "k116__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k116__grid_code__meter1_enable",
+      "k116__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11601",
+    "request_key": "k116__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k116__grid_code__meter1_enable",
+      "k116__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11704",
+    "request_key": "k117__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k117__grid_code__meter1_enable",
+      "k117__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11705",
+    "request_key": "k117__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k117__grid_code__meter1_enable",
+      "k117__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11706",
+    "request_key": "k117__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k117__grid_code__meter1_enable",
+      "k117__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11800",
+    "request_key": "k118__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k118__grid_code__meter1_enable",
+      "k118__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "K11902",
+    "request_key": "k119__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "k119__grid_code__meter1_enable",
+      "k119__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10002",
+    "request_key": "zaa100__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "zaa100__grid_code__meter1_enable",
+      "zaa100__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10102",
+    "request_key": "zaa101__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "zaa101__grid_code__meter1_enable",
+      "zaa101__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10200",
+    "request_key": "zaa102__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "zaa102__grid_code__meter1_enable",
+      "zaa102__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10301",
+    "request_key": "zaa103__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "zaa103__grid_code__meter1_enable",
+      "zaa103__grid_code__meter2_enable"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10400",
+    "request_key": "zaa104__grid_code",
+    "response_names": [
+      "Meter1/CT1",
+      "Meter2/CT2"
+    ],
+    "response_key": [
+      "zaa104__grid_code__meter1_enable",
+      "zaa104__grid_code__meter2_enable"
     ]
   }
 ]

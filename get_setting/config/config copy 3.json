@@ -7,12 +7,12 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
-        "read_names": [["Meter1/CT1","Meter2/CT2"]]
+        "read_names": [["GridCode"]]
     },
     "get_setting": {
-        "input_file": "单相_all_device_data.csv",
+        "input_file": "all-h3g2+h3p-260811.csv",
         "concurrency": 180,
         "request_timeout": 300,
-        "skip_protocols": ["K11100"]
+        "skip_protocols": []
     }
 }

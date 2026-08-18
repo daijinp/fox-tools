@@ -1,0 +1,31 @@
+{
+  "ssh": {
+    "address": "ssh.example.com:22",
+    "username": "ssh-user",
+    "private_key": "id_rsa",
+    "private_key_passphrase": "",
+    "known_hosts_file": "known_hosts",
+    "timeout_seconds": 15
+  },
+  "mysql": {
+    "address": "127.0.0.1:3306",
+    "username": "readonly-user",
+    "password": "replace-with-the-mysql-password",
+    "database": "replace-with-the-database-name",
+    "connect_timeout_seconds": 15
+  },
+  "input": {
+    "csv_files": [
+      "../sns/单相.csv",
+      "../sns/三相.csv"
+    ]
+  },
+  "output": {
+    "directory": "../output"
+  },
+  "query": {
+    "batch_size": 200,
+    "batch_interval_seconds": 1,
+    "timeout_seconds": 60
+  }
+}

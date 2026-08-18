@@ -158,6 +158,35 @@ def _validate_protocols(devices, mapping_by_protocol):
         )
 
 
+def _get_input_csv_path():
+    """获取并校验待处理设备 CSV 路径。"""
+    input_file = _setting_cfg.get('input_file', '')
+    if not input_file:
+        raise Exception('config.json 中未配置 get_setting.input_file')
+
+    input_csv = os.path.join(_data_dir, input_file)
+    if not os.path.exists(input_csv):
+        raise Exception(f'输入文件不存在: {input_csv}')
+    return input_csv
+
+
+def precheck():
+    """在登录和拉取 UI 数据前，检查待处理协议是否已配置取 KEY 设备。"""
+    input_csv = _get_input_csv_path()
+    devices = _read_device_csv(input_csv)
+    configured_protocols = {
+        device['protocol_version'] for device in load_getui_devices()
+    }
+    device_protocols = {device[2] for device in devices}
+    missing = device_protocols - configured_protocols
+    if missing:
+        raise Exception(
+            '预检失败: 以下协议版本未在 config/getui_config.csv 中配置: '
+            f'{sorted(missing)}'
+        )
+    print(f'预检通过, 共 {len(device_protocols)} 个协议版本')
+
+
 async def _write_logs(state, message, log_files, output_dir):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
     line = f'[{timestamp}] {message}\n'
@@ -309,13 +338,7 @@ def _load_protocol_key_mapping():
 
 async def get_setting(token):
     """异步批量读取设备配置，自动重试失败设备"""
-    input_file = _setting_cfg.get('input_file', '')
-    if not input_file:
-        raise Exception('config.json 中未配置 get_setting.input_file')
-
-    input_csv = os.path.join(_data_dir, input_file)
-    if not os.path.exists(input_csv):
-        raise Exception(f'输入文件不存在: {input_csv}')
+    input_csv = _get_input_csv_path()
 
     os.makedirs(_data_dir, exist_ok=True)
     protocol_key_mapping = _load_protocol_key_mapping()
@@ -348,6 +371,7 @@ async def get_setting(token):
 
 
 if __name__ == '__main__':
+    precheck()
     _token = login()
     get_ui_keys(_token)
     asyncio.run(get_setting(_token))
