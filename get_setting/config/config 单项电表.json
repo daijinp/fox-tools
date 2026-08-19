@@ -7,21 +7,12 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
-        "read_names": [
-            [
-                "Meter1",
-                "Meter2"
-            ]
-        ]
+        "read_names": [["Meter1/CT1","Meter2/CT2"]]
     },
     "get_setting": {
-        "input_file": "三相_all_device_data.csv",
+        "input_file": "单相_all_device_data.csv",
         "concurrency": 180,
         "request_timeout": 300,
-        "skip_protocols": [
-            "D10800",
-            "D10900",
-            "Q11600"
-        ]
+        "skip_protocols": ["K11100"]
     }
 }

@@ -2,19 +2,19 @@
   "errno": 0,
   "msg": "Operation successful",
   "result": {
-    "protocol": "H104xx",
+    "protocol": "P106xx",
     "dictionary": {
       "grid_code": 1
     },
     "parameters": [
       {
         "disable": false,
-        "name": "SystemTime",
+        "name": "RTCTime",
         "block": true,
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__system_time",
+        "key": "p106__system_time",
         "tips": "",
         "properties": [
           {
@@ -24,14 +24,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "year",
+            "name": "Year",
             "range": {
               "hi": 99,
-              "lo": 20,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__year",
+            "key": "p106__system_time__year",
             "tips": ""
           },
           {
@@ -41,14 +41,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "month",
+            "name": "Month",
             "range": {
               "hi": 12,
               "lo": 1,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__month",
+            "key": "p106__system_time__month",
             "tips": ""
           },
           {
@@ -58,14 +58,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "day",
+            "name": "Day",
             "range": {
               "hi": 31,
               "lo": 1,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__day",
+            "key": "p106__system_time__day",
             "tips": ""
           },
           {
@@ -75,14 +75,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "hour",
+            "name": "Hour",
             "range": {
               "hi": 23,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__hour",
+            "key": "p106__system_time__hour",
             "tips": ""
           },
           {
@@ -92,14 +92,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "minute",
+            "name": "Minute",
             "range": {
               "hi": 59,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__minute",
+            "key": "p106__system_time__minute",
             "tips": ""
           },
           {
@@ -109,14 +109,14 @@
             },
             "unit": "",
             "level": 0,
-            "name": "second",
+            "name": "Second",
             "range": {
               "hi": 59,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__system_time__second",
+            "key": "p106__system_time__second",
             "tips": ""
           }
         ],
@@ -129,7 +129,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__grid_code",
+        "key": "p106__grid_code",
         "tips": "",
         "properties": [
           {
@@ -137,145 +137,133 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Japan",
-                "PPDS_CR_B",
-                "EN50549_NL",
-                "Austria",
-                "TR3.3.1-DK2",
-                "NBR-127/220",
-                "Test-60Hz",
-                "Colombia-208",
-                "NBR-220_BR",
-                "Ireland-Micro",
-                "CEI016",
-                "Qatar-LV",
-                "Ireland-Mini",
-                "Canada-120/240",
-                "VDE4105_DE",
-                "EN50549_PL",
-                "VFR2019_FR",
-                "Slovakia",
-                "Finland",
-                "SaudiArabia",
-                "Israel",
-                "EN50549_FR_W",
-                "Local",
-                "ChileMT-B",
-                "NBR-220/380",
-                "EN50549-PL-BMV",
-                "G99_UK",
-                "Estonia",
-                "Hawaii",
-                "Denmark3.2.1",
-                "Serbia",
-                "AS4777_AU-2020B",
-                "USA-120/208",
-                "Belgium-delta",
-                "CQC_CN-2",
-                "KSC8564",
-                "PPDS_CR",
-                "SriLanka",
-                "Turkey",
-                "Jamaica-110",
-                "G98_UK",
-                "NRS_SA",
-                "Slovenia",
-                "CQC_CN-5",
-                "Hungary",
-                "Croatia",
-                "Romania",
-                "Denmark3.2.2",
-                "Austria-B",
-                "IEC61727",
-                "Cyprus",
-                "CEI021_A",
-                "UTE_FR",
                 "PEA_TH",
-                "Chile_BT",
-                "EN 50549-2",
-                "AS4777_NZ",
-                "TR3.3.1-DK1",
-                "Test-50Hz",
-                "Sweden",
-                "PHL-delta",
-                "NBR-240_BR",
-                "Indonesia",
-                "Malaysia",
-                "USA-120/240",
-                "EN50549_FR",
-                "EN50549_PT",
-                "Switzerland",
-                "AS4777_AU-2020A",
-                "CEI021_B",
-                "VDE4110_DE",
-                "PR-LUMA",
-                "TWN-S",
-                "Mexico",
-                "CEI021_Areti_B",
-                "NBR-220/380_W",
-                "EN50549_PL_B",
-                "Singapore",
-                "Colombia",
-                "Austria_A_North",
-                "VDE0126",
+                "AS4777_AU-2020C",
+                "AS4777_NZ-2020",
+                "USA-120/208",
+                "Ireland-Mini",
+                "G99_UK",
+                "VDE4105_DE",
+                "Cambodia",
+                "Austria",
+                "Local",
+                "SaudiArabia",
+                "AS4777_AU-2020B",
+                "CQC_CN-5",
+                "Qatar-LV",
                 "PR-120/240",
                 "Type-B-DK2",
-                "Ukraine",
-                "Latvia",
-                "Lithuania",
-                "Norway",
-                "AS4777_NZ-2020",
-                "TWN-T",
-                "USA-277/480",
-                "Type-B-DK1",
-                "CQC_CN",
-                "Cambodia",
-                "AS4777_AU-2020C",
-                "Jamaica-240",
-                "Slovakia-B",
-                "MEA_TH",
-                "Bulgaria",
-                "Argentina",
-                "Pakistan",
-                "Philippines",
-                "Belgium",
-                "Greece",
-                "CQC_CN-1",
-                "ChileMT-A",
-                "CEI021_Areti_A",
-                "Spain",
-                "CQC_CN-3",
+                "PHL-delta",
+                "TR3.3.1-DK1",
+                "Colombia-208",
+                "Cyprus",
+                "NBR-220/380",
                 "G98_NI",
-                "DUBAI",
-                "AS4777_AU",
-                "UNE-206_SP",
-                "KSC8565",
-                "CQC_CN-4",
-                "USA-120",
+                "Austria-B",
+                "USA-277/480",
+                "Indonesia",
+                "Slovakia",
+                "Slovenia",
+                "USA-120/240",
+                "NBR-127/220",
+                "Jamaica-240",
+                "Philippines",
+                "Switzerland",
+                "Denmark3.2.2",
+                "Israel",
+                "AS4777_NZ",
+                "Latvia",
+                "CEI021_B",
+                "EN50549_FR",
+                "Colombia",
+                "EN50549_PL",
+                "Pakistan",
+                "Hungary",
+                "CQC_CN-1",
+                "Jamaica-110",
                 "PR-LUMA-120/208",
-                "PR-LUMA-277/480",
+                "MEA_TH",
+                "CQC_CN-2",
+                "CEI021_Areti_A",
+                "UNE-206_SP",
+                "Greece",
+                "Mexico",
+                "CQC_CN-4",
+                "Austria_A_North",
+                "NRS_SA",
+                "Denmark3.2.1",
+                "ChileMT-A",
+                "Belgium-delta",
+                "Turkey",
+                "UTE_FR",
+                "Malaysia",
+                "AS4777_AU-2020A",
+                "Chile_BT",
+                "Japan",
+                "EN50549_FR_W",
                 "Vietnam",
+                "EN50549_PT",
                 "RD1699_SP",
-                "G99_NI"
+                "Croatia",
+                "Lithuania",
+                "VDE4110_DE",
+                "TR3.3.1-DK2",
+                "NBR-240_BR",
+                "VFR2019_FR",
+                "Serbia",
+                "PR-LUMA",
+                "NBR-220/380_W",
+                "EN50549-PL-BMV",
+                "AS4777_AU",
+                "NBR-220_BR",
+                "Hawaii",
+                "CEI016",
+                "Sweden",
+                "Argentina",
+                "CQC_CN",
+                "PPDS_CR_B",
+                "IEC61727",
+                "SriLanka",
+                "Estonia",
+                "CEI021_Areti_B",
+                "DUBAI",
+                "USA-120",
+                "PR-LUMA-277/480",
+                "EN50549_NL",
+                "Bulgaria",
+                "Norway",
+                "VDE0126",
+                "Belgium",
+                "Canada-120/240",
+                "Spain",
+                "TWN-S",
+                "Slovakia-B",
+                "G98_UK",
+                "Singapore",
+                "Ireland-Micro",
+                "CQC_CN-3",
+                "Test-50Hz",
+                "Test-60Hz",
+                "G99_NI",
+                "ChileMT-B",
+                "Type-B-DK1",
+                "Romania",
+                "KSC8564",
+                "EN50549_PL_B",
+                "Ukraine",
+                "PPDS_CR",
+                "Finland",
+                "KSC8565",
+                "EN 50549-2",
+                "CEI021_A",
+                "TWN-T"
               ]
             },
             "unit": "",
             "level": 0,
             "name": "GridCode",
             "export": "",
-            "key": "h104__grid_code__safety",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Language",
-            "export": "",
-            "key": "h104__grid_code__01",
+            "key": "p106__grid_code__safety",
             "tips": ""
           },
           {
@@ -283,27 +271,15 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "independent",
-                "in-parallel"
+                "Disable",
+                "Enable"
               ]
-            },
-            "unit": "",
-            "level": 0,
-            "name": "PVConfig",
-            "export": "",
-            "key": "h104__grid_code__02",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
             },
             "unit": "",
             "level": 0,
             "name": "DRM0State",
             "export": "",
-            "key": "h104__grid_code__03",
+            "key": "p106__grid_code__01",
             "tips": ""
           },
           {
@@ -311,33 +287,15 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Meter",
-                "CT",
-                "disable"
-              ]
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Meter1/CT1",
-            "export": "",
-            "key": "h104__grid_code__meter1_enable",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "string",
-              "uiType": "select",
-              "uiItems": [
-                "CT",
                 "disable",
-                "Meter"
+                "enable"
               ]
             },
             "unit": "",
             "level": 0,
-            "name": "Meter2/CT2",
+            "name": "Meter",
             "export": "",
-            "key": "h104__grid_code__meter2_enable",
+            "key": "p106__grid_code__meter1_enable",
             "tips": ""
           },
           {
@@ -346,15 +304,15 @@
               "uiType": "input"
             },
             "unit": "",
-            "level": 0,
-            "name": "ModbusAddress",
+            "level": 1,
+            "name": "ModbusAddr",
             "range": {
               "hi": 247,
               "lo": 1,
               "enable": true
             },
             "export": "",
-            "key": "h104__grid_code__06",
+            "key": "p106__grid_code__03",
             "tips": ""
           },
           {
@@ -363,15 +321,67 @@
               "uiType": "input"
             },
             "unit": "",
-            "level": 0,
-            "name": "Password",
+            "level": 2,
+            "name": "WifiPushTimeInterval",
             "range": {
-              "hi": 9999,
-              "lo": 0,
+              "hi": 600,
+              "lo": 30,
               "enable": true
             },
             "export": "",
-            "key": "h104__grid_code__07",
+            "key": "p106__grid_code__04",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "100%",
+                "60%",
+                "30%",
+                "0%"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "DrmCtrlHw",
+            "export": "",
+            "key": "p106__grid_code__05",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "0%",
+                "100%",
+                "60%",
+                "30%"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "DrmCtrlWf",
+            "export": "",
+            "key": "p106__grid_code__06",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "enable",
+                "disable"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "Meter2",
+            "export": "",
+            "key": "p106__grid_code__meter2_enable",
             "tips": ""
           }
         ],
@@ -379,12 +389,12 @@
       },
       {
         "disable": false,
-        "name": "WorkModeParameters",
+        "name": "OperationMode",
         "block": false,
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__operation_mode",
+        "key": "p106__operation_mode",
         "tips": "",
         "properties": [
           {
@@ -394,14 +404,21 @@
               "uiItems": [
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "PowerStation",
+                "PeakShaving"
               ]
             },
             "unit": "",
             "level": 0,
             "name": "WorkMode",
+            "range": {
+              "hi": 3,
+              "lo": 0,
+              "enable": true
+            },
             "export": "",
-            "key": "h104__operation_mode__work_mode",
+            "key": "p106__operation_mode__work_mode",
             "tips": ""
           }
         ],
@@ -414,7 +431,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__charge_time",
+        "key": "p106__charge_time",
         "tips": "1.Only filling the four period settings with all zero can disable force-charge period.\n2.The following two checkboxes means:\n (checked) During force-charge period, both grid and PV can charge battery.\n (unchecked) During force-charge period, only PV can charge battery.",
         "properties": [
           {
@@ -431,7 +448,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__start_time1_hour",
+            "key": "p106__charge_time__start_time1_hour",
             "tips": ""
           },
           {
@@ -448,7 +465,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__start_time1_minute",
+            "key": "p106__charge_time__start_time1_minute",
             "tips": ""
           },
           {
@@ -465,7 +482,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__end_time1_hour",
+            "key": "p106__charge_time__end_time1_hour",
             "tips": ""
           },
           {
@@ -482,7 +499,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__end_time1_minute",
+            "key": "p106__charge_time__end_time1_minute",
             "tips": ""
           },
           {
@@ -494,7 +511,7 @@
             "level": 0,
             "name": "P1GridChargeFlag",
             "export": "",
-            "key": "h104__charge_time__grid_flag1",
+            "key": "p106__charge_time__grid_flag1",
             "tips": ""
           },
           {
@@ -511,7 +528,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__start_time2_hour",
+            "key": "p106__charge_time__start_time2_hour",
             "tips": ""
           },
           {
@@ -528,7 +545,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__start_time2_minute",
+            "key": "p106__charge_time__start_time2_minute",
             "tips": ""
           },
           {
@@ -545,7 +562,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__end_time2_hour",
+            "key": "p106__charge_time__end_time2_hour",
             "tips": ""
           },
           {
@@ -562,7 +579,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__charge_time__end_time2_minute",
+            "key": "p106__charge_time__end_time2_minute",
             "tips": ""
           },
           {
@@ -574,7 +591,7 @@
             "level": 0,
             "name": "P2GridChargeFlag",
             "export": "",
-            "key": "h104__charge_time__grid_flag2",
+            "key": "p106__charge_time__grid_flag2",
             "tips": ""
           }
         ],
@@ -587,7 +604,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__basic2",
+        "key": "p106__basic2",
         "tips": "",
         "properties": [
           {
@@ -599,12 +616,12 @@
             "level": 0,
             "name": "MaximumSetChargeCurrent",
             "range": {
-              "hi": 35,
+              "hi": 50,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__basic2__max_set_charge_current",
+            "key": "p106__basic2__max_set_charge_current",
             "tips": ""
           },
           {
@@ -616,12 +633,12 @@
             "level": 0,
             "name": "MaximumSetDischargeCurrent",
             "range": {
-              "hi": 35,
+              "hi": 50,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__basic2__max_set_discharge_current",
+            "key": "p106__basic2__max_set_discharge_current",
             "tips": ""
           },
           {
@@ -638,7 +655,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__basic2__minsoc",
+            "key": "p106__basic2__minsoc",
             "tips": ""
           },
           {
@@ -655,7 +672,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__basic2__maxsoc",
+            "key": "p106__basic2__maxsoc",
             "tips": ""
           },
           {
@@ -672,24 +689,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__basic2__minsoc_ongrid",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "W",
-            "level": 0,
-            "name": "ExportLimit",
-            "range": {
-              "hi": 60000,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__basic2__export_limit",
+            "key": "p106__basic2__minsoc_ongrid",
             "tips": ""
           },
           {
@@ -705,7 +705,128 @@
             "level": 0,
             "name": "SysOn/Off",
             "export": "",
-            "key": "h104__basic2__06",
+            "key": "p106__basic2__sys_switch",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "bool",
+              "uiType": "switch"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "GroundProtection",
+            "export": "",
+            "key": "p106__basic2__ground_protection",
+            "tips": ""
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "PowerLimit",
+        "block": false,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__05",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%",
+            "level": 0,
+            "name": "PowerLimit",
+            "range": {
+              "hi": 100,
+              "lo": 1,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__05__00",
+            "tips": ""
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "ExportLimit",
+        "block": true,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__export_limit",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "uint32",
+              "uiType": "input"
+            },
+            "unit": "W",
+            "level": 0,
+            "name": "ExportLimit",
+            "range": {
+              "hi": 300000,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__export_limit__export_limit",
+            "tips": ""
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "OffGridParameters",
+        "block": true,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__07",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "bool",
+              "uiType": "checkbox"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "RemoteDeratingEnable",
+            "export": "",
+            "key": "p106__07__00",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%",
+            "level": 0,
+            "name": "EpsRecoverSOC",
+            "export": "",
+            "key": "p106__07__01",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "V",
+            "level": 0,
+            "name": "EpsRecoverVolt",
+            "export": "",
+            "key": "p106__07__02",
             "tips": ""
           },
           {
@@ -721,105 +842,7 @@
             "level": 0,
             "name": "EpsFrequencySelect",
             "export": "",
-            "key": "h104__basic2__07",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "EpsOutput",
-            "export": "",
-            "key": "h104__basic2__08",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%",
-            "level": 0,
-            "name": "PowerLimit",
-            "range": {
-              "hi": 100,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__basic2__09",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "string",
-              "uiType": "select",
-              "uiItems": [
-                "External",
-                "Internal"
-              ]
-            },
-            "unit": "",
-            "level": 0,
-            "name": "ByPassRelay",
-            "export": "",
-            "key": "h104__basic2__10",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Grounding",
-            "export": "",
-            "key": "h104__basic2__11",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "V",
-            "level": 0,
-            "name": "EpsRatedVoltage",
-            "range": {
-              "hi": 250,
-              "lo": 150,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__basic2__12",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "EpsOverloadAutoRecovery",
-            "export": "",
-            "key": "h104__basic2__13",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "IdleState",
-            "export": "",
-            "key": "h104__basic2__14",
+            "key": "p106__07__03",
             "tips": ""
           }
         ],
@@ -832,7 +855,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__05",
+        "key": "p106__08",
         "tips": "",
         "properties": [
           {
@@ -842,33 +865,9 @@
             },
             "unit": "",
             "level": 0,
-            "name": "VoltParameter",
+            "name": "SoftStart_En",
             "export": "",
-            "key": "h104__05__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "FrequenceParameter",
-            "export": "",
-            "key": "h104__05__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "SoftStart",
-            "export": "",
-            "key": "h104__05__02",
+            "key": "p106__08__00",
             "tips": ""
           },
           {
@@ -876,16 +875,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "ConnectTime",
             "range": {
-              "hi": 1800,
-              "lo": 15,
+              "hi": 1000,
+              "lo": 20,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__03",
+            "key": "p106__08__01",
             "tips": ""
           },
           {
@@ -893,16 +892,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%Pn/min",
+            "unit": "%/min",
             "level": 0,
             "name": "ConnectPowerGradient",
             "range": {
-              "hi": 100,
-              "lo": 1,
+              "hi": 600,
+              "lo": 5,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__04",
+            "key": "p106__08__02",
             "tips": ""
           },
           {
@@ -910,16 +909,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "ReconnectTime",
             "range": {
-              "hi": 1800,
-              "lo": 15,
+              "hi": 1000,
+              "lo": 20,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__05",
+            "key": "p106__08__03",
             "tips": ""
           },
           {
@@ -927,16 +926,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%Pn/min",
+            "unit": "%/min",
             "level": 0,
             "name": "ReconnectPowerGradient",
             "range": {
-              "hi": 100,
-              "lo": 1,
+              "hi": 600,
+              "lo": 5,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__06",
+            "key": "p106__08__04",
             "tips": ""
           },
           {
@@ -946,14 +945,14 @@
             },
             "unit": "V",
             "level": 0,
-            "name": "ConnectVoltagHeighLimit",
+            "name": "ConnectVoltageHighLimit",
             "range": {
               "hi": 300,
-              "lo": 230,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__07",
+            "key": "p106__08__05",
             "tips": ""
           },
           {
@@ -963,14 +962,14 @@
             },
             "unit": "V",
             "level": 0,
-            "name": "ConnectVoltagLowLimit",
+            "name": "ConnectVoltageLowLimit",
             "range": {
-              "hi": 230,
-              "lo": 150,
+              "hi": 300,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__08",
+            "key": "p106__08__06",
             "tips": ""
           },
           {
@@ -982,12 +981,12 @@
             "level": 0,
             "name": "ConnectFrequencyHighLimit",
             "range": {
-              "hi": 55,
-              "lo": 50.1,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__09",
+            "key": "p106__08__07",
             "tips": ""
           },
           {
@@ -999,12 +998,12 @@
             "level": 0,
             "name": "ConnectFrequencyLowLimit",
             "range": {
-              "hi": 49.9,
-              "lo": 47,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__05__10",
+            "key": "p106__08__08",
             "tips": ""
           }
         ],
@@ -1012,12 +1011,12 @@
       },
       {
         "disable": false,
-        "name": "SafetyVoltageParameters",
+        "name": "SafetyVoltage",
         "block": true,
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__06",
+        "key": "p106__09",
         "tips": "",
         "properties": [
           {
@@ -1027,45 +1026,9 @@
             },
             "unit": "",
             "level": 0,
-            "name": "PrimaryProtection",
+            "name": "VoltProtEnable",
             "export": "",
-            "key": "h104__06__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "SecondaryProtection",
-            "export": "",
-            "key": "h104__06__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Three-levelProtection",
-            "export": "",
-            "key": "h104__06__02",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "TenMinutesOvervoltageProtection",
-            "export": "",
-            "key": "h104__06__03",
+            "key": "p106__09__00",
             "tips": ""
           },
           {
@@ -1078,11 +1041,11 @@
             "name": "VoltageHighLimit1",
             "range": {
               "hi": 300,
-              "lo": 230,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__04",
+            "key": "p106__09__01",
             "tips": ""
           },
           {
@@ -1090,16 +1053,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "VoltageHighLimit1ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__05",
+            "key": "p106__09__02",
             "tips": ""
           },
           {
@@ -1112,11 +1075,11 @@
             "name": "VoltageHighLimit2",
             "range": {
               "hi": 300,
-              "lo": 230,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__06",
+            "key": "p106__09__03",
             "tips": ""
           },
           {
@@ -1124,16 +1087,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "VoltageHighLimit2ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__07",
+            "key": "p106__09__04",
             "tips": ""
           },
           {
@@ -1146,11 +1109,11 @@
             "name": "VoltageHighLimit3",
             "range": {
               "hi": 300,
-              "lo": 230,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__08",
+            "key": "p106__09__05",
             "tips": ""
           },
           {
@@ -1158,16 +1121,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "VoltageHighLimit3ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__09",
+            "key": "p106__09__06",
             "tips": ""
           },
           {
@@ -1179,12 +1142,12 @@
             "level": 0,
             "name": "VoltageLowLimit1",
             "range": {
-              "hi": 230,
-              "lo": 50,
+              "hi": 300,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__10",
+            "key": "p106__09__07",
             "tips": ""
           },
           {
@@ -1192,16 +1155,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "VoltageLowLimit1ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__11",
+            "key": "p106__09__08",
             "tips": ""
           },
           {
@@ -1213,12 +1176,12 @@
             "level": 0,
             "name": "VoltageLowLimit2",
             "range": {
-              "hi": 230,
-              "lo": 50,
+              "hi": 300,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__12",
+            "key": "p106__09__09",
             "tips": ""
           },
           {
@@ -1226,16 +1189,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "VoltageLowLimit2ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__13",
+            "key": "p106__09__10",
             "tips": ""
           },
           {
@@ -1247,12 +1210,12 @@
             "level": 0,
             "name": "10minVoltageHighLimit",
             "range": {
-              "hi": 350,
-              "lo": 230,
+              "hi": 300,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__06__14",
+            "key": "p106__09__11",
             "tips": ""
           }
         ],
@@ -1265,7 +1228,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__07",
+        "key": "p106__10",
         "tips": "",
         "properties": [
           {
@@ -1275,33 +1238,9 @@
             },
             "unit": "",
             "level": 0,
-            "name": "PrimaryProtection",
+            "name": "FrequencyProtectEnable",
             "export": "",
-            "key": "h104__07__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "SecondaryProtection",
-            "export": "",
-            "key": "h104__07__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Rocof",
-            "export": "",
-            "key": "h104__07__02",
+            "key": "p106__10__00",
             "tips": ""
           },
           {
@@ -1313,12 +1252,12 @@
             "level": 0,
             "name": "FrequencyHighLimit1",
             "range": {
-              "hi": 65,
-              "lo": 50.1,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__03",
+            "key": "p106__10__01",
             "tips": ""
           },
           {
@@ -1326,16 +1265,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "FrequencyHighLimit1ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__04",
+            "key": "p106__10__02",
             "tips": ""
           },
           {
@@ -1347,12 +1286,12 @@
             "level": 0,
             "name": "FrequencyHighLimit2",
             "range": {
-              "hi": 65,
-              "lo": 50.1,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__05",
+            "key": "p106__10__03",
             "tips": ""
           },
           {
@@ -1360,16 +1299,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "FrequencyHighLimit2ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__06",
+            "key": "p106__10__04",
             "tips": ""
           },
           {
@@ -1381,12 +1320,12 @@
             "level": 0,
             "name": "FrequencyLowLimit1",
             "range": {
-              "hi": 60,
-              "lo": 45,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__07",
+            "key": "p106__10__05",
             "tips": ""
           },
           {
@@ -1394,16 +1333,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "FrequencyLowLimit1ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__08",
+            "key": "p106__10__06",
             "tips": ""
           },
           {
@@ -1415,12 +1354,12 @@
             "level": 0,
             "name": "FrequencyLowLimit2",
             "range": {
-              "hi": 60,
-              "lo": 45,
+              "hi": 70,
+              "lo": 40,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__09",
+            "key": "p106__10__07",
             "tips": ""
           },
           {
@@ -1428,33 +1367,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "FrequencyLowLimit2ProtectTime",
             "range": {
-              "hi": 50,
+              "hi": 600,
               "lo": 0.02,
               "enable": true
             },
             "export": "",
-            "key": "h104__07__10",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz/s",
-            "level": 0,
-            "name": "Rocof",
-            "range": {
-              "hi": 5,
-              "lo": 0.5,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__07__11",
+            "key": "p106__10__08",
             "tips": ""
           }
         ],
@@ -1467,240 +1389,19 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__08",
+        "key": "p106__11",
         "tips": "",
         "properties": [
           {
             "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
+              "valueType": "bool",
+              "uiType": "checkbox"
             },
             "unit": "",
             "level": 0,
-            "name": "P(f) flag",
+            "name": "DroopOverFreqmode",
             "export": "",
-            "key": "h104__08__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "UnderFrequencyPointRecover",
-            "range": {
-              "hi": 60,
-              "lo": 45,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "UnderFrequencyPointEnter",
-            "range": {
-              "hi": 60,
-              "lo": 45,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__02",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "UnderFrequencyPointExit",
-            "range": {
-              "hi": 60,
-              "lo": 45,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__03",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%/min",
-            "level": 0,
-            "name": "UnderFrequencyPowerDeclineSlope",
-            "range": {
-              "hi": 100,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__04",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "OverFrequencyPointRecover",
-            "range": {
-              "hi": 65,
-              "lo": 50.1,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__05",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "OverFrequencyPointEnter",
-            "range": {
-              "hi": 65,
-              "lo": 50.1,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__06",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "Hz",
-            "level": 0,
-            "name": "OverFrequencyPointExit",
-            "range": {
-              "hi": 65,
-              "lo": 50.1,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__07",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%/min",
-            "level": 0,
-            "name": "OverFrequencyPowerDeclineSlope",
-            "range": {
-              "hi": 100,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__08",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "S",
-            "level": 0,
-            "name": "P(f)EnterDelay",
-            "range": {
-              "hi": 300,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__09",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "S",
-            "level": 0,
-            "name": "P(f)ExitDelay",
-            "range": {
-              "hi": 300,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__10",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%Pn/min",
-            "level": 0,
-            "name": "P(f)PowerIncreaseGradient",
-            "range": {
-              "hi": 100,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__11",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%",
-            "level": 0,
-            "name": "UnderFrequencyStopPointDeclineSlope",
-            "range": {
-              "hi": 1000,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__12",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "%",
-            "level": 0,
-            "name": "OverFrequencyStopPointDeclineSlope",
-            "range": {
-              "hi": 1000,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__08__13",
+            "key": "p106__11__00",
             "tips": ""
           },
           {
@@ -1710,9 +1411,152 @@
             },
             "unit": "",
             "level": 0,
-            "name": "p(f)Enable",
+            "name": "DroopUnderFreqmode",
             "export": "",
-            "key": "h104__08__14",
+            "key": "p106__11__01",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "Hz",
+            "level": 0,
+            "name": "DroopUnderFreqPointEnter",
+            "range": {
+              "hi": 70,
+              "lo": 40,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__02",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "Hz",
+            "level": 0,
+            "name": "DroopUnderFreqPointExit",
+            "range": {
+              "hi": 70,
+              "lo": 40,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__03",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%",
+            "level": 0,
+            "name": "DroopUnderDecSlop",
+            "range": {
+              "hi": 100,
+              "lo": 1,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__04",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "Hz",
+            "level": 0,
+            "name": "DroopOverFreqPointEnter",
+            "range": {
+              "hi": 70,
+              "lo": 40,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__05",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "Hz",
+            "level": 0,
+            "name": "DroopOverFreqPointExit",
+            "range": {
+              "hi": 70,
+              "lo": 40,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__06",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%",
+            "level": 0,
+            "name": "DroopOverDecSlop",
+            "range": {
+              "hi": 100,
+              "lo": 1,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__07",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "s",
+            "level": 0,
+            "name": "UnderFreq_ExitDelay",
+            "export": "",
+            "key": "p106__11__08",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "s",
+            "level": 0,
+            "name": "OverFreq_ExitDelay",
+            "export": "",
+            "key": "p106__11__09",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%/min",
+            "level": 0,
+            "name": "DroopIncPwrGradient",
+            "range": {
+              "hi": 600,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__11__10",
             "tips": ""
           }
         ],
@@ -1725,19 +1569,19 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__09",
+        "key": "p106__12",
         "tips": "",
         "properties": [
           {
             "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
+              "valueType": "bool",
+              "uiType": "checkbox"
             },
             "unit": "",
             "level": 0,
-            "name": "P(u)flag",
+            "name": "P(U)Enable",
             "export": "",
-            "key": "h104__09__00",
+            "key": "p106__12__00",
             "tips": ""
           },
           {
@@ -1750,11 +1594,11 @@
             "name": "V1",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__09__01",
+            "key": "p106__12__01",
             "tips": ""
           },
           {
@@ -1767,11 +1611,11 @@
             "name": "V2",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__09__02",
+            "key": "p106__12__02",
             "tips": ""
           },
           {
@@ -1784,11 +1628,11 @@
             "name": "V3",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__09__03",
+            "key": "p106__12__03",
             "tips": ""
           },
           {
@@ -1801,11 +1645,11 @@
             "name": "V4",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__09__04",
+            "key": "p106__12__04",
             "tips": ""
           },
           {
@@ -1813,16 +1657,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
-            "level": 0,
+            "unit": "s",
+            "level": 1,
             "name": "P(U)Delay",
             "range": {
-              "hi": 300,
+              "hi": 10,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__09__05",
+            "key": "p106__12__05",
             "tips": ""
           },
           {
@@ -1831,132 +1675,10 @@
               "uiType": "input"
             },
             "unit": "%Pn/min",
-            "level": 0,
-            "name": "P(U)PowerIncreaseGradient",
-            "range": {
-              "hi": 100,
-              "lo": 0,
-              "enable": true
-            },
+            "level": 1,
+            "name": "P(U)PowerGradient",
             "export": "",
-            "key": "h104__09__06",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "p(u)Enable",
-            "export": "",
-            "key": "h104__09__07",
-            "tips": ""
-          }
-        ],
-        "empty": false
-      },
-      {
-        "disable": false,
-        "name": "Safety-DCI",
-        "block": true,
-        "setting_code": "",
-        "type": "",
-        "export": "",
-        "key": "h104__10",
-        "tips": "",
-        "properties": [
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "PrimaryProtection",
-            "export": "",
-            "key": "h104__10__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "SecondaryProtection",
-            "export": "",
-            "key": "h104__10__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "mA",
-            "level": 0,
-            "name": "DCIHighLimit1",
-            "range": {
-              "hi": 1000,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__10__02",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "S",
-            "level": 0,
-            "name": "DCIHighLimit1ProtectTime",
-            "range": {
-              "hi": 5,
-              "lo": 0.02,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__10__03",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "mA",
-            "level": 0,
-            "name": "DCIHighLimit2",
-            "range": {
-              "hi": 1000,
-              "lo": 0,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__10__04",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "uint16",
-              "uiType": "input"
-            },
-            "unit": "S",
-            "level": 0,
-            "name": "DCIHighLimit2ProtectTime",
-            "range": {
-              "hi": 5,
-              "lo": 0.02,
-              "enable": true
-            },
-            "export": "",
-            "key": "h104__10__05",
+            "key": "p106__12__06",
             "tips": ""
           }
         ],
@@ -1969,7 +1691,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__reactive_parameter",
+        "key": "p106__reactive_parameter",
         "tips": "",
         "properties": [
           {
@@ -1979,93 +1701,9 @@
             },
             "unit": "",
             "level": 0,
-            "name": "InvalidMode",
+            "name": "ReactivePowerModeEnable",
             "export": "",
-            "key": "h104__reactive_parameter__00",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "FixedCosphiAhead",
-            "export": "",
-            "key": "h104__reactive_parameter__01",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "FixedCosphiHysteresis",
-            "export": "",
-            "key": "h104__reactive_parameter__02",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "PFLineMode",
-            "export": "",
-            "key": "h104__reactive_parameter__03",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "FixedQvar",
-            "export": "",
-            "key": "h104__reactive_parameter__04",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "Q(u) mode",
-            "export": "",
-            "key": "h104__reactive_parameter__05",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "VoltageLockEnable",
-            "export": "",
-            "key": "h104__reactive_parameter__06",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "checkbox"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "PowerLockEnable",
-            "export": "",
-            "key": "h104__reactive_parameter__07",
+            "key": "p106__reactive_parameter__00",
             "tips": ""
           },
           {
@@ -2073,19 +1711,19 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "FixedQ",
-                "QVoltage",
-                "VarNo",
-                "UnderExcited",
-                "OverExcited",
-                "PFPower"
+                "Qu",
+                "OFF",
+                "FixedPFOver",
+                "FixedPFUnder",
+                "Qppf",
+                "FixedQ"
               ]
             },
             "unit": "",
             "level": 0,
             "name": "ReactivePowerControlMode",
             "export": "",
-            "key": "h104__reactive_parameter__reactive_power_control_mode",
+            "key": "p106__reactive_parameter__reactive_power_control_mode",
             "tips": ""
           },
           {
@@ -2093,16 +1731,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "ReactivePowerRiseTime",
             "range": {
-              "hi": 10,
+              "hi": 500,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__09",
+            "key": "p106__reactive_parameter__02",
             "tips": ""
           },
           {
@@ -2119,7 +1757,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__10",
+            "key": "p106__reactive_parameter__03",
             "tips": ""
           },
           {
@@ -2131,12 +1769,12 @@
             "level": 0,
             "name": "FixedQ",
             "range": {
-              "hi": 4500,
-              "lo": -3600,
+              "hi": 30000,
+              "lo": -30000,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__11",
+            "key": "p106__reactive_parameter__04",
             "tips": ""
           },
           {
@@ -2145,15 +1783,15 @@
               "uiType": "input"
             },
             "unit": "V",
-            "level": 0,
+            "level": 2,
             "name": "CosphiPLockinV",
             "range": {
               "hi": 300,
-              "lo": 200,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__12",
+            "key": "p106__reactive_parameter__05",
             "tips": ""
           },
           {
@@ -2162,15 +1800,15 @@
               "uiType": "input"
             },
             "unit": "V",
-            "level": 0,
+            "level": 2,
             "name": "CosphiPLockoutV",
             "range": {
               "hi": 300,
-              "lo": 200,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__13",
+            "key": "p106__reactive_parameter__06",
             "tips": ""
           },
           {
@@ -2183,11 +1821,11 @@
             "name": "CosphiPPF1",
             "range": {
               "hi": 1,
-              "lo": 0.8,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__14",
+            "key": "p106__reactive_parameter__07",
             "tips": ""
           },
           {
@@ -2195,7 +1833,7 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
+            "unit": "Pn%",
             "level": 0,
             "name": "CosphiPP1",
             "range": {
@@ -2204,7 +1842,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__15",
+            "key": "p106__reactive_parameter__08",
             "tips": ""
           },
           {
@@ -2217,11 +1855,11 @@
             "name": "CosphiPPF2",
             "range": {
               "hi": 1,
-              "lo": 0.8,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__16",
+            "key": "p106__reactive_parameter__09",
             "tips": ""
           },
           {
@@ -2229,7 +1867,7 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
+            "unit": "Pn%",
             "level": 0,
             "name": "CosphiPP2",
             "range": {
@@ -2238,7 +1876,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__17",
+            "key": "p106__reactive_parameter__10",
             "tips": ""
           },
           {
@@ -2251,11 +1889,11 @@
             "name": "CosphiPPF3",
             "range": {
               "hi": 1,
-              "lo": 0.8,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__18",
+            "key": "p106__reactive_parameter__11",
             "tips": ""
           },
           {
@@ -2263,7 +1901,7 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
+            "unit": "Pn%",
             "level": 0,
             "name": "CosphiPP3",
             "range": {
@@ -2272,7 +1910,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__19",
+            "key": "p106__reactive_parameter__12",
             "tips": ""
           },
           {
@@ -2285,11 +1923,11 @@
             "name": "CosphiPPF4",
             "range": {
               "hi": 1,
-              "lo": 0.8,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__20",
+            "key": "p106__reactive_parameter__13",
             "tips": ""
           },
           {
@@ -2297,7 +1935,7 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
+            "unit": "Pn%",
             "level": 0,
             "name": "CosphiPP4",
             "range": {
@@ -2306,7 +1944,7 @@
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__21",
+            "key": "p106__reactive_parameter__14",
             "tips": ""
           },
           {
@@ -2319,11 +1957,11 @@
             "name": "QuV1",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__22",
+            "key": "p106__reactive_parameter__15",
             "tips": ""
           },
           {
@@ -2331,16 +1969,16 @@
               "valueType": "int16",
               "uiType": "input"
             },
-            "unit": "Var",
+            "unit": "%",
             "level": 0,
             "name": "QuQ1",
             "range": {
-              "hi": 3000,
-              "lo": 0,
+              "hi": 60,
+              "lo": -60,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__23",
+            "key": "p106__reactive_parameter__16",
             "tips": ""
           },
           {
@@ -2353,11 +1991,11 @@
             "name": "QuV2",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__24",
+            "key": "p106__reactive_parameter__17",
             "tips": ""
           },
           {
@@ -2365,16 +2003,16 @@
               "valueType": "int16",
               "uiType": "input"
             },
-            "unit": "Var",
+            "unit": "%",
             "level": 0,
             "name": "QuQ2",
             "range": {
-              "hi": 3000,
-              "lo": 0,
+              "hi": 60,
+              "lo": -60,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__25",
+            "key": "p106__reactive_parameter__18",
             "tips": ""
           },
           {
@@ -2387,11 +2025,11 @@
             "name": "QuV3",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__26",
+            "key": "p106__reactive_parameter__19",
             "tips": ""
           },
           {
@@ -2399,16 +2037,16 @@
               "valueType": "int16",
               "uiType": "input"
             },
-            "unit": "Var",
+            "unit": "%",
             "level": 0,
             "name": "QuQ3",
             "range": {
-              "hi": 3000,
-              "lo": 0,
+              "hi": 60,
+              "lo": -60,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__27",
+            "key": "p106__reactive_parameter__20",
             "tips": ""
           },
           {
@@ -2421,11 +2059,11 @@
             "name": "QuV4",
             "range": {
               "hi": 300,
-              "lo": 150,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__28",
+            "key": "p106__reactive_parameter__21",
             "tips": ""
           },
           {
@@ -2433,16 +2071,16 @@
               "valueType": "int16",
               "uiType": "input"
             },
-            "unit": "Var",
+            "unit": "%",
             "level": 0,
             "name": "QuQ4",
             "range": {
-              "hi": 3000,
-              "lo": 0,
+              "hi": 60,
+              "lo": -60,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__29",
+            "key": "p106__reactive_parameter__22",
             "tips": ""
           },
           {
@@ -2450,16 +2088,16 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
-            "level": 0,
-            "name": "QuLockinPRatio",
+            "unit": "Pn%",
+            "level": 1,
+            "name": "QulockinP",
             "range": {
               "hi": 100,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__30",
+            "key": "p106__reactive_parameter__23",
             "tips": ""
           },
           {
@@ -2467,33 +2105,33 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "%",
-            "level": 0,
-            "name": "QuLockoutPRatio",
+            "unit": "Pn%",
+            "level": 1,
+            "name": "QulockoutP",
             "range": {
               "hi": 100,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__31",
+            "key": "p106__reactive_parameter__24",
             "tips": ""
           },
           {
             "elemType": {
-              "valueType": "int16",
+              "valueType": "uint16",
               "uiType": "input"
             },
             "unit": "Var",
-            "level": 0,
+            "level": 1,
             "name": "QuQLimit",
             "range": {
-              "hi": 6000,
+              "hi": 60000,
               "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__32",
+            "key": "p106__reactive_parameter__25",
             "tips": ""
           },
           {
@@ -2501,16 +2139,245 @@
               "valueType": "uint16",
               "uiType": "input"
             },
-            "unit": "S",
+            "unit": "s",
             "level": 0,
             "name": "QuEnterDelay",
             "range": {
-              "hi": 20,
-              "lo": 0.02,
+              "hi": 10,
+              "lo": 0,
               "enable": true
             },
             "export": "",
-            "key": "h104__reactive_parameter__33",
+            "key": "p106__reactive_parameter__26",
+            "tips": ""
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "PeakShavingSet",
+        "block": true,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__peak_shaving_set",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "int32",
+              "uiType": "input"
+            },
+            "unit": "kW",
+            "level": 0,
+            "name": "Importlimit",
+            "range": {
+              "hi": 1000,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__import_limit",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "%",
+            "level": 0,
+            "name": "ThresholdSOC",
+            "range": {
+              "hi": 100,
+              "lo": 10,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__thresholdsoc",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint32",
+              "uiType": "input"
+            },
+            "unit": "kW",
+            "level": 0,
+            "name": "Exportpeaklimit",
+            "range": {
+              "hi": 100,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__02",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "NOMode",
+                "NCMode",
+                "TimingMode"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowImport",
+            "export": "",
+            "key": "p106__peak_shaving_set__03",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowStartTime1Hour",
+            "range": {
+              "hi": 23,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__04",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowStartTime1Minute",
+            "range": {
+              "hi": 59,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__05",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowEndTime1Hour",
+            "range": {
+              "hi": 23,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__06",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowEndTime1Minute",
+            "range": {
+              "hi": 59,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__07",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowStartTime2Hour",
+            "range": {
+              "hi": 23,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__08",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowStartTime2Minute",
+            "range": {
+              "hi": 59,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__09",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowEndTime2Hour",
+            "range": {
+              "hi": 23,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__10",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint8",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "ChrInLowEndTime2Minute",
+            "range": {
+              "hi": 59,
+              "lo": 0,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__peak_shaving_set__11",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "",
+            "level": 2,
+            "name": "TBD",
+            "export": "",
+            "key": "p106__peak_shaving_set__12",
             "tips": ""
           }
         ],
@@ -2523,7 +2390,7 @@
         "setting_code": "",
         "type": "",
         "export": "",
-        "key": "h104__operation",
+        "key": "p106__15",
         "tips": "",
         "properties": [
           {
@@ -2535,19 +2402,7 @@
             "level": 0,
             "name": "ClearEvents",
             "export": "",
-            "key": "h104__operation__test",
-            "tips": ""
-          },
-          {
-            "elemType": {
-              "valueType": "bool",
-              "uiType": "switch"
-            },
-            "unit": "",
-            "level": 0,
-            "name": "ClearEnergy",
-            "export": "",
-            "key": "h104__operation__01",
+            "key": "p106__15__test",
             "tips": ""
           },
           {
@@ -2559,7 +2414,110 @@
             "level": 0,
             "name": "FactoryReset",
             "export": "",
-            "key": "h104__operation__02",
+            "key": "p106__15__01",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "bool",
+              "uiType": "switch"
+            },
+            "unit": "",
+            "level": 0,
+            "name": "BatteryPowerActive",
+            "export": "",
+            "key": "p106__15__02",
+            "tips": ""
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "OperationMode",
+        "block": false,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__16",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "Enable",
+                "Disable"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "BalanceLoad",
+            "export": "",
+            "key": "p106__16__00",
+            "tips": "Note: Unbalanced load function\nEnable: activate unbalanced load function.  Disable: deactivate the function."
+          },
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "Disable",
+                "Enable"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "BalanceLogicFirst",
+            "export": "",
+            "key": "p106__16__01",
+            "tips": "Enable: grid power will be balanced.  Disable: grid power will be unbalanced."
+          }
+        ],
+        "empty": false
+      },
+      {
+        "disable": false,
+        "name": "IDLE",
+        "block": false,
+        "setting_code": "",
+        "type": "",
+        "export": "",
+        "key": "p106__17",
+        "tips": "",
+        "properties": [
+          {
+            "elemType": {
+              "valueType": "string",
+              "uiType": "select",
+              "uiItems": [
+                "Disable",
+                "Enable"
+              ]
+            },
+            "unit": "",
+            "level": 0,
+            "name": "StandByState",
+            "export": "",
+            "key": "p106__17__00",
+            "tips": ""
+          },
+          {
+            "elemType": {
+              "valueType": "uint16",
+              "uiType": "input"
+            },
+            "unit": "W",
+            "level": 0,
+            "name": "StandByLoadPowerThreshold",
+            "range": {
+              "hi": 600,
+              "lo": 100,
+              "enable": true
+            },
+            "export": "",
+            "key": "p106__17__01",
             "tips": ""
           }
         ],

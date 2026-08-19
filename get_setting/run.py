@@ -14,24 +14,15 @@ urllib3.disable_warnings()
 _base_dir = os.path.dirname(os.path.abspath(__file__))
 _config_dir = os.path.join(_base_dir, 'config')
 _data_dir = os.path.join(_base_dir, 'device_data')
+_config_path = os.path.join(_config_dir, 'config.json')
 
-with open(os.path.join(_config_dir, 'config.json'), 'r', encoding='utf-8') as _f:
+with open(_config_path, 'r', encoding='utf-8') as _f:
     config = json.load(_f)
 
-_setting_cfg = config.get('get_setting', {})
+_setting_cfg = config.setdefault('get_setting', {})
 
 
 # ==================== login / get_ui_keys ====================
-
-
-def load_getui_devices():
-    devices = []
-    csv_path = os.path.join(_config_dir, 'getui_config.csv')
-    with open(csv_path, 'r', encoding='utf-8') as f:
-        for row in csv.reader(f):
-            if row:
-                devices.append({'protocol_version': row[0].strip(), 'id': row[1].strip()})
-    return devices
 
 
 def login():
@@ -57,55 +48,114 @@ def _find_props_recursive(properties, names):
     return results
 
 
+def _build_protocol_mappings(protocol, parameters, read_names):
+    """从一个设备的 UI 参数中提取当前协议所需的 KEY 映射。"""
+    mappings = []
+    seen_request_keys = set()
+    for name_group in read_names:
+        names_set = set(name_group)
+        for group in parameters:
+            matched = _find_props_recursive(
+                group.get('properties', []), names_set)
+            if not matched or group.get('key') in seen_request_keys:
+                continue
+            seen_request_keys.add(group['key'])
+            matched_dict = dict(matched)
+            ordered_names = [name for name in name_group
+                             if name in matched_dict]
+            mappings.append({
+                'protocol_version': protocol,
+                'request_key': group['key'],
+                'response_names': ordered_names,
+                'response_key': [matched_dict[name] for name in ordered_names]
+            })
+    return mappings
+
+
 def get_ui_keys(token):
     """
-    遍历 getui_config.csv 中的设备，对每个 read_names 分组找到 request_key 和 response_key 列表。
-    按 protocol_version 去重，返回 PROTOCOL_KEY_MAPPING
+    从 get_setting.input_file 按协议版本分组，每个协议依次尝试候选设备。
+    设备 UI 获取成功且找到目标 KEY 后停止尝试当前协议；全部失败则自动跳过该协议。
     """
-    devices = load_getui_devices()
+    input_csv = _get_input_csv_path()
+    devices = _read_device_csv(input_csv)
+    if not devices:
+        raise Exception('输入文件中没有可处理的设备')
+    missing_protocol_devices = [device[0] for device in devices if not device[2]]
+    if missing_protocol_devices:
+        raise Exception(
+            '以下设备缺少第三列协议版本: '
+            f'{missing_protocol_devices[:10]}'
+        )
+
+    devices_by_protocol = {}
+    seen_devices = set()
+    for device_id, _, protocol, _ in devices:
+        dedup_key = (protocol, device_id)
+        if dedup_key in seen_devices:
+            continue
+        seen_devices.add(dedup_key)
+        devices_by_protocol.setdefault(protocol, []).append(device_id)
+
     read_names = config['getui']['read_names']
-    seen = set()
     result = []
+    failed_protocols = []
     first_saved = False
-    for device in devices:
-        response = fr_requests('get', path='/generic/v0/device/setting/ui', token=token,
-                               param={'id': device['id']})
-        data = response.json()
-        if data.get('errno') != 0:
-            print(f'getui 跳过设备 {device["id"]} ({device["protocol_version"]}): '
-                  f'{data.get("msg", data)}')
-            continue
-        parameters = jsonpath(data, '$.result.parameters')[0]
-        if not parameters:
-            print(f'getui 跳过设备 {device["id"]} ({device["protocol_version"]}): '
-                  f'parameters 为空')
-            continue
-        if not first_saved:
-            first_saved = True
-            with open(os.path.join(_base_dir, 'gitui_res.json'), 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-        for name_group in read_names:
-            names_set = set(name_group)
-            for group in parameters:
-                matched = _find_props_recursive(group.get('properties', []), names_set)
-                if not matched:
+    for protocol, candidate_ids in devices_by_protocol.items():
+        protocol_mappings = None
+        for attempt, device_id in enumerate(candidate_ids, start=1):
+            try:
+                response = fr_requests(
+                    'get', path='/generic/v0/device/setting/ui', token=token,
+                    param={'id': device_id})
+                data = response.json()
+                if data.get('errno') != 0:
+                    reason = data.get('msg', data)
+                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                          f'个设备 {device_id} 失败: {reason}')
                     continue
-                dedup_key = (device['protocol_version'], group['key'])
-                if dedup_key in seen:
+
+                parameter_matches = jsonpath(data, '$.result.parameters')
+                parameters = parameter_matches[0] if parameter_matches else None
+                if not parameters:
+                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                          f'个设备 {device_id} 失败: parameters 为空')
                     continue
-                seen.add(dedup_key)
-                matched_dict = dict(matched)
-                ordered_names = [n for n in name_group if n in matched_dict]
-                result.append({
-                    'protocol_version': device['protocol_version'],
-                    'request_key': group['key'],
-                    'response_names': ordered_names,
-                    'response_key': [matched_dict[n] for n in ordered_names]
-                })
+
+                candidate_mappings = _build_protocol_mappings(
+                    protocol, parameters, read_names)
+                if not candidate_mappings:
+                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                          f'个设备 {device_id} 失败: 未找到目标 KEY')
+                    continue
+
+                protocol_mappings = candidate_mappings
+                result.extend(candidate_mappings)
+                print(f'getui 协议 {protocol} 获取成功: 使用第 '
+                      f'{attempt}/{len(candidate_ids)} 个设备 {device_id}')
+                if not first_saved:
+                    first_saved = True
+                    with open(os.path.join(_base_dir, 'gitui_res.json'), 'w',
+                              encoding='utf-8') as f:
+                        json.dump(data, f, ensure_ascii=False, indent=2)
+                break
+            except Exception as exc:
+                print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                      f'个设备 {device_id} 异常: {exc}')
+
+        if protocol_mappings is None:
+            failed_protocols.append(protocol)
+            print(f'getui 协议 {protocol} 的 {len(candidate_ids)} 个候选设备全部失败，'
+                  '将加入 skip_protocols')
+
     mapping_path = os.path.join(_config_dir, 'protocol_key_mapping.json')
     with open(mapping_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f'get_ui_keys 完成, 共匹配 {len(result)} 组, 已保存到: {mapping_path}')
+    _set_skip_protocols(failed_protocols)
+    success_protocols = len(devices_by_protocol) - len(failed_protocols)
+    print(f'get_ui_keys 完成, 成功 {success_protocols} 个协议/'
+          f'{len(result)} 组映射, 失败 {len(failed_protocols)} 个协议, '
+          f'已保存到: {mapping_path}')
     return result
 
 
@@ -122,7 +172,7 @@ class _BatchState:
         self.success_count = 0
 
 
-def _read_device_csv(file_path):
+def _read_device_csv(file_path, report_skipped=True):
     """读取设备 CSV（取前 4 列），自动跳过 device_id 表头行和 skip_protocols 中的协议版本，忽略多余列"""
     skip_protocols = set(_setting_cfg.get('skip_protocols', []))
     devices = []
@@ -143,7 +193,7 @@ def _read_device_csv(file_path):
                 protocol,
                 row[3].strip() if len(row) > 3 else '',
             ))
-    if skipped_count:
+    if skipped_count and report_skipped:
         print(f'已跳过 {skipped_count} 条记录 (协议版本在 skip_protocols 中: {sorted(skip_protocols)})')
     return devices
 
@@ -154,7 +204,7 @@ def _validate_protocols(devices, mapping_by_protocol):
     missing = device_protocols - set(mapping_by_protocol.keys())
     if missing:
         raise Exception(
-            f'严重错误: 以下协议版本未找到 KEY，请检查 config/getui_config.csv: {sorted(missing)}'
+            f'严重错误: 以下非跳过协议版本未生成 KEY 映射: {sorted(missing)}'
         )
 
 
@@ -170,21 +220,26 @@ def _get_input_csv_path():
     return input_csv
 
 
-def precheck():
-    """在登录和拉取 UI 数据前，检查待处理协议是否已配置取 KEY 设备。"""
-    input_csv = _get_input_csv_path()
-    devices = _read_device_csv(input_csv)
-    configured_protocols = {
-        device['protocol_version'] for device in load_getui_devices()
-    }
-    device_protocols = {device[2] for device in devices}
-    missing = device_protocols - configured_protocols
-    if missing:
-        raise Exception(
-            '预检失败: 以下协议版本未在 config/getui_config.csv 中配置: '
-            f'{sorted(missing)}'
-        )
-    print(f'预检通过, 共 {len(device_protocols)} 个协议版本')
+def _set_skip_protocols(protocols):
+    """更新内存及 config.json 中的自动跳过协议列表。"""
+    normalized = sorted({protocol for protocol in protocols if protocol})
+    _setting_cfg['skip_protocols'] = normalized
+    temp_path = f'{_config_path}.tmp'
+    with open(temp_path, 'w', encoding='utf-8') as f:
+        json.dump(config, f, ensure_ascii=False, indent=4)
+        f.write('\n')
+    os.replace(temp_path, _config_path)
+
+
+def _clear_skip_protocols():
+    """每次启动时清空上一次自动探测生成的跳过协议。"""
+    previous = list(_setting_cfg.get('skip_protocols', []))
+    if previous:
+        _set_skip_protocols([])
+        print(f'启动清理: 已清空上次的 skip_protocols: {sorted(previous)}')
+    else:
+        _setting_cfg['skip_protocols'] = []
+        print('启动清理: skip_protocols 原本为空')
 
 
 async def _write_logs(state, message, log_files, output_dir):
@@ -344,7 +399,8 @@ async def get_setting(token):
     protocol_key_mapping = _load_protocol_key_mapping()
     mapping_by_protocol = {m['protocol_version']: m for m in protocol_key_mapping}
 
-    _validate_protocols(_read_device_csv(input_csv), mapping_by_protocol)
+    _validate_protocols(
+        _read_device_csv(input_csv, report_skipped=False), mapping_by_protocol)
 
     round_num = 1
     current_input = input_csv
@@ -371,7 +427,7 @@ async def get_setting(token):
 
 
 if __name__ == '__main__':
-    precheck()
+    _clear_skip_protocols()
     _token = login()
     get_ui_keys(_token)
     asyncio.run(get_setting(_token))
