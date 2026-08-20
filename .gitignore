@@ -159,3 +159,4 @@ volume_test_amber/backup/*
 *.zip
 *arm64
 *bak
+*rice-code*

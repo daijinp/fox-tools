@@ -56,3 +56,26 @@ go -C .\get_data_for_mysql run .\cmd\query_devices -config E:\path\to\config.jso
 旧版本生成的 `all_device_data.csv` 和 `online_device_by_protocol.csv` 如果存在，会在四个新文件全部写入后移动到 `output/legacy_combined/`，不会删除。
 
 四个输出 CSV 都不包含表头，第一行就是查询数据；没有结果时生成空文件。
+
+## 南非停电通知只读核查
+
+核查 `ns_power_outage_info` 的近期计划和数据格式：
+
+```powershell
+go -C .\get_data_for_mysql run .\cmd\query_sepush -config .\config\config.json
+```
+
+拿到测试电站的历史 `block_id` 后，可只核查该区域：
+
+```powershell
+go -C .\get_data_for_mysql run .\cmd\query_sepush -config .\config\config.json -block-id eskde-10-fourways
+```
+
+同时核查电站、设备归属、当天计划、强充设置和 APP 推送关系：
+
+```powershell
+go -C .\get_data_for_mysql run .\cmd\query_sepush -config .\config\config.json `
+  -plant-id <plant_id> -block-id <block_id> -device-id <device_id>
+```
+
+该命令只包含固定的 `SELECT`，并在只读事务中执行，不提供任意 SQL 输入。
