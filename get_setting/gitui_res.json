@@ -137,53 +137,6 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "PEA_TH",
-                "AS4777_AU-2020C",
-                "AS4777_NZ-2020",
-                "USA-120/208",
-                "Ireland-Mini",
-                "G99_UK",
-                "VDE4105_DE",
-                "Cambodia",
-                "Austria",
-                "Local",
-                "SaudiArabia",
-                "AS4777_AU-2020B",
-                "CQC_CN-5",
-                "Qatar-LV",
-                "PR-120/240",
-                "Type-B-DK2",
-                "PHL-delta",
-                "TR3.3.1-DK1",
-                "Colombia-208",
-                "Cyprus",
-                "NBR-220/380",
-                "G98_NI",
-                "Austria-B",
-                "USA-277/480",
-                "Indonesia",
-                "Slovakia",
-                "Slovenia",
-                "USA-120/240",
-                "NBR-127/220",
-                "Jamaica-240",
-                "Philippines",
-                "Switzerland",
-                "Denmark3.2.2",
-                "Israel",
-                "AS4777_NZ",
-                "Latvia",
-                "CEI021_B",
-                "EN50549_FR",
-                "Colombia",
-                "EN50549_PL",
-                "Pakistan",
-                "Hungary",
-                "CQC_CN-1",
-                "Jamaica-110",
-                "PR-LUMA-120/208",
-                "MEA_TH",
-                "CQC_CN-2",
                 "CEI021_Areti_A",
                 "UNE-206_SP",
                 "Greece",
@@ -256,7 +209,54 @@
                 "KSC8565",
                 "EN 50549-2",
                 "CEI021_A",
-                "TWN-T"
+                "TWN-T",
+                "PEA_TH",
+                "AS4777_AU-2020C",
+                "AS4777_NZ-2020",
+                "USA-120/208",
+                "Ireland-Mini",
+                "G99_UK",
+                "VDE4105_DE",
+                "Cambodia",
+                "Austria",
+                "Local",
+                "SaudiArabia",
+                "AS4777_AU-2020B",
+                "CQC_CN-5",
+                "Qatar-LV",
+                "PR-120/240",
+                "Type-B-DK2",
+                "PHL-delta",
+                "TR3.3.1-DK1",
+                "Colombia-208",
+                "Cyprus",
+                "NBR-220/380",
+                "G98_NI",
+                "Austria-B",
+                "USA-277/480",
+                "Indonesia",
+                "Slovakia",
+                "Slovenia",
+                "USA-120/240",
+                "NBR-127/220",
+                "Jamaica-240",
+                "Philippines",
+                "Switzerland",
+                "Denmark3.2.2",
+                "Israel",
+                "AS4777_NZ",
+                "Latvia",
+                "CEI021_B",
+                "EN50549_FR",
+                "Colombia",
+                "EN50549_PL",
+                "Pakistan",
+                "Hungary",
+                "CQC_CN-1",
+                "Jamaica-110",
+                "PR-LUMA-120/208",
+                "MEA_TH",
+                "CQC_CN-2"
               ]
             },
             "unit": "",
@@ -271,8 +271,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Disable",
-                "Enable"
+                "Enable",
+                "Disable"
               ]
             },
             "unit": "",
@@ -337,10 +337,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "100%",
                 "60%",
                 "30%",
-                "0%"
+                "0%",
+                "100%"
               ]
             },
             "unit": "",
@@ -355,10 +355,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "30%",
                 "0%",
                 "100%",
-                "60%",
-                "30%"
+                "60%"
               ]
             },
             "unit": "",
@@ -402,11 +402,11 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "PeakShaving",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "PowerStation",
-                "PeakShaving"
+                "PowerStation"
               ]
             },
             "unit": "",
@@ -697,8 +697,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "On",
-                "Off"
+                "Off",
+                "On"
               ]
             },
             "unit": "",
@@ -1711,12 +1711,12 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Qu",
                 "OFF",
                 "FixedPFOver",
                 "FixedPFUnder",
                 "Qppf",
-                "FixedQ"
+                "FixedQ",
+                "Qu"
               ]
             },
             "unit": "",
@@ -2447,8 +2447,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Enable",
-                "Disable"
+                "Disable",
+                "Enable"
               ]
             },
             "unit": "",
