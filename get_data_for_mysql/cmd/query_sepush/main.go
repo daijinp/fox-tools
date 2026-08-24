@@ -52,6 +52,12 @@ func main() {
 	blockID := flag.String("block-id", "", "可选：只核查指定的 plants.block_id")
 	plantID := flag.String("plant-id", "", "可选：核查指定的 plant_id")
 	deviceID := flag.String("device-id", "", "可选：核查指定的 device_id 是否属于电站")
+	inspectPush := flag.Bool("inspect-push", false, "输出推送相关表结构和停电消息类型（只读）")
+	paginationTestAction := flag.String("pagination-test-action", "", "分页缺陷临时数据操作：seed 或 cleanup；默认不写库")
+	paginationBaselineStage := flag.Int("pagination-baseline-stage", -1, "分页测试前的目标当天 Stage；cleanup 时恢复；默认不处理")
+	missingDayTestAction := flag.String("missing-day-test-action", "", "缺失当天计划测试操作：seed 或 cleanup；默认不写库")
+	timezoneTestAction := flag.String("timezone-test-action", "", "恢复任务时区测试操作：seed 或 cleanup；默认不写库")
+	timezoneBaselineStage := flag.Int("timezone-baseline-stage", -1, "时区测试前的目标当天 Stage；cleanup 时恢复")
 	daysBefore := flag.Int("days-before", 3, "向前核查的天数")
 	daysAfter := flag.Int("days-after", 7, "向后核查的天数")
 	flag.Parse()
@@ -60,7 +66,10 @@ func main() {
 		fatal(errors.New("days-before 和 days-after 不能小于 0"))
 	}
 	if err := run(*configPath, strings.TrimSpace(*plantID), strings.TrimSpace(*blockID),
-		strings.TrimSpace(*deviceID), *daysBefore, *daysAfter); err != nil {
+		strings.TrimSpace(*deviceID), *daysBefore, *daysAfter, *inspectPush,
+		strings.TrimSpace(*paginationTestAction), *paginationBaselineStage,
+		strings.TrimSpace(*missingDayTestAction), strings.TrimSpace(*timezoneTestAction),
+		*timezoneBaselineStage); err != nil {
 		fatal(err)
 	}
 }
@@ -70,7 +79,9 @@ func fatal(err error) {
 	os.Exit(1)
 }
 
-func run(configPath, plantID, blockID, deviceID string, daysBefore, daysAfter int) error {
+func run(configPath, plantID, blockID, deviceID string, daysBefore, daysAfter int, inspectPush bool,
+	paginationTestAction string, paginationBaselineStage int, missingDayTestAction, timezoneTestAction string,
+	timezoneBaselineStage int) error {
 	cfg, configDir, err := loadConfig(configPath)
 	if err != nil {
 		return err
@@ -94,6 +105,15 @@ func run(configPath, plantID, blockID, deviceID string, daysBefore, daysAfter in
 	timeout := time.Duration(cfg.Query.TimeoutSeconds) * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
+	if timezoneTestAction != "" {
+		return runTimezoneTestAction(ctx, db, plantID, blockID, timezoneTestAction, timezoneBaselineStage)
+	}
+	if missingDayTestAction != "" {
+		return runMissingDayTestAction(ctx, db, plantID, blockID, missingDayTestAction)
+	}
+	if paginationTestAction != "" {
+		return runPaginationTestAction(ctx, db, blockID, paginationTestAction, paginationBaselineStage)
+	}
 	tx, err := db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
 	if err != nil {
 		return fmt.Errorf("开启只读事务：%w", err)
@@ -107,6 +127,12 @@ func run(configPath, plantID, blockID, deviceID string, daysBefore, daysAfter in
 		return err
 	}
 	if err := printSummary(ctx, tx, daysBefore, daysAfter); err != nil {
+		return err
+	}
+	if err := printPaginationDiagnostic(ctx, tx); err != nil {
+		return err
+	}
+	if err := printDuplicatePlanDiagnostic(ctx, tx); err != nil {
 		return err
 	}
 	if err := printRecentDays(ctx, tx, daysBefore, daysAfter); err != nil {
@@ -125,8 +151,371 @@ func run(configPath, plantID, blockID, deviceID string, daysBefore, daysAfter in
 			return err
 		}
 	}
+	if inspectPush {
+		if err := printPushSchema(ctx, tx); err != nil {
+			return err
+		}
+	}
 
 	return tx.Commit()
+}
+
+func runTimezoneTestAction(ctx context.Context, db *sql.DB, plantID, blockID, action string, baselineStage int) error {
+	if plantID == "" || blockID == "" || baselineStage < 0 {
+		return errors.New("时区测试必须提供 -plant-id、-block-id 和非负的 -timezone-baseline-stage")
+	}
+	if action != "seed" && action != "cleanup" {
+		return fmt.Errorf("不支持的 timezone-test-action：%s", action)
+	}
+
+	tx, err := db.BeginTx(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("开启时区测试事务：%w", err)
+	}
+	defer tx.Rollback()
+
+	var matchingPlants int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*) FROM plants WHERE plant_id = ? AND block_id = ?`, plantID, blockID).Scan(&matchingPlants); err != nil {
+		return fmt.Errorf("核对时区测试电站：%w", err)
+	}
+	if matchingPlants != 1 {
+		return fmt.Errorf("时区测试电站与 block_id 匹配数=%d，不是预期的 1", matchingPlants)
+	}
+
+	var currentStage int
+	if err := tx.QueryRowContext(ctx, `
+SELECT stage
+FROM ns_power_outage_info
+WHERE block_id = ? AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()`, blockID).Scan(&currentStage); err != nil {
+		return fmt.Errorf("读取时区测试目标当天 Stage：%w", err)
+	}
+	var settingRows, reserveEnabled int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*), COALESCE(SUM(CASE WHEN power_outage_reserve = 1 THEN 1 ELSE 0 END), 0)
+FROM ns_power_outage_settings
+WHERE plant_id = ?`, plantID).Scan(&settingRows, &reserveEnabled); err != nil {
+		return fmt.Errorf("读取时区测试强充开关：%w", err)
+	}
+	if settingRows != 1 {
+		return fmt.Errorf("时区测试电站停电设置数=%d，不是预期的 1", settingRows)
+	}
+
+	if action == "seed" {
+		if currentStage != baselineStage || reserveEnabled != 0 {
+			return fmt.Errorf("时区测试基线不符：Stage=%d（预期 %d），强充开启记录=%d（预期 0）",
+				currentStage, baselineStage, reserveEnabled)
+		}
+		if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_settings SET power_outage_reserve = 1 WHERE plant_id = ?`, plantID); err != nil {
+			return fmt.Errorf("临时开启时区测试强充：%w", err)
+		}
+		if err := tx.Commit(); err != nil {
+			return fmt.Errorf("提交时区测试准备：%w", err)
+		}
+		fmt.Printf("时区测试已准备：强充开关 0 -> 1；目标当天 Stage=%d\n", currentStage)
+		return nil
+	}
+
+	if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_settings SET power_outage_reserve = 0 WHERE plant_id = ?`, plantID); err != nil {
+		return fmt.Errorf("恢复时区测试强充开关：%w", err)
+	}
+	if currentStage != baselineStage {
+		if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_info
+SET stage = ?
+WHERE block_id = ? AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()`, baselineStage, blockID); err != nil {
+			return fmt.Errorf("恢复时区测试目标当天 Stage：%w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("提交时区测试清理：%w", err)
+	}
+	fmt.Printf("时区测试数据已恢复：强充开关 -> 0；目标当天 Stage -> %d\n", baselineStage)
+	return nil
+}
+
+const missingDayTestBackupDate = "2099-12-30"
+
+func runMissingDayTestAction(ctx context.Context, db *sql.DB, plantID, blockID, action string) error {
+	if plantID == "" || blockID == "" {
+		return errors.New("缺失当天计划测试必须同时提供 -plant-id 和 -block-id")
+	}
+	if action != "seed" && action != "cleanup" {
+		return fmt.Errorf("不支持的 missing-day-test-action：%s", action)
+	}
+
+	tx, err := db.BeginTx(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("开启缺失当天计划测试事务：%w", err)
+	}
+	defer tx.Rollback()
+
+	var plantMatches int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*) FROM plants WHERE plant_id = ? AND block_id = ?`, plantID, blockID).Scan(&plantMatches); err != nil {
+		return fmt.Errorf("核对测试电站与 block_id：%w", err)
+	}
+	if plantMatches != 1 {
+		return fmt.Errorf("测试电站与 block_id 匹配数=%d，不是预期的 1", plantMatches)
+	}
+
+	var currentDay string
+	if err := tx.QueryRowContext(ctx, `SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')`).Scan(&currentDay); err != nil {
+		return fmt.Errorf("读取数据库当天日期：%w", err)
+	}
+	var currentRows, backupRows int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT
+  SUM(CASE WHEN day = ? THEN 1 ELSE 0 END),
+  SUM(CASE WHEN day = ? THEN 1 ELSE 0 END)
+FROM ns_power_outage_info
+WHERE block_id = ?`, currentDay, missingDayTestBackupDate, blockID).Scan(&currentRows, &backupRows); err != nil {
+		return fmt.Errorf("核对当天与备份日期计划：%w", err)
+	}
+
+	var settingRows, reserveEnabled int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*), COALESCE(SUM(CASE WHEN power_outage_reserve = 1 THEN 1 ELSE 0 END), 0)
+FROM ns_power_outage_settings
+WHERE plant_id = ?`, plantID).Scan(&settingRows, &reserveEnabled); err != nil {
+		return fmt.Errorf("核对测试电站强充设置：%w", err)
+	}
+	if settingRows != 1 {
+		return fmt.Errorf("测试电站停电设置数=%d，不是预期的 1", settingRows)
+	}
+
+	if action == "seed" {
+		if currentRows != 1 || backupRows != 0 {
+			return fmt.Errorf("造数前当天计划=%d、备份日期计划=%d，不满足 1/0 安全条件", currentRows, backupRows)
+		}
+		if reserveEnabled != 0 {
+			return errors.New("造数前强充开关不是关闭状态，拒绝覆盖原配置")
+		}
+		if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_info SET day = ? WHERE block_id = ? AND day = ?`,
+			missingDayTestBackupDate, blockID, currentDay); err != nil {
+			return fmt.Errorf("临时移走当天计划：%w", err)
+		}
+		if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_settings SET power_outage_reserve = 1 WHERE plant_id = ?`, plantID); err != nil {
+			return fmt.Errorf("临时打开强充开关：%w", err)
+		}
+		if err := tx.Commit(); err != nil {
+			return fmt.Errorf("提交缺失当天计划测试数据：%w", err)
+		}
+		fmt.Printf("缺失当天计划场景已构造：%s 计划已临时移至 %s；测试电站强充开关 0 -> 1\n",
+			currentDay, missingDayTestBackupDate)
+		return nil
+	}
+
+	if currentRows != 0 || backupRows != 1 {
+		return fmt.Errorf("清理前当天计划=%d、备份日期计划=%d，不满足 0/1 安全条件", currentRows, backupRows)
+	}
+	if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_info SET day = ? WHERE block_id = ? AND day = ?`,
+		currentDay, blockID, missingDayTestBackupDate); err != nil {
+		return fmt.Errorf("恢复当天计划：%w", err)
+	}
+	if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_settings SET power_outage_reserve = 0 WHERE plant_id = ?`, plantID); err != nil {
+		return fmt.Errorf("恢复强充开关：%w", err)
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("提交缺失当天计划测试清理：%w", err)
+	}
+	fmt.Printf("缺失当天计划场景已清理：%s 计划已恢复；测试电站强充开关 -> 0\n", currentDay)
+	return nil
+}
+
+const (
+	paginationTestStart = "2098-01-01"
+	paginationTestEnd   = "2099-12-31"
+)
+
+func runPaginationTestAction(ctx context.Context, db *sql.DB, blockID, action string, baselineStage int) error {
+	if blockID == "" {
+		return errors.New("分页缺陷临时数据操作必须提供 -block-id")
+	}
+	if action != "seed" && action != "cleanup" {
+		return fmt.Errorf("不支持的 pagination-test-action：%s", action)
+	}
+
+	tx, err := db.BeginTx(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("开启分页测试事务：%w", err)
+	}
+	defer tx.Rollback()
+
+	var markerRows int64
+	if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*)
+FROM ns_power_outage_info
+WHERE block_id = ? AND day BETWEEN ? AND ?`, blockID, paginationTestStart, paginationTestEnd).Scan(&markerRows); err != nil {
+		return fmt.Errorf("检查分页测试日期范围：%w", err)
+	}
+
+	if action == "cleanup" {
+		if markerRows > 700 {
+			return fmt.Errorf("分页测试日期范围内有 %d 条记录，超过安全删除上限 700，拒绝清理", markerRows)
+		}
+		result, err := tx.ExecContext(ctx, `
+DELETE FROM ns_power_outage_info
+WHERE block_id = ? AND day BETWEEN ? AND ?`, blockID, paginationTestStart, paginationTestEnd)
+		if err != nil {
+			return fmt.Errorf("清理分页测试数据：%w", err)
+		}
+		deleted, err := result.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("读取分页测试清理数量：%w", err)
+		}
+		if baselineStage >= 0 {
+			var currentStage int
+			err := tx.QueryRowContext(ctx, `
+SELECT stage
+FROM ns_power_outage_info
+WHERE block_id = ? AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()`, blockID).Scan(&currentStage)
+			if err != nil {
+				return fmt.Errorf("读取分页测试目标当天 Stage：%w", err)
+			}
+			if currentStage != baselineStage {
+				if _, err := tx.ExecContext(ctx, `
+UPDATE ns_power_outage_info
+SET stage = ?
+WHERE block_id = ? AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()`, baselineStage, blockID); err != nil {
+					return fmt.Errorf("恢复分页测试目标当天 Stage：%w", err)
+				}
+			}
+		}
+		joinedRows, err := paginationJoinedRows(ctx, tx)
+		if err != nil {
+			return err
+		}
+		if err := tx.Commit(); err != nil {
+			return fmt.Errorf("提交分页测试清理：%w", err)
+		}
+		fmt.Printf("分页测试数据已清理：删除=%d；清理后 JOIN 行数=%d，总页数=%d",
+			deleted, joinedRows, (joinedRows+4999)/5000)
+		if baselineStage >= 0 {
+			fmt.Printf("；目标当天 Stage 已恢复为 %d", baselineStage)
+		}
+		fmt.Println()
+		return nil
+	}
+
+	if markerRows != 0 {
+		return fmt.Errorf("分页测试日期范围 %s~%s 已有 %d 条记录，拒绝写入", paginationTestStart, paginationTestEnd, markerRows)
+	}
+	joinedRows, err := paginationJoinedRows(ctx, tx)
+	if err != nil {
+		return err
+	}
+	if joinedRows > 5000 {
+		return fmt.Errorf("当前 JOIN 行数已经为 %d，分页缺陷已触发，无需造数", joinedRows)
+	}
+	if baselineStage >= 0 {
+		var matchingStageRows int64
+		if err := tx.QueryRowContext(ctx, `
+SELECT COUNT(*)
+FROM ns_power_outage_info
+WHERE block_id = ?
+  AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()
+  AND stage = ?`, blockID, baselineStage).Scan(&matchingStageRows); err != nil {
+			return fmt.Errorf("核对分页测试基线 Stage：%w", err)
+		}
+		if matchingStageRows != 1 {
+			return fmt.Errorf("目标当天 Stage=%d 的记录数为 %d，不是预期的 1", baselineStage, matchingStageRows)
+		}
+	}
+
+	var mappedPlants int64
+	if err := tx.QueryRowContext(ctx, `SELECT COUNT(*) FROM plants WHERE block_id = ?`, blockID).Scan(&mappedPlants); err != nil {
+		return fmt.Errorf("查询 block_id 关联电站数：%w", err)
+	}
+	if mappedPlants <= 0 {
+		return errors.New("指定 block_id 没有关联电站，无法构造 JOIN 分页数据")
+	}
+	rowsNeeded := (5000-joinedRows)/mappedPlants + 1
+	if rowsNeeded <= 0 || rowsNeeded > 700 {
+		return fmt.Errorf("计算得到需写入 %d 条，超出安全范围 1~700，拒绝写入", rowsNeeded)
+	}
+
+	var stages string
+	if err := tx.QueryRowContext(ctx, `
+SELECT stages
+FROM ns_power_outage_info
+WHERE block_id = ? AND JSON_VALID(stages) = 1 AND JSON_LENGTH(stages) = 8
+ORDER BY STR_TO_DATE(day, '%Y-%m-%d') DESC
+LIMIT 1`, blockID).Scan(&stages); err != nil {
+		return fmt.Errorf("读取有效 Stage 模板：%w", err)
+	}
+	start, _ := time.Parse("2006-01-02", paginationTestStart)
+	statement, err := tx.PrepareContext(ctx, `
+INSERT INTO ns_power_outage_info (block_id, stages, day, stage)
+VALUES (?, ?, ?, 0)`)
+	if err != nil {
+		return fmt.Errorf("准备分页测试数据写入：%w", err)
+	}
+	defer statement.Close()
+	for i := int64(0); i < rowsNeeded; i++ {
+		day := start.AddDate(0, 0, int(i)).Format("2006-01-02")
+		if _, err := statement.ExecContext(ctx, blockID, stages, day); err != nil {
+			return fmt.Errorf("写入第 %d 条分页测试数据：%w", i+1, err)
+		}
+	}
+
+	afterRows, err := paginationJoinedRows(ctx, tx)
+	if err != nil {
+		return err
+	}
+	afterPages := (afterRows + 4999) / 5000
+	if afterPages != 2 {
+		return fmt.Errorf("写入后 JOIN 行数=%d、页数=%d，不是预期的 2 页，事务回滚", afterRows, afterPages)
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("提交分页测试数据：%w", err)
+	}
+	fmt.Printf("分页测试数据已写入：新增=%d；block 关联电站=%d；JOIN 行数 %d -> %d；总页数=%d\n",
+		rowsNeeded, mappedPlants, joinedRows, afterRows, afterPages)
+	return nil
+}
+
+func paginationJoinedRows(ctx context.Context, q interface {
+	QueryRowContext(context.Context, string, ...any) *sql.Row
+}) (int64, error) {
+	var joinedRows int64
+	err := q.QueryRowContext(ctx, `
+SELECT COUNT(*)
+FROM ns_power_outage_info a
+INNER JOIN plants p ON p.block_id = a.block_id
+WHERE STR_TO_DATE(a.day, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`).Scan(&joinedRows)
+	if err != nil {
+		return 0, fmt.Errorf("统计分页查询 JOIN 行数：%w", err)
+	}
+	return joinedRows, nil
+}
+
+func printPaginationDiagnostic(ctx context.Context, q *sql.Tx) error {
+	var joinedRows, pageCount, distinctPlants, distinctBlocks, distinctDays int64
+	err := q.QueryRowContext(ctx, `
+SELECT COUNT(*) AS joined_row_count,
+       CEIL(COUNT(*) / 5000) AS page_count,
+       COUNT(DISTINCT p.plant_id) AS distinct_plant_count,
+       COUNT(DISTINCT a.block_id) AS distinct_block_count,
+       COUNT(DISTINCT a.day) AS distinct_day_count
+FROM ns_power_outage_info a
+INNER JOIN plants p ON p.block_id = a.block_id
+WHERE STR_TO_DATE(a.day, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`).Scan(
+		&joinedRows, &pageCount, &distinctPlants, &distinctBlocks, &distinctDays,
+	)
+	if err != nil {
+		return fmt.Errorf("诊断停电计划分页：%w", err)
+	}
+
+	fmt.Printf("分页诊断（代码实际范围：昨天起）：JOIN 行数=%d，总页数=%d，电站=%d，block=%d，日期=%d\n",
+		joinedRows, pageCount, distinctPlants, distinctBlocks, distinctDays)
+	return nil
 }
 
 func printServerTime(ctx context.Context, q *sql.Tx) error {
@@ -200,6 +589,44 @@ FROM ns_power_outage_info`, daysBefore, daysAfter).Scan(
 	fmt.Printf("核查窗口（前 %d 天到后 %d 天）记录：%d\n", daysBefore, daysAfter, recentRows)
 	fmt.Printf("质量检查：非法日期=%d，空 block_id=%d，非法 stages JSON=%d，非 8 个 Stage=%d\n",
 		invalidDays, invalidBlocks, invalidJSON, nonEightStages)
+	return nil
+}
+
+func printDuplicatePlanDiagnostic(ctx context.Context, q *sql.Tx) error {
+	var duplicateGroups, duplicateRows int64
+	err := q.QueryRowContext(ctx, `
+SELECT COUNT(*), COALESCE(SUM(row_count), 0)
+FROM (
+  SELECT COUNT(*) AS row_count
+  FROM ns_power_outage_info
+  WHERE STR_TO_DATE(day, '%Y-%m-%d') >= CURDATE()
+  GROUP BY block_id, day
+  HAVING COUNT(*) > 1
+) duplicate_plans`).Scan(&duplicateGroups, &duplicateRows)
+	if err != nil {
+		return fmt.Errorf("诊断未来停电计划重复数据：%w", err)
+	}
+
+	var uniqueBlockDayIndexes int64
+	err = q.QueryRowContext(ctx, `
+SELECT COUNT(*)
+FROM (
+  SELECT index_name
+  FROM information_schema.statistics
+  WHERE table_schema = DATABASE()
+    AND table_name = 'ns_power_outage_info'
+    AND non_unique = 0
+  GROUP BY index_name
+  HAVING COUNT(*) = 2
+     AND SUM(column_name = 'block_id') = 1
+     AND SUM(column_name = 'day') = 1
+) unique_indexes`).Scan(&uniqueBlockDayIndexes)
+	if err != nil {
+		return fmt.Errorf("诊断停电计划唯一约束：%w", err)
+	}
+
+	fmt.Printf("重复计划诊断（今天起）：重复 block_id+day 组合=%d，涉及记录=%d，block_id+day 唯一索引=%t\n",
+		duplicateGroups, duplicateRows, uniqueBlockDayIndexes > 0)
 	return nil
 }
 
@@ -301,6 +728,30 @@ ORDER BY STR_TO_DATE(day, '%Y-%m-%d')`, blockID, daysBefore, daysAfter)
 	if !found {
 		fmt.Println("  无记录")
 	}
+	if found {
+		var stagesJSON string
+		err := q.QueryRowContext(ctx, `
+SELECT stages
+FROM ns_power_outage_info
+WHERE block_id = ?
+  AND STR_TO_DATE(day, '%Y-%m-%d') = CURDATE()
+LIMIT 1`, blockID).Scan(&stagesJSON)
+		if errors.Is(err, sql.ErrNoRows) {
+			fmt.Println("  当天无计划")
+			return nil
+		}
+		if err != nil {
+			return fmt.Errorf("读取指定 block_id 当天 Stage 时段：%w", err)
+		}
+		var allStages [][]string
+		if err := json.Unmarshal([]byte(stagesJSON), &allStages); err != nil {
+			return fmt.Errorf("解析指定 block_id 当天 Stage 时段：%w", err)
+		}
+		fmt.Println("  当天 Stage 1-8 时段：")
+		for index, stageRanges := range allStages {
+			fmt.Printf("    Stage %d：%v\n", index+1, stageRanges)
+		}
+	}
 	return nil
 }
 
@@ -323,14 +774,17 @@ WHERE plant_id = ?`, expectedBlockID, plantID).Scan(&plantRows, &zaRows, &matchi
 	}
 
 	var todayPlans, stage2Plans, stage3Plans int64
+	var todayStageValues sql.NullString
 	err = q.QueryRowContext(ctx, `
 SELECT COUNT(*),
        COALESCE(SUM(CASE WHEN JSON_LENGTH(JSON_EXTRACT(i.stages, '$[1]')) > 0 THEN 1 ELSE 0 END), 0),
-       COALESCE(SUM(CASE WHEN JSON_LENGTH(JSON_EXTRACT(i.stages, '$[2]')) > 0 THEN 1 ELSE 0 END), 0)
+       COALESCE(SUM(CASE WHEN JSON_LENGTH(JSON_EXTRACT(i.stages, '$[2]')) > 0 THEN 1 ELSE 0 END), 0),
+       GROUP_CONCAT(DISTINCT COALESCE(CAST(i.stage AS CHAR), 'NULL') ORDER BY i.stage)
 FROM ns_power_outage_info i
 INNER JOIN plants p ON p.block_id = i.block_id
 WHERE p.plant_id = ?
-  AND STR_TO_DATE(i.day, '%Y-%m-%d') = CURDATE()`, plantID).Scan(&todayPlans, &stage2Plans, &stage3Plans)
+  AND STR_TO_DATE(i.day, '%Y-%m-%d') = CURDATE()`, plantID).Scan(
+		&todayPlans, &stage2Plans, &stage3Plans, &todayStageValues)
 	if err != nil {
 		return fmt.Errorf("核查测试电站当天计划：%w", err)
 	}
@@ -461,19 +915,77 @@ SELECT
 	fmt.Println("测试目标就绪检查：")
 	fmt.Printf("  电站存在=%t，南非电站=%t，block_id 匹配=%t，时区已配置=%t\n",
 		plantRows > 0, zaRows > 0, expectedBlockID == "" || matchingBlockRows > 0, timezone != "")
-	fmt.Printf("  当天计划=%d，Stage 2 可用=%t，Stage 3 可用=%t\n",
-		todayPlans, stage2Plans > 0, stage3Plans > 0)
+	if location, locationErr := time.LoadLocation(timezone); timezone != "" && locationErr == nil {
+		fmt.Printf("  电站时区=%s，当前当地时间=%s\n", timezone, time.Now().In(location).Format("2006-01-02 15:04:05"))
+	}
+	fmt.Printf("  当天计划=%d，Stage 2 可用=%t，Stage 3 可用=%t，当前 stage=%s\n",
+		todayPlans, stage2Plans > 0, stage3Plans > 0, nullableDate(todayStageValues))
 	fmt.Printf("  停电设置=%d，强充已开启=%t，推送已开启=%t，提前时间=%s小时%s分钟\n",
 		settingRows, reserveEnabled > 0, pushEnabled > 0, nullableInt(preChargeH, "默认3"), nullableInt(preChargeM, "默认0"))
 	if deviceID != "" {
 		fmt.Printf("  device_id 属于电站=%t\n", deviceBelongs > 0)
+		if err := printForceChargeState(ctx, q, deviceID); err != nil {
+			return err
+		}
 	}
 	fmt.Printf("  电池记录=%d，活跃 APP 推送关系=%d\n", batteryCount, activePushRelations)
 	fmt.Printf("  APP 推送链路：登记设备=%d，启用设备=%d，订阅关系=%d，启用关系=%d\n",
 		pushDevices, activePushDevices, pushRelations, enabledPushRelations)
 	fmt.Printf("  用户关联：停电设置属于电站用户=%t，电站用户登记手机=%d，全库登记手机=%d\n",
 		settingOwnerMatches > 0, ownerPushDevices, globalPushDevices)
+	if err := printTargetPushTypes(ctx, q, plantID); err != nil {
+		return err
+	}
 	return nil
+}
+
+func printForceChargeState(ctx context.Context, q *sql.Tx, deviceID string) error {
+	var totalLogs, activeLogs int64
+	var latestEnd sql.NullInt64
+	err := q.QueryRowContext(ctx, `
+SELECT COUNT(*),
+       COALESCE(SUM(CASE WHEN f.state = 0 THEN 1 ELSE 0 END), 0),
+       MAX(f.end_time)
+FROM forcecharge_device_log f
+INNER JOIN devices d ON d.device_sn = f.device_sn
+WHERE d.device_id = ?`, deviceID).Scan(&totalLogs, &activeLogs, &latestEnd)
+	if err != nil {
+		return fmt.Errorf("核查目标设备强充记录：%w", err)
+	}
+	latestEndText := "无"
+	if latestEnd.Valid {
+		latestEndText = time.UnixMilli(latestEnd.Int64).Format("2006-01-02 15:04:05")
+	}
+	fmt.Printf("  强充记录：总数=%d，未恢复=%d，最近结束时间=%s\n", totalLogs, activeLogs, latestEndText)
+	return nil
+}
+
+func printTargetPushTypes(ctx context.Context, q *sql.Tx, plantID string) error {
+	rows, err := q.QueryContext(ctx, `
+SELECT t.msg_type_code, r.state, t.state
+FROM plants p
+INNER JOIN msg_push_device d
+        ON d.user_id = p.related_userid AND d.state = 1
+INNER JOIN msg_push_relations r
+        ON r.user_id = d.user_id AND r.registration_id = d.registration_id
+INNER JOIN msg_push_type t
+        ON t.msg_type_id = r.msg_type_id
+WHERE p.plant_id = ?
+ORDER BY t.msg_type_code`, plantID)
+	if err != nil {
+		return fmt.Errorf("查询测试账号停电订阅类型：%w", err)
+	}
+	defer rows.Close()
+	fmt.Println("  目标账号全部订阅类型（类型 / relation state / type state）：")
+	for rows.Next() {
+		var code string
+		var relationState, typeState int
+		if err := rows.Scan(&code, &relationState, &typeState); err != nil {
+			return err
+		}
+		fmt.Printf("    %s / %d / %d\n", code, relationState, typeState)
+	}
+	return rows.Err()
 }
 
 func printIdentifierDiagnostics(ctx context.Context, q *sql.Tx, plantValue, blockValue, deviceValue string) error {
@@ -516,6 +1028,88 @@ func nullableInt(value sql.NullInt64, fallback string) string {
 		return fallback
 	}
 	return fmt.Sprintf("%d", value.Int64)
+}
+
+func printPushSchema(ctx context.Context, q *sql.Tx) error {
+	rows, err := q.QueryContext(ctx, `
+SELECT table_name, column_name, column_type, is_nullable, column_default, extra
+FROM information_schema.columns
+WHERE table_schema = DATABASE()
+  AND table_name IN ('msg_push_device', 'msg_push_relations', 'msg_push_type')
+ORDER BY FIELD(table_name, 'msg_push_device', 'msg_push_relations', 'msg_push_type'), ordinal_position`)
+	if err != nil {
+		return fmt.Errorf("查询推送表结构：%w", err)
+	}
+	fmt.Println("推送表字段（表 / 字段 / 类型 / 可空 / 默认值 / extra）：")
+	for rows.Next() {
+		var table, column, columnType, nullable, extra string
+		var defaultValue sql.NullString
+		if err := rows.Scan(&table, &column, &columnType, &nullable, &defaultValue, &extra); err != nil {
+			rows.Close()
+			return fmt.Errorf("读取推送表结构：%w", err)
+		}
+		defaultText := "NULL"
+		if defaultValue.Valid {
+			defaultText = defaultValue.String
+		}
+		fmt.Printf("  %s / %s / %s / %s / %s / %s\n",
+			table, column, columnType, nullable, defaultText, extra)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
+	rows.Close()
+
+	indexRows, err := q.QueryContext(ctx, `
+SELECT table_name, index_name, non_unique,
+       GROUP_CONCAT(column_name ORDER BY seq_in_index SEPARATOR ',')
+FROM information_schema.statistics
+WHERE table_schema = DATABASE()
+  AND table_name IN ('msg_push_device', 'msg_push_relations')
+GROUP BY table_name, index_name, non_unique
+ORDER BY table_name, index_name`)
+	if err != nil {
+		return fmt.Errorf("查询推送表索引：%w", err)
+	}
+	fmt.Println("推送表索引（表 / 索引 / non_unique / 字段）：")
+	for indexRows.Next() {
+		var table, indexName, columns string
+		var nonUnique int
+		if err := indexRows.Scan(&table, &indexName, &nonUnique, &columns); err != nil {
+			indexRows.Close()
+			return err
+		}
+		fmt.Printf("  %s / %s / %d / %s\n", table, indexName, nonUnique, columns)
+	}
+	if err := indexRows.Err(); err != nil {
+		indexRows.Close()
+		return err
+	}
+	indexRows.Close()
+
+	typeRows, err := q.QueryContext(ctx, `
+SELECT CAST(msg_type_id AS CHAR), msg_type_code
+FROM msg_push_type
+WHERE LOWER(COALESCE(msg_type_code, '')) REGEXP 'power|outage|reserve|eskom|system'
+ORDER BY msg_type_code`)
+	if err != nil {
+		return fmt.Errorf("查询停电消息类型：%w", err)
+	}
+	fmt.Println("停电相关消息类型（msg_type_id / msg_type_code）：")
+	for typeRows.Next() {
+		var id, code string
+		if err := typeRows.Scan(&id, &code); err != nil {
+			typeRows.Close()
+			return err
+		}
+		fmt.Printf("  %s / %s\n", id, code)
+	}
+	if err := typeRows.Err(); err != nil {
+		typeRows.Close()
+		return err
+	}
+	return typeRows.Close()
 }
 
 func nullableDate(value sql.NullString) string {
