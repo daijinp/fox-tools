@@ -1,0 +1,40 @@
+[
+  {
+    "title": "【南非停电】停电计划超过5000行时分页漏读，推送和强充任务不执行",
+    "description": "selectStagesAllPlants()每页5000行。旧逻辑在结果超过一页时没有加入第1页，循环条件又遗漏最后一页。",
+    "reproduction": "构造停电计划JOIN结果5012行、共2页，触发eskomPushMessageTestJob下发Stage 4。",
+    "actual": "XXL显示任务成功，但目标Stage未更新，没有通知、强充和恢复任务。",
+    "expected": "从第1页到最后一页完整读取，任何数据量下均不能漏掉电站计划。",
+    "impact": "生产数据超过5000行后可能大面积漏通知、漏强充。",
+    "evidence": "缺陷日志257548；修复后使用5008行回归，日志257814，Stage成功更新。",
+    "note": "已修复并回归通过，建议作为历史缺陷归档。"
+  },
+  {
+    "title": "【南非停电】目标日期无计划时错误兜底为全天停电，可能下发全天强充",
+    "description": "电站存在其他日期计划、但本次Stage对应日期无计划时，旧逻辑将map.get(targetDay)==null兜底为00:00-23:59。",
+    "reproduction": "保留目标电站未来日期计划，移走本次Stage对应当天计划，开启强充后触发Stage 4。",
+    "actual": "旧逻辑可能发送无准确时段的通知、下发全天强充并创建恢复任务。",
+    "expected": "目标日期没有计划时跳过该电站并告警，不能按全天停电处理。",
+    "impact": "设备可能全天强充，改变客户用能策略并产生额外电费。",
+    "evidence": "旧代码逻辑确认；修复后日志257785，APP保持空计划，未新增强充和恢复任务。",
+    "note": "已修复并回归通过，建议作为历史缺陷归档。"
+  },
+  {
+    "title": "【南非停电】Cape Town分支错误读取Eskom国家级Stage，导致同一事件重复处理",
+    "description": "系统分别处理Cape Town和national范围，但eskomMessage()始终读取status.eskom.next_stages。即使status.capetown.next_stages为空，Cape Town分支仍按国家级Stage执行。",
+    "reproduction": "Mock中设置eskom.next_stages为Stage 4、capetown.next_stages为空，触发eskomPushMessageTestJob。",
+    "actual": "同一Stage被Cape Town和national各处理一次；先创建恢复Job 553，随后移除553并创建Job 554。",
+    "expected": "Cape Town分支读取status.capetown；next_stages为空时不处理国家级Stage。",
+    "impact": "可能重复查询、重复下发、重复创建或替换恢复任务，Cape Town用户还可能收到错误Stage。",
+    "evidence": "XXL日志271301；代码eskomMessage()固定使用status.getStatus().getEskom()。"
+  },
+  {
+    "title": "【南非停电】设备恢复链路缺少失败保护，可能无法恢复客户设置且状态不一致",
+    "description": "恢复链路存在三类关联问题：单设备恢复曾耗时15分22秒；settingSet()失败时只记录日志并继续删除Redis备份；提前手工恢复成功后，forcecharge_device_log仍受end_time条件限制而保持未恢复状态。",
+    "reproduction": "对已经下发Forced Charge的测试电站执行removeDeviceController，并分别检查XXL耗时、设备设置、Redis备份和forcecharge_device_log状态。",
+    "actual": "恢复任务可能长时间无回调；设备写入失败时任务仍可能显示成功且备份被删除；设备已恢复时数据库仍可能显示未恢复。",
+    "expected": "设备写入失败应保留备份、返回任务失败并告警；恢复成功后及时同步数据库状态；单设备恢复应在合理时间内完成。",
+    "impact": "客户原有Mode Scheduler可能无法恢复，也可能失去再次恢复的数据来源；数据库与设备状态不一致会影响监控、报表和故障处理。",
+    "evidence": "恢复日志256780耗时15分22秒；日志271124、272012恢复成功；EskomAreaServiceImpl.removeDeviceController()代码显示写入失败后仍删除备份。"
+  }
+]

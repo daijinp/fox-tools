@@ -1,0 +1,5 @@
+config.yml
+session.json
+captures/
+__pycache__/
+.pytest_cache/
