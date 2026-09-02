@@ -100,9 +100,23 @@ def get_ui_keys(token):
     read_names = config['getui']['read_names']
     result = []
     failed_protocols = []
+    failed_protocol_details = {}
     first_saved = False
     for protocol, candidate_ids in devices_by_protocol.items():
         protocol_mappings = None
+        failure_counts = {}
+        last_failure = None
+
+        def record_failure(category, device_id, detail=None):
+            nonlocal last_failure
+            failure_counts[category] = failure_counts.get(category, 0) + 1
+            last_failure = {
+                'device_id': device_id,
+                'reason': category,
+            }
+            if detail:
+                last_failure['detail'] = str(detail)
+
         for attempt, device_id in enumerate(candidate_ids, start=1):
             try:
                 response = fr_requests(
@@ -111,6 +125,7 @@ def get_ui_keys(token):
                 data = response.json()
                 if data.get('errno') != 0:
                     reason = data.get('msg', data)
+                    record_failure('接口返回失败', device_id, reason)
                     print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
                           f'个设备 {device_id} 失败: {reason}')
                     continue
@@ -118,6 +133,7 @@ def get_ui_keys(token):
                 parameter_matches = jsonpath(data, '$.result.parameters')
                 parameters = parameter_matches[0] if parameter_matches else None
                 if not parameters:
+                    record_failure('parameters 为空', device_id)
                     print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
                           f'个设备 {device_id} 失败: parameters 为空')
                     continue
@@ -125,6 +141,7 @@ def get_ui_keys(token):
                 candidate_mappings = _build_protocol_mappings(
                     protocol, parameters, read_names)
                 if not candidate_mappings:
+                    record_failure('未找到目标 KEY', device_id)
                     print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
                           f'个设备 {device_id} 失败: 未找到目标 KEY')
                     continue
@@ -140,11 +157,17 @@ def get_ui_keys(token):
                         json.dump(data, f, ensure_ascii=False, indent=2)
                 break
             except Exception as exc:
+                record_failure('请求或解析异常', device_id, exc)
                 print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
                       f'个设备 {device_id} 异常: {exc}')
 
         if protocol_mappings is None:
             failed_protocols.append(protocol)
+            failed_protocol_details[protocol] = {
+                'candidate_count': len(candidate_ids),
+                'failure_counts': failure_counts,
+                'last_failure': last_failure,
+            }
             print(f'getui 协议 {protocol} 的 {len(candidate_ids)} 个候选设备全部失败，'
                   '将加入 skip_protocols')
 
@@ -152,10 +175,12 @@ def get_ui_keys(token):
     with open(mapping_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
     _set_skip_protocols(failed_protocols)
+    reason_path = _save_skip_protocol_reasons(failed_protocol_details)
     success_protocols = len(devices_by_protocol) - len(failed_protocols)
     print(f'get_ui_keys 完成, 成功 {success_protocols} 个协议/'
           f'{len(result)} 组映射, 失败 {len(failed_protocols)} 个协议, '
           f'已保存到: {mapping_path}')
+    print(f'跳过协议原因已保存到: {reason_path}')
     return result
 
 
@@ -173,8 +198,11 @@ class _BatchState:
 
 
 def _read_device_csv(file_path, report_skipped=True):
-    """读取设备 CSV（取前 4 列），自动跳过 device_id 表头行和 skip_protocols 中的协议版本，忽略多余列"""
-    skip_protocols = set(_setting_cfg.get('skip_protocols', []))
+    """读取设备 CSV，并跳过自动或永久配置的协议版本。"""
+    automatic_skips = set(_setting_cfg.get('skip_protocols', []))
+    persistent_skips = set(
+        _setting_cfg.get('persistent_skip_protocols', []))
+    skip_protocols = automatic_skips | persistent_skips
     devices = []
     skipped_count = 0
     with open(file_path, 'r', encoding='utf-8-sig') as f:
@@ -194,7 +222,9 @@ def _read_device_csv(file_path, report_skipped=True):
                 row[3].strip() if len(row) > 3 else '',
             ))
     if skipped_count and report_skipped:
-        print(f'已跳过 {skipped_count} 条记录 (协议版本在 skip_protocols 中: {sorted(skip_protocols)})')
+        print(f'已跳过 {skipped_count} 条记录 '
+              f'(自动跳过: {sorted(automatic_skips)}, '
+              f'永久跳过: {sorted(persistent_skips)})')
     return devices
 
 
@@ -231,8 +261,39 @@ def _set_skip_protocols(protocols):
     os.replace(temp_path, _config_path)
 
 
+def _save_skip_protocol_reasons(failed_protocol_details):
+    """保存本轮永久及自动跳过协议的原因，供运行结束后追溯。"""
+    records = []
+    for protocol in sorted(set(
+            _setting_cfg.get('persistent_skip_protocols', []))):
+        records.append({
+            'protocol_version': protocol,
+            'skip_source': 'persistent_skip_protocols',
+            'reason': '配置为永久跳过',
+        })
+    for protocol in sorted(failed_protocol_details):
+        details = failed_protocol_details[protocol]
+        records.append({
+            'protocol_version': protocol,
+            'skip_source': 'skip_protocols',
+            'reason': '所有候选设备均未生成目标 KEY 映射',
+            **details,
+        })
+
+    reason_path = os.path.join(_config_dir, 'skip_protocol_reasons.json')
+    payload = {
+        'generated_at': datetime.now().isoformat(timespec='seconds'),
+        'requested_names': config.get('getui', {}).get('read_names', []),
+        'skipped_protocols': records,
+    }
+    with open(reason_path, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+        f.write('\n')
+    return reason_path
+
+
 def _clear_skip_protocols():
-    """每次启动时清空上一次自动探测生成的跳过协议。"""
+    """每次启动时仅清空自动跳过协议，保留永久跳过协议。"""
     previous = list(_setting_cfg.get('skip_protocols', []))
     if previous:
         _set_skip_protocols([])

@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-09-02T14:59:13",
+  "requested_names": [
+    [
+      "ReactivePowerControlMode"
+    ]
+  ],
+  "skipped_protocols": [
+    {
+      "protocol_version": "A10500",
+      "skip_source": "persistent_skip_protocols",
+      "reason": "配置为永久跳过"
+    },
+    {
+      "protocol_version": "B10702",
+      "skip_source": "persistent_skip_protocols",
+      "reason": "配置为永久跳过"
+    },
+    {
+      "protocol_version": "A10200",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 2,
+      "failure_counts": {
+        "接口返回失败": 1,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "e3c10520-c7d1-4b80-9677-fb861a0fc64f",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10701",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 6,
+      "failure_counts": {
+        "未找到目标 KEY": 6
+      },
+      "last_failure": {
+        "device_id": "576e6589-0e5d-4735-aad0-d9b66911dd3e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10800",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 3,
+      "failure_counts": {
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "bb3f8be9-0fc6-47e5-90b3-14ad7f008878",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10801",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 55,
+      "failure_counts": {
+        "未找到目标 KEY": 43,
+        "接口返回失败": 12
+      },
+      "last_failure": {
+        "device_id": "a7ffa2fe-a5e3-4990-91e5-524b17b42f8b",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B11000",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 1,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "bf2648a9-1ba8-43c9-a984-8f70594c6246",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P12100",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "candidate_count": 1,
+      "failure_counts": {
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "e4cc026a-603d-4688-b29f-b575439597ac",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    }
+  ]
+}

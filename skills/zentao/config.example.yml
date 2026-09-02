@@ -1,7 +1,0 @@
-# ZenTao site root, for example: https://zentao.example.com/zentao
-URL: "https://zentao.example.com/zentao"
-# ZenTao login account. Do not commit real credentials.
-USER: "tester_account"
-PASSWORD: "replace_me"
-# Optional request timeout in seconds.
-TIMEOUT: "30"

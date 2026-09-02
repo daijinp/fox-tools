@@ -1,462 +1,322 @@
 [
   {
-    "protocol_version": "P10600",
-    "request_key": "p106__grid_code",
+    "protocol_version": "K11600",
+    "request_key": "k116__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p106__grid_code__meter1_enable",
-      "p106__grid_code__meter2_enable"
+      "k116__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P11900",
-    "request_key": "p119__grid_code",
+    "protocol_version": "K11706",
+    "request_key": "k117__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p119__grid_code__meter1_enable",
-      "p119__grid_code__meter2_enable"
+      "k117__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12900",
-    "request_key": "d129__grid_code",
+    "protocol_version": "K11601",
+    "request_key": "k116__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d129__grid_code__meter1_enable",
-      "d129__grid_code__meter2_enable"
+      "k116__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12000",
-    "request_key": "d120__grid_code",
+    "protocol_version": "K11502",
+    "request_key": "k115__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d120__grid_code__meter1_enable",
-      "d120__grid_code__meter2_enable"
+      "k115__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D13200",
-    "request_key": "d132__grid_code",
+    "protocol_version": "K11000",
+    "request_key": "k110__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d132__grid_code__meter1_enable",
-      "d132__grid_code__meter2_enable"
+      "k110__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12301",
-    "request_key": "d123__grid_code",
+    "protocol_version": "K11309",
+    "request_key": "k113__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d123__grid_code__meter1_enable",
-      "d123__grid_code__meter2_enable"
+      "k113__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10600",
-    "request_key": "q106__grid_code",
+    "protocol_version": "K11705",
+    "request_key": "k117__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q106__grid_code__meter2_enable"
+      "k117__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10800",
-    "request_key": "q108__grid_code",
+    "protocol_version": "K11800",
+    "request_key": "k118__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q108__grid_code__meter2_enable"
+      "k118__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q11200",
-    "request_key": "q112__grid_code",
+    "protocol_version": "K11902",
+    "request_key": "k119__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q112__grid_code__meter2_enable"
+      "k119__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10500",
-    "request_key": "q105__grid_code",
+    "protocol_version": "K11400",
+    "request_key": "k114__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q105__grid_code__meter2_enable"
+      "k114__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10900",
-    "request_key": "q109__grid_code",
+    "protocol_version": "K11103",
+    "request_key": "k111__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q109__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "Q11300",
-    "request_key": "q113__grid_code",
-    "response_names": [
-      "Meter2"
-    ],
-    "response_key": [
-      "q113__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "D12700",
-    "request_key": "d127__grid_code",
-    "response_names": [
-      "Meter",
-      "Meter2"
-    ],
-    "response_key": [
-      "d127__grid_code__meter1_enable",
-      "d127__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "Q11400",
-    "request_key": "q114__grid_code",
-    "response_names": [
-      "Meter2"
-    ],
-    "response_key": [
-      "q114__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "Q11000",
-    "request_key": "q110__grid_code",
-    "response_names": [
-      "Meter2"
-    ],
-    "response_key": [
-      "q110__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "Q11100",
-    "request_key": "q111__grid_code",
-    "response_names": [
-      "Meter2"
-    ],
-    "response_key": [
-      "q111__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "Q10700",
-    "request_key": "q107__grid_code",
-    "response_names": [
-      "Meter2"
-    ],
-    "response_key": [
-      "q107__grid_code__meter2_enable"
+      "k111__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
     "protocol_version": "Q11500",
-    "request_key": "q115__grid_code",
+    "request_key": "q115__15",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q115__grid_code__meter2_enable"
+      "q115__15__01"
     ]
   },
   {
-    "protocol_version": "Q10300",
-    "request_key": "q103__grid_code",
+    "protocol_version": "Q10500",
+    "request_key": "q105__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q103__grid_code__meter2_enable"
+      "q105__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10200",
-    "request_key": "q102__grid_code",
+    "protocol_version": "Q11300",
+    "request_key": "q113__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q102__grid_code__meter2_enable"
+      "q113__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P11300",
-    "request_key": "p113__grid_code",
+    "protocol_version": "Q11200",
+    "request_key": "q112__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p113__grid_code__meter1_enable",
-      "p113__grid_code__meter2_enable"
+      "q112__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D11200",
-    "request_key": "d112__grid_code",
+    "protocol_version": "Q11400",
+    "request_key": "q114__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d112__grid_code__meter1_enable",
-      "d112__grid_code__meter2_enable"
+      "q114__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D11501",
-    "request_key": "d115__grid_code",
+    "protocol_version": "Q11100",
+    "request_key": "q111__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d115__grid_code__meter1_enable",
-      "d115__grid_code__meter2_enable"
+      "q111__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P11700",
-    "request_key": "p117__grid_code",
+    "protocol_version": "Q11600",
+    "request_key": "q116__15",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p117__grid_code__meter1_enable",
-      "p117__grid_code__meter2_enable"
+      "q116__15__01"
     ]
   },
   {
-    "protocol_version": "D10800",
-    "request_key": "d108__grid_code",
+    "protocol_version": "Q10900",
+    "request_key": "q109__reactive_parameter",
     "response_names": [
-      "Meter"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d108__grid_code__meter1_enable"
+      "q109__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D10900",
-    "request_key": "d109__grid_code",
+    "protocol_version": "K10602",
+    "request_key": "k106__reactive_parameter",
     "response_names": [
-      "Meter"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d109__grid_code__meter1_enable"
+      "k106__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12600",
-    "request_key": "d126__grid_code",
+    "protocol_version": "Q11000",
+    "request_key": "q110__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d126__grid_code__meter1_enable",
-      "d126__grid_code__meter2_enable"
+      "q110__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12801",
-    "request_key": "d128__grid_code",
+    "protocol_version": "Q10700",
+    "request_key": "q107__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d128__grid_code__meter1_enable",
-      "d128__grid_code__meter2_enable"
+      "q107__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12403",
-    "request_key": "d124__grid_code",
+    "protocol_version": "K11500",
+    "request_key": "k115__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d124__grid_code__meter1_enable",
-      "d124__grid_code__meter2_enable"
+      "k115__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P12200",
-    "request_key": "p122__grid_code",
+    "protocol_version": "K11302",
+    "request_key": "k113__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p122__grid_code__meter1_enable",
-      "p122__grid_code__meter2_enable"
+      "k113__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P10700",
-    "request_key": "p107__grid_code",
+    "protocol_version": "K11704",
+    "request_key": "k117__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p107__grid_code__meter1_enable",
-      "p107__grid_code__meter2_enable"
+      "k117__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p118__grid_code",
+    "protocol_version": "K11101",
+    "request_key": "k111__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p118__grid_code__meter1_enable",
-      "p118__grid_code__meter2_enable"
+      "k111__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "P10400",
-    "request_key": "p104__grid_code",
+    "protocol_version": "K12002",
+    "request_key": "k120__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p104__grid_code__meter1_enable",
-      "p104__grid_code__meter2_enable"
+      "k120__reactive_parameter__reactive_power_control_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11200",
+    "request_key": "k112__reactive_parameter",
+    "response_names": [
+      "ReactivePowerControlMode"
+    ],
+    "response_key": [
+      "k112__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
     "protocol_version": "P12400",
-    "request_key": "p124__grid_code",
+    "request_key": "p124__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p124__grid_code__meter1_enable",
-      "p124__grid_code__meter2_enable"
+      "p124__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D12500",
-    "request_key": "d125__grid_code",
+    "protocol_version": "P12200",
+    "request_key": "p122__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d125__grid_code__meter1_enable",
-      "d125__grid_code__meter2_enable"
+      "p122__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "D13100",
-    "request_key": "d131__grid_code",
+    "protocol_version": "H11800",
+    "request_key": "h118__reactive_parameter",
     "response_names": [
-      "Meter",
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "d131__grid_code__meter1_enable",
-      "d131__grid_code__meter2_enable"
+      "h118__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
-    "protocol_version": "Q10400",
-    "request_key": "q104__grid_code",
+    "protocol_version": "H11302",
+    "request_key": "h113__reactive_parameter",
     "response_names": [
-      "Meter2"
+      "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q104__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "D11900",
-    "request_key": "d119__grid_code",
-    "response_names": [
-      "Meter",
-      "Meter2"
-    ],
-    "response_key": [
-      "d119__grid_code__meter1_enable",
-      "d119__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "D12200",
-    "request_key": "d122__grid_code",
-    "response_names": [
-      "Meter",
-      "Meter2"
-    ],
-    "response_key": [
-      "d122__grid_code__meter1_enable",
-      "d122__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "D12100",
-    "request_key": "d121__grid_code",
-    "response_names": [
-      "Meter",
-      "Meter2"
-    ],
-    "response_key": [
-      "d121__grid_code__meter1_enable",
-      "d121__grid_code__meter2_enable"
-    ]
-  },
-  {
-    "protocol_version": "P11100",
-    "request_key": "p111__grid_code",
-    "response_names": [
-      "Meter",
-      "Meter2"
-    ],
-    "response_key": [
-      "p111__grid_code__meter1_enable",
-      "p111__grid_code__meter2_enable"
+      "h113__reactive_parameter__reactive_power_control_mode"
     ]
   }
 ]
