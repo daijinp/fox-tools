@@ -10,16 +10,6 @@
     ]
   },
   {
-    "protocol_version": "K11706",
-    "request_key": "k117__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "k117__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
     "protocol_version": "K11601",
     "request_key": "k116__reactive_parameter",
     "response_names": [
@@ -27,6 +17,26 @@
     ],
     "response_key": [
       "k116__reactive_parameter__reactive_power_control_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11309",
+    "request_key": "k113__reactive_parameter",
+    "response_names": [
+      "ReactivePowerControlMode"
+    ],
+    "response_key": [
+      "k113__reactive_parameter__reactive_power_control_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11706",
+    "request_key": "k117__reactive_parameter",
+    "response_names": [
+      "ReactivePowerControlMode"
+    ],
+    "response_key": [
+      "k117__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -47,16 +57,6 @@
     ],
     "response_key": [
       "k110__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "K11309",
-    "request_key": "k113__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "k113__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -90,13 +90,13 @@
     ]
   },
   {
-    "protocol_version": "K11400",
-    "request_key": "k114__reactive_parameter",
+    "protocol_version": "K11500",
+    "request_key": "k115__reactive_parameter",
     "response_names": [
       "ReactivePowerControlMode"
     ],
     "response_key": [
-      "k114__reactive_parameter__reactive_power_control_mode"
+      "k115__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -110,83 +110,13 @@
     ]
   },
   {
-    "protocol_version": "Q11500",
-    "request_key": "q115__15",
+    "protocol_version": "K11400",
+    "request_key": "k114__reactive_parameter",
     "response_names": [
       "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q115__15__01"
-    ]
-  },
-  {
-    "protocol_version": "Q10500",
-    "request_key": "q105__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q105__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q11300",
-    "request_key": "q113__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q113__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q11200",
-    "request_key": "q112__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q112__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q11400",
-    "request_key": "q114__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q114__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q11100",
-    "request_key": "q111__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q111__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q11600",
-    "request_key": "q116__15",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q116__15__01"
-    ]
-  },
-  {
-    "protocol_version": "Q10900",
-    "request_key": "q109__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q109__reactive_parameter__reactive_power_control_mode"
+      "k114__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -200,33 +130,13 @@
     ]
   },
   {
-    "protocol_version": "Q11000",
-    "request_key": "q110__reactive_parameter",
+    "protocol_version": "K11704",
+    "request_key": "k117__reactive_parameter",
     "response_names": [
       "ReactivePowerControlMode"
     ],
     "response_key": [
-      "q110__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "Q10700",
-    "request_key": "q107__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "q107__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "K11500",
-    "request_key": "k115__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "k115__reactive_parameter__reactive_power_control_mode"
+      "k117__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -240,13 +150,13 @@
     ]
   },
   {
-    "protocol_version": "K11704",
-    "request_key": "k117__reactive_parameter",
+    "protocol_version": "K12000",
+    "request_key": "k120__reactive_parameter",
     "response_names": [
       "ReactivePowerControlMode"
     ],
     "response_key": [
-      "k117__reactive_parameter__reactive_power_control_mode"
+      "k120__reactive_parameter__reactive_power_control_mode"
     ]
   },
   {
@@ -260,16 +170,6 @@
     ]
   },
   {
-    "protocol_version": "K12002",
-    "request_key": "k120__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "k120__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
     "protocol_version": "K11200",
     "request_key": "k112__reactive_parameter",
     "response_names": [
@@ -280,43 +180,13 @@
     ]
   },
   {
-    "protocol_version": "P12400",
-    "request_key": "p124__reactive_parameter",
+    "protocol_version": "K12002",
+    "request_key": "k120__reactive_parameter",
     "response_names": [
       "ReactivePowerControlMode"
     ],
     "response_key": [
-      "p124__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "P12200",
-    "request_key": "p122__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "p122__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "H11800",
-    "request_key": "h118__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "h118__reactive_parameter__reactive_power_control_mode"
-    ]
-  },
-  {
-    "protocol_version": "H11302",
-    "request_key": "h113__reactive_parameter",
-    "response_names": [
-      "ReactivePowerControlMode"
-    ],
-    "response_key": [
-      "h113__reactive_parameter__reactive_power_control_mode"
+      "k120__reactive_parameter__reactive_power_control_mode"
     ]
   }
 ]

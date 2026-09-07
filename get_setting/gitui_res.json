@@ -243,10 +243,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Meter",
                 "CT",
                 "disable",
-                "Meter_3PH",
-                "Meter"
+                "Meter_3PH"
               ]
             },
             "unit": "",
@@ -659,9 +659,9 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "60Hz",
                 "Invalid",
-                "50Hz",
-                "60Hz"
+                "50Hz"
               ]
             },
             "unit": "",
@@ -2680,12 +2680,12 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "VarNo",
-                "UnderExcited",
                 "OverExcited",
                 "PFPower",
                 "FixedQ",
-                "QVoltage"
+                "QVoltage",
+                "VarNo",
+                "UnderExcited"
               ]
             },
             "unit": "",
@@ -3178,10 +3178,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "State3",
                 "State3Lockout",
                 "State1",
-                "State2",
-                "State3"
+                "State2"
               ]
             },
             "unit": "",
@@ -3429,9 +3429,9 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "NOMode",
                 "NCMode",
-                "TimingMode",
-                "NOMode"
+                "TimingMode"
               ]
             },
             "unit": "",
@@ -3709,8 +3709,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -3793,14 +3793,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -3911,8 +3911,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -3995,14 +3995,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid"
               ]
             },
             "unit": "",
@@ -4085,8 +4085,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -4399,14 +4399,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge"
+                "Backup"
               ]
             },
             "unit": "",
@@ -4596,14 +4596,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -4798,14 +4798,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -4888,8 +4888,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -5000,14 +5000,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid"
               ]
             },
             "unit": "",
@@ -5090,8 +5090,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -5429,14 +5429,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -5749,8 +5749,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -5833,14 +5833,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -5951,8 +5951,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -6035,14 +6035,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -6153,8 +6153,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -6232,14 +6232,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge",
-                "ForceDischarge"
+                "ForceCharge"
               ]
             },
             "unit": "",
@@ -6434,14 +6434,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -6636,14 +6636,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -6838,14 +6838,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -7065,14 +7065,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -7155,8 +7155,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -7267,14 +7267,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -7357,8 +7357,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -7469,14 +7469,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -7671,14 +7671,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -7789,8 +7789,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -7868,14 +7868,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse"
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -8070,14 +8070,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse"
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -8272,14 +8272,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -8474,14 +8474,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -8564,8 +8564,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -8701,14 +8701,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse"
+                "SelfUse",
+                "Feedin",
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -8903,14 +8903,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid"
               ]
             },
             "unit": "",
@@ -9105,14 +9105,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse"
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -9307,14 +9307,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "SelfUse",
-                "Feedin",
-                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
-                "Invalid"
+                "Invalid",
+                "SelfUse",
+                "Feedin",
+                "Backup"
               ]
             },
             "unit": "",
@@ -9425,8 +9425,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -9706,14 +9706,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -9908,14 +9908,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -10337,14 +10337,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge"
+                "Backup"
               ]
             },
             "unit": "",
@@ -10427,8 +10427,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -10539,14 +10539,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
+                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge"
+                "Backup"
               ]
             },
             "unit": "",
@@ -10741,14 +10741,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -10831,8 +10831,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -10943,14 +10943,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -11033,8 +11033,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -11140,14 +11140,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid"
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -11342,14 +11342,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -11544,14 +11544,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
+                "Feedin",
+                "Backup"
               ]
             },
             "unit": "",
@@ -11746,14 +11746,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -11973,14 +11973,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -12265,8 +12265,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -12293,8 +12293,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -12377,14 +12377,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid"
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -12776,14 +12776,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge",
+                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge"
               ]
             },
             "unit": "",
@@ -13180,14 +13180,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)"
+                "Backup"
               ]
             },
             "unit": "",
@@ -13270,8 +13270,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -13382,14 +13382,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -13811,14 +13811,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -14013,14 +14013,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid"
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -14215,14 +14215,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -14412,14 +14412,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
+                "Backup",
+                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup",
-                "ForceCharge"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -14614,14 +14614,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Invalid",
+                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse"
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -14816,14 +14816,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Invalid",
+                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse"
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -15018,14 +15018,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -15245,14 +15245,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -15447,14 +15447,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse"
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -15649,14 +15649,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "SelfUse",
-                "Feedin",
-                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
-                "Invalid"
+                "Invalid",
+                "SelfUse",
+                "Feedin",
+                "Backup"
               ]
             },
             "unit": "",
@@ -15739,8 +15739,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -15767,8 +15767,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -15851,14 +15851,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse"
+                "Invalid"
               ]
             },
             "unit": "",
@@ -16048,14 +16048,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)"
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -16138,8 +16138,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -16250,14 +16250,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -16368,8 +16368,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -16452,14 +16452,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -16654,14 +16654,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin"
+                "Feedin",
+                "Backup"
               ]
             },
             "unit": "",
@@ -16881,14 +16881,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -17083,14 +17083,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse"
+                "SelfUse",
+                "Feedin",
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -17285,14 +17285,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge"
               ]
             },
             "unit": "",
@@ -17487,14 +17487,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -17684,14 +17684,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
-                "SelfUse",
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid",
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -17886,14 +17886,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -18088,14 +18088,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin"
+                "Feedin",
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -18290,14 +18290,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin"
+                "Feedin",
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -18517,14 +18517,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -18635,8 +18635,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -18837,8 +18837,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -18921,14 +18921,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Invalid",
+                "SelfUse",
+                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
-                "SelfUse",
-                "Feedin"
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -19039,8 +19039,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -19320,14 +19320,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge(BAT)",
+                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid"
+                "ForceCharge(BAT)"
               ]
             },
             "unit": "",
@@ -19410,8 +19410,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -19522,14 +19522,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "SelfUse",
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
-                "Invalid"
+                "Invalid",
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -19612,8 +19612,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -19724,14 +19724,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin",
-                "Backup"
+                "Feedin"
               ]
             },
             "unit": "",
@@ -19926,14 +19926,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge"
               ]
             },
             "unit": "",
@@ -20153,14 +20153,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -20355,14 +20355,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup"
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -20557,14 +20557,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
-                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)",
+                "Invalid"
               ]
             },
             "unit": "",
@@ -20647,8 +20647,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -20759,14 +20759,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)"
+                "Backup"
               ]
             },
             "unit": "",
@@ -20956,14 +20956,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
-                "ForceCharge(BAT)"
+                "Backup"
               ]
             },
             "unit": "",
@@ -21046,8 +21046,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -21158,14 +21158,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Feedin",
-                "Backup",
-                "ForceCharge",
-                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse"
+                "SelfUse",
+                "Feedin",
+                "Backup",
+                "ForceCharge",
+                "ForceDischarge"
               ]
             },
             "unit": "",
@@ -21360,14 +21360,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -21450,8 +21450,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -21562,14 +21562,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
+                "Backup",
+                "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup",
-                "ForceCharge"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -21705,8 +21705,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -21789,14 +21789,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "SelfUse",
-                "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
-                "Invalid"
+                "Invalid",
+                "SelfUse",
+                "Feedin"
               ]
             },
             "unit": "",
@@ -21991,14 +21991,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
-                "ForceDischarge(BAT)"
+                "ForceDischarge(BAT)",
+                "Invalid"
               ]
             },
             "unit": "",
@@ -22193,14 +22193,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
-                "Feedin"
+                "Feedin",
+                "Backup"
               ]
             },
             "unit": "",
@@ -22283,8 +22283,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -22395,14 +22395,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceDischarge",
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge"
+                "ForceCharge",
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -22513,8 +22513,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "disable",
-                "enable"
+                "enable",
+                "disable"
               ]
             },
             "unit": "",
@@ -22592,14 +22592,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "ForceCharge(BAT)",
-                "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
                 "ForceCharge",
-                "ForceDischarge"
+                "ForceDischarge",
+                "ForceCharge(BAT)",
+                "ForceDischarge(BAT)"
               ]
             },
             "unit": "",
@@ -22710,8 +22710,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -22794,14 +22794,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Feedin",
+                "Backup",
                 "ForceCharge",
                 "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
-                "SelfUse",
-                "Feedin",
-                "Backup"
+                "SelfUse"
               ]
             },
             "unit": "",
@@ -22884,8 +22884,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -23086,8 +23086,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -23198,14 +23198,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ForceDischarge",
                 "ForceCharge(BAT)",
                 "ForceDischarge(BAT)",
                 "Invalid",
                 "SelfUse",
                 "Feedin",
                 "Backup",
-                "ForceCharge",
-                "ForceDischarge"
+                "ForceCharge"
               ]
             },
             "unit": "",
@@ -25981,8 +25981,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -26034,8 +26034,8 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "enable",
-                "disable"
+                "disable",
+                "enable"
               ]
             },
             "unit": "",
@@ -26326,11 +26326,11 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "The battery is in a stopped warm up state",
+                "The battery is in a ready warm up state",
                 "The battery is in the warm up state",
                 "The battery is in a ready stopped warm up state",
-                "Battery is in self warm up state",
-                "The battery is in a stopped warm up state",
-                "The battery is in a ready warm up state"
+                "Battery is in self warm up state"
               ]
             },
             "unit": "",
@@ -26450,10 +26450,10 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "EndOfDetection",
-                "DetectionFailure",
                 "NotStarted",
-                "Detecting"
+                "Detecting",
+                "EndOfDetection",
+                "DetectionFailure"
               ]
             },
             "unit": "",
@@ -26514,9 +26514,9 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "CT1+CT2",
                 "CT1",
-                "CT2"
+                "CT2",
+                "CT1+CT2"
               ]
             },
             "unit": "",
@@ -26548,14 +26548,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "Unknown",
                 "Success",
                 "ThreeWire",
                 "CurrentLow",
                 "LoadFluctuation",
                 "SequenceFailed",
                 "PolarityFailed",
-                "Reject",
-                "Unknown"
+                "Reject"
               ]
             },
             "unit": "",
@@ -26570,13 +26570,13 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "BAC",
+                "CBA",
+                "ABC(default)",
                 "ABC",
                 "BCA",
                 "CAB",
-                "ACB",
-                "BAC",
-                "CBA",
-                "ABC(default)"
+                "ACB"
               ]
             },
             "unit": "",
@@ -26591,13 +26591,13 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ACB",
+                "BAC",
+                "CBA",
                 "ABC(default)",
                 "ABC",
                 "BCA",
-                "CAB",
-                "ACB",
-                "BAC",
-                "CBA"
+                "CAB"
               ]
             },
             "unit": "",
@@ -26802,14 +26802,14 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "Unknown",
                 "Success",
                 "ThreeWire",
                 "CurrentLow",
                 "LoadFluctuation",
                 "SequenceFailed",
                 "PolarityFailed",
-                "Reject"
+                "Reject",
+                "Unknown"
               ]
             },
             "unit": "",
@@ -26824,13 +26824,13 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
-                "BCA",
-                "CAB",
                 "ACB",
                 "BAC",
                 "CBA",
                 "ABC(default)",
-                "ABC"
+                "ABC",
+                "BCA",
+                "CAB"
               ]
             },
             "unit": "",
@@ -26845,13 +26845,13 @@
               "valueType": "string",
               "uiType": "select",
               "uiItems": [
+                "ABC(default)",
+                "ABC",
                 "BCA",
                 "CAB",
                 "ACB",
                 "BAC",
-                "CBA",
-                "ABC(default)",
-                "ABC"
+                "CBA"
               ]
             },
             "unit": "",

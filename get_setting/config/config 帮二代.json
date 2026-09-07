@@ -14,10 +14,20 @@
         ]
     },
     "get_setting": {
-        "input_file": "AU-KH10-260907.csv",
+        "input_file": "AU-KH10-260902.csv",
         "concurrency": 300,
         "request_timeout": 300,
-        "skip_protocols": [],
-        "persistent_skip_protocols": []
+        "skip_protocols": [
+            "A10200",
+            "B10701",
+            "B10800",
+            "B10801",
+            "B11000",
+            "P12100"
+        ],
+        "persistent_skip_protocols": [
+            "B10702",
+            "A10500"
+        ]
     }
 }
