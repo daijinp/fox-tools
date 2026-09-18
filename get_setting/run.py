@@ -50,25 +50,42 @@ def _find_props_recursive(properties, names):
 
 def _build_protocol_mappings(protocol, parameters, read_names):
     """从一个设备的 UI 参数中提取当前协议所需的 KEY 映射。"""
-    mappings = []
-    seen_request_keys = set()
+    requested_names = []
     for name_group in read_names:
-        names_set = set(name_group)
-        for group in parameters:
-            matched = _find_props_recursive(
-                group.get('properties', []), names_set)
-            if not matched or group.get('key') in seen_request_keys:
-                continue
-            seen_request_keys.add(group['key'])
-            matched_dict = dict(matched)
-            ordered_names = [name for name in name_group
-                             if name in matched_dict]
-            mappings.append({
+        for name in name_group:
+            if name not in requested_names:
+                requested_names.append(name)
+
+    names_set = set(requested_names)
+    mappings = []
+    mappings_by_request_key = {}
+    for group in parameters:
+        request_key = group.get('key')
+        if not request_key:
+            continue
+        matched = _find_props_recursive(
+            group.get('properties', []), names_set)
+        if not matched:
+            continue
+
+        mapping = mappings_by_request_key.get(request_key)
+        if mapping is None:
+            mapping = {
                 'protocol_version': protocol,
-                'request_key': group['key'],
-                'response_names': ordered_names,
-                'response_key': [matched_dict[name] for name in ordered_names]
-            })
+                'request_key': request_key,
+                'response_names': [],
+                'response_key': [],
+            }
+            mappings_by_request_key[request_key] = mapping
+            mappings.append(mapping)
+
+        matched_dict = dict(matched)
+        existing_names = set(mapping['response_names'])
+        for name in requested_names:
+            if name in matched_dict and name not in existing_names:
+                mapping['response_names'].append(name)
+                mapping['response_key'].append(matched_dict[name])
+                existing_names.add(name)
     return mappings
 
 
@@ -314,31 +331,35 @@ async def _write_logs(state, message, log_files, output_dir):
 
 def _save_records_csv(records, csv_path, info_field, value_columns=None,
                       append=False):
-    if not records:
+    if not records and append:
         return
-    exists = os.path.exists(csv_path)
+    exists = os.path.exists(csv_path) and os.path.getsize(csv_path) > 0
+    fieldnames = [
+        'device_id',
+        'device_sn',
+        'protocol_version',
+        'master_version',
+    ]
+    if value_columns:
+        fieldnames.extend(value_columns)
+    fieldnames.append(info_field)
     with open(csv_path, 'a' if append else 'w', encoding='utf-8-sig', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
         if not append or not exists:
-            header = 'device_id,device_sn,protocol_version,master_version'
-            if value_columns:
-                header += ',' + ','.join(value_columns)
-            f.write(f'{header},{info_field}\n')
+            writer.writeheader()
         for r in records:
-            line = f'{r["device_id"]},{r["device_sn"]},' \
-                   f'{r["protocol_version"]},{r["master_version"]}'
+            row = dict(r)
             if value_columns:
                 for col in value_columns:
-                    val = str(r.get(col, 'N/A')).replace('\n', ' ').replace(',', ';')
-                    line += f',{val}'
-            info = str(r[info_field]).replace('\n', ' ').replace(',', ';')
-            f.write(f'{line},{info}\n')
+                    row.setdefault(col, 'N/A')
+            writer.writerow(row)
     print(f'{"追加" if append else "保存"}记录到: {csv_path} ({len(records)} 条)')
 
 
 async def _process_device(session, semaphore, device_data, token,
                           mapping_by_protocol, state, output_dir):
     device_id, device_sn, pv, mv = device_data
-    mapping = mapping_by_protocol[pv]
+    mappings = mapping_by_protocol[pv]
 
     async def fail(reason):
         await _write_logs(state, f'{device_id} 失败: {reason}',
@@ -354,48 +375,63 @@ async def _process_device(session, semaphore, device_data, token,
         try:
             path = '/generic/v0/device/setting/get'
             url = config['domain'] + path
-            headers = GetAuth().get_signature(token=token, path=path)
-            param = {'id': device_id, 'key': mapping['request_key']}
-
             timeout = aiohttp.ClientTimeout(
                 total=_setting_cfg.get('request_timeout', 300))
-            async with session.get(url, params=param, headers=headers,
-                                   ssl=False, timeout=timeout) as resp:
-                if resp.status != 200:
-                    return await fail(f'HTTP {resp.status}')
+            name_values = {}
+            success_info = []
 
+            for mapping in mappings:
+                request_key = mapping['request_key']
+                headers = GetAuth().get_signature(token=token, path=path)
+                param = {'id': device_id, 'key': request_key}
                 try:
-                    data = await resp.json()
+                    async with session.get(
+                            url, params=param, headers=headers,
+                            ssl=False, timeout=timeout) as resp:
+                        if resp.status != 200:
+                            return await fail(
+                                f'key={request_key} HTTP {resp.status}')
+
+                        try:
+                            data = await resp.json()
+                        except Exception as e:
+                            return await fail(
+                                f'key={request_key} 响应解析失败: {e}')
+                except asyncio.TimeoutError:
+                    return await fail(f'key={request_key} 请求超时')
                 except Exception as e:
-                    return await fail(f'响应解析失败: {e}')
+                    return await fail(f'key={request_key} 请求异常: {e}')
 
                 if data.get('errno') != 0:
                     return await fail(
-                        f'errno={data.get("errno")}: {data.get("msg", "")}')
+                        f'key={request_key} errno={data.get("errno")}: '
+                        f'{data.get("msg", "")}')
 
                 values = data.get('result', {}).get('values', {})
                 names = mapping['response_names']
                 keys = mapping['response_key']
-                name_values = {}
                 key_values = {}
                 for name, key in zip(names, keys):
                     val = values.get(key, 'N/A')
                     name_values[name] = val
                     key_values[key] = val
+                success_info.append({
+                    'request_key': request_key,
+                    'values': key_values,
+                })
 
-                await _write_logs(state, f'{device_id} 成功: {key_values}',
-                                  ['success.log', 'all.log'], output_dir)
-                async with state.record_lock:
-                    state.success_records.append({
-                        'device_id': device_id, 'device_sn': device_sn,
-                        'protocol_version': pv, 'master_version': mv,
-                        **name_values,
-                        'success_info': str(key_values)
-                    })
-                    state.success_count += 1
+            success_info_json = json.dumps(success_info, ensure_ascii=False)
+            await _write_logs(state, f'{device_id} 成功: {success_info_json}',
+                              ['success.log', 'all.log'], output_dir)
+            async with state.record_lock:
+                state.success_records.append({
+                    'device_id': device_id, 'device_sn': device_sn,
+                    'protocol_version': pv, 'master_version': mv,
+                    **name_values,
+                    'success_info': success_info_json,
+                })
+                state.success_count += 1
 
-        except asyncio.TimeoutError:
-            await fail('请求超时')
         except Exception as e:
             await fail(f'异常: {e}')
 
@@ -410,7 +446,8 @@ def _get_value_columns():
     return columns
 
 
-async def _run_batch(input_csv, token, mapping_by_protocol, output_dir):
+async def _run_batch(input_csv, token, mapping_by_protocol, output_dir,
+                     append_success=False):
     state = _BatchState()
     devices = _read_device_csv(input_csv)
     if not devices:
@@ -436,7 +473,8 @@ async def _run_batch(input_csv, token, mapping_by_protocol, output_dir):
                       os.path.join(output_dir, 'fail.csv'), 'err_info')
     _save_records_csv(state.success_records,
                       os.path.join(output_dir, 'success.csv'), 'success_info',
-                      value_columns=value_columns, append=True)
+                      value_columns=value_columns,
+                      append=append_success)
 
     print(f'本轮完成! 成功: {state.success_count}, 失败: {len(state.fail_records)}')
     return state.success_count, len(state.fail_records)
@@ -458,7 +496,10 @@ async def get_setting(token):
 
     os.makedirs(_data_dir, exist_ok=True)
     protocol_key_mapping = _load_protocol_key_mapping()
-    mapping_by_protocol = {m['protocol_version']: m for m in protocol_key_mapping}
+    mapping_by_protocol = {}
+    for mapping in protocol_key_mapping:
+        mapping_by_protocol.setdefault(
+            mapping['protocol_version'], []).append(mapping)
 
     _validate_protocols(
         _read_device_csv(input_csv, report_skipped=False), mapping_by_protocol)
@@ -470,7 +511,8 @@ async def get_setting(token):
     while True:
         print(f'\n{"=" * 20} 第 {round_num} 轮处理 {"=" * 20}')
         success, fail_count = await _run_batch(
-            current_input, token, mapping_by_protocol, _data_dir)
+            current_input, token, mapping_by_protocol, _data_dir,
+            append_success=round_num > 1)
 
         if fail_count == 0:
             print('\n所有设备处理成功!')
