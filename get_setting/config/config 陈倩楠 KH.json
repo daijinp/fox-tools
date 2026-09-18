@@ -7,11 +7,11 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
-        "read_names": [["MeterCompensation","GridCode"]]
+        "read_names": [["Meter1/CT1","Meter2/CT2"]]
     },
     "get_setting": {
-        "input_file": "all_h3p_260701.csv",
-        "concurrency": 1000,
+        "input_file": "KH需拉电表位_all_device_data.csv",
+        "concurrency": 300,
         "request_timeout": 300,
         "skip_protocols": [
         ],

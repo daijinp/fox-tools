@@ -1,8 +1,10 @@
 {
-  "generated_at": "2026-09-07T16:47:55",
+  "generated_at": "2026-09-18T09:34:42",
   "requested_names": [
     [
-      "ReactivePowerControlMode"
+      "GridCode",
+      "G100Enable",
+      "State"
     ]
   ],
   "skipped_protocols": []

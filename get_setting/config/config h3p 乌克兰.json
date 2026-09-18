@@ -8,16 +8,17 @@
     },
     "getui": {
         "read_names": [
+                        [
+                "GridCode"
+            ],
             [
-                "GridCode",
-                "G100Enable",
-                "State"
+                "G100Enable","State"
             ]
         ]
     },
     "get_setting": {
         "input_file": "h3p-ua-0916.csv",
-        "concurrency": 200,
+        "concurrency": 1000,
         "request_timeout": 300,
         "skip_protocols": [],
         "persistent_skip_protocols": []
