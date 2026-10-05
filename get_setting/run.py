@@ -245,14 +245,31 @@ def _read_device_csv(file_path, report_skipped=True):
     return devices
 
 
-def _validate_protocols(devices, mapping_by_protocol):
-    """校验所有设备的 protocol_version 都有对应 mapping，否则抛出严重错误停止脚本"""
-    device_protocols = {d[2] for d in devices}
-    missing = device_protocols - set(mapping_by_protocol.keys())
-    if missing:
-        raise Exception(
-            f'严重错误: 以下非跳过协议版本未生成 KEY 映射: {sorted(missing)}'
-        )
+def _skip_unmapped_protocols(devices, mapping_by_protocol):
+    """跳过缺少 KEY 映射的协议并记录原因，返回其余可处理设备。"""
+    missing_counts = {}
+    for device in devices:
+        protocol = device[2]
+        if not mapping_by_protocol.get(protocol):
+            missing_counts[protocol] = missing_counts.get(protocol, 0) + 1
+    if not missing_counts:
+        return devices
+
+    automatic_skips = set(_setting_cfg.get('skip_protocols', []))
+    _set_skip_protocols(automatic_skips | set(missing_counts))
+    reason_path = _save_skip_protocol_reasons({
+        protocol: {
+            'stage': 'get_setting',
+            'reason': 'protocol_key_mapping.json 中没有对应协议的 KEY 映射',
+            'device_count': count,
+        }
+        for protocol, count in missing_counts.items()
+    }, merge=True)
+    for protocol, count in sorted(missing_counts.items()):
+        print(f'爬取跳过协议 {protocol!r}: 缺少 KEY 映射，'
+              f'跳过 {count} 个设备，继续处理其他协议')
+    print(f'跳过协议原因已保存到: {reason_path}')
+    return [device for device in devices if device[2] not in missing_counts]
 
 
 def _get_input_csv_path():
@@ -278,8 +295,8 @@ def _set_skip_protocols(protocols):
     os.replace(temp_path, _config_path)
 
 
-def _save_skip_protocol_reasons(failed_protocol_details):
-    """保存本轮永久及自动跳过协议的原因，供运行结束后追溯。"""
+def _save_skip_protocol_reasons(failed_protocol_details, merge=False):
+    """保存跳过协议的原因；爬取阶段合并记录，保留 getui 阶段的原因。"""
     records = []
     for protocol in sorted(set(
             _setting_cfg.get('persistent_skip_protocols', []))):
@@ -298,6 +315,17 @@ def _save_skip_protocol_reasons(failed_protocol_details):
         })
 
     reason_path = os.path.join(_config_dir, 'skip_protocol_reasons.json')
+    if merge and os.path.exists(reason_path):
+        with open(reason_path, 'r', encoding='utf-8') as f:
+            previous = json.load(f)
+        records_by_protocol = {
+            (record['skip_source'], record['protocol_version']): record
+            for record in previous.get('skipped_protocols', [])
+        }
+        for record in records:
+            records_by_protocol[
+                (record['skip_source'], record['protocol_version'])] = record
+        records = list(records_by_protocol.values())
     payload = {
         'generated_at': datetime.now().isoformat(timespec='seconds'),
         'requested_names': config.get('getui', {}).get('read_names', []),
@@ -449,7 +477,8 @@ def _get_value_columns():
 async def _run_batch(input_csv, token, mapping_by_protocol, output_dir,
                      append_success=False):
     state = _BatchState()
-    devices = _read_device_csv(input_csv)
+    devices = _skip_unmapped_protocols(
+        _read_device_csv(input_csv), mapping_by_protocol)
     if not devices:
         print('没有设备需要处理')
         return 0, 0
@@ -501,9 +530,6 @@ async def get_setting(token):
         mapping_by_protocol.setdefault(
             mapping['protocol_version'], []).append(mapping)
 
-    _validate_protocols(
-        _read_device_csv(input_csv, report_skipped=False), mapping_by_protocol)
-
     round_num = 1
     current_input = input_csv
     fail_csv = os.path.join(_data_dir, 'fail.csv')
@@ -515,7 +541,7 @@ async def get_setting(token):
             append_success=round_num > 1)
 
         if fail_count == 0:
-            print('\n所有设备处理成功!')
+            print('\n本轮处理完成，没有失败设备需要重试。')
             break
 
         if success > 0:
