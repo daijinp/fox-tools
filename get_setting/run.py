@@ -91,9 +91,15 @@ def _build_protocol_mappings(protocol, parameters, read_names):
 
 def get_ui_keys(token):
     """
-    从 get_setting.input_file 按协议版本分组，每个协议依次尝试候选设备。
-    设备 UI 获取成功且找到目标 KEY 后停止尝试当前协议；全部失败则自动跳过该协议。
+    按协议分组，在 max_attempts_per_protocol 上限内依次尝试候选设备。
+    找到目标 KEY 后停止尝试；候选耗尽或达到上限仍失败则自动跳过该协议。
     """
+    getui_cfg = config['getui']
+    max_attempts = getui_cfg.get('max_attempts_per_protocol', 5)
+    if (isinstance(max_attempts, bool) or not isinstance(max_attempts, int)
+            or max_attempts <= 0):
+        raise ValueError('getui.max_attempts_per_protocol 必须为大于 0 的整数')
+
     input_csv = _get_input_csv_path()
     devices = _read_device_csv(input_csv)
     if not devices:
@@ -114,15 +120,18 @@ def get_ui_keys(token):
         seen_devices.add(dedup_key)
         devices_by_protocol.setdefault(protocol, []).append(device_id)
 
-    read_names = config['getui']['read_names']
+    read_names = getui_cfg['read_names']
     result = []
     failed_protocols = []
     failed_protocol_details = {}
     first_saved = False
     for protocol, candidate_ids in devices_by_protocol.items():
+        attempt_limit = min(len(candidate_ids), max_attempts)
         protocol_mappings = None
         failure_counts = {}
         last_failure = None
+        print(f'getui 协议 {protocol}: 共 {len(candidate_ids)} 个候选设备，'
+              f'最多尝试 {attempt_limit} 个')
 
         def record_failure(category, device_id, detail=None):
             nonlocal last_failure
@@ -134,7 +143,7 @@ def get_ui_keys(token):
             if detail:
                 last_failure['detail'] = str(detail)
 
-        for attempt, device_id in enumerate(candidate_ids, start=1):
+        for attempt, device_id in enumerate(candidate_ids[:attempt_limit], start=1):
             try:
                 response = fr_requests(
                     'get', path='/generic/v0/device/setting/ui', token=token,
@@ -143,7 +152,7 @@ def get_ui_keys(token):
                 if data.get('errno') != 0:
                     reason = data.get('msg', data)
                     record_failure('接口返回失败', device_id, reason)
-                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                    print(f'getui 协议 {protocol} 第 {attempt}/{attempt_limit} '
                           f'个设备 {device_id} 失败: {reason}')
                     continue
 
@@ -151,7 +160,7 @@ def get_ui_keys(token):
                 parameters = parameter_matches[0] if parameter_matches else None
                 if not parameters:
                     record_failure('parameters 为空', device_id)
-                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                    print(f'getui 协议 {protocol} 第 {attempt}/{attempt_limit} '
                           f'个设备 {device_id} 失败: parameters 为空')
                     continue
 
@@ -159,14 +168,14 @@ def get_ui_keys(token):
                     protocol, parameters, read_names)
                 if not candidate_mappings:
                     record_failure('未找到目标 KEY', device_id)
-                    print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                    print(f'getui 协议 {protocol} 第 {attempt}/{attempt_limit} '
                           f'个设备 {device_id} 失败: 未找到目标 KEY')
                     continue
 
                 protocol_mappings = candidate_mappings
                 result.extend(candidate_mappings)
                 print(f'getui 协议 {protocol} 获取成功: 使用第 '
-                      f'{attempt}/{len(candidate_ids)} 个设备 {device_id}')
+                      f'{attempt}/{attempt_limit} 个设备 {device_id}')
                 if not first_saved:
                     first_saved = True
                     with open(os.path.join(_base_dir, 'gitui_res.json'), 'w',
@@ -175,18 +184,29 @@ def get_ui_keys(token):
                 break
             except Exception as exc:
                 record_failure('请求或解析异常', device_id, exc)
-                print(f'getui 协议 {protocol} 第 {attempt}/{len(candidate_ids)} '
+                print(f'getui 协议 {protocol} 第 {attempt}/{attempt_limit} '
                       f'个设备 {device_id} 异常: {exc}')
 
         if protocol_mappings is None:
+            remaining_count = len(candidate_ids) - attempt_limit
+            reason = (
+                f'达到 getui 尝试上限（{max_attempts} 次），仍未生成目标 KEY 映射'
+                if remaining_count else '所有候选设备均未生成目标 KEY 映射'
+            )
             failed_protocols.append(protocol)
             failed_protocol_details[protocol] = {
+                'stage': 'getui',
+                'reason': reason,
                 'candidate_count': len(candidate_ids),
+                'attempted_count': attempt_limit,
+                'max_attempts_per_protocol': max_attempts,
+                'remaining_candidate_count': remaining_count,
                 'failure_counts': failure_counts,
                 'last_failure': last_failure,
             }
-            print(f'getui 协议 {protocol} 的 {len(candidate_ids)} 个候选设备全部失败，'
-                  '将加入 skip_protocols')
+            print(f'getui 跳过协议 {protocol}: {reason}，'
+                  f'已尝试 {attempt_limit}/{len(candidate_ids)} 个设备，'
+                  '将加入 skip_protocols，继续处理其他协议')
 
     mapping_path = os.path.join(_config_dir, 'protocol_key_mapping.json')
     with open(mapping_path, 'w', encoding='utf-8') as f:

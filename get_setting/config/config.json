@@ -7,6 +7,7 @@
         "password": "c8522ba359b4e819f6064d7df23e881f"
     },
     "getui": {
+        "max_attempts_per_protocol": 5,
         "read_names": [
             [
                 "GridCode",
