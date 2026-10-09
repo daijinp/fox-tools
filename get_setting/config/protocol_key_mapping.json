@@ -1,112 +1,698 @@
 [
   {
-    "protocol_version": "P11900",
-    "request_key": "p124__grid_code",
+    "protocol_version": "K11600",
+    "request_key": "k116__battery_warm_up",
     "response_names": [
-      "GridCode"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "k116__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P11900",
-    "request_key": "p124__27",
+    "protocol_version": "K11307",
+    "request_key": "k113__battery_warm_up",
     "response_names": [
-      "G100Enable",
-      "State"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__27__00",
-      "p124__27__03"
+      "k113__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P12400",
-    "request_key": "p124__grid_code",
+    "protocol_version": "K11601",
+    "request_key": "k116__battery_warm_up",
     "response_names": [
-      "GridCode"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "k116__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P12400",
-    "request_key": "p124__27",
+    "protocol_version": "K12002",
+    "request_key": "k120__battery_warm_up",
     "response_names": [
-      "G100Enable",
-      "State"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__27__00",
-      "p124__27__03"
+      "k120__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11000",
+    "request_key": "k110__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k110__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10900",
+    "request_key": "k109__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k109__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11309",
+    "request_key": "k113__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k113__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11800",
+    "request_key": "k118__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k118__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11902",
+    "request_key": "k119__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k119__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10804",
+    "request_key": "k108__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k108__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11502",
+    "request_key": "k115__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k115__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11200",
+    "request_key": "k112__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k112__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11705",
+    "request_key": "k117__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k117__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11500",
+    "request_key": "k115__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k115__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12000",
+    "request_key": "k120__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k120__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
     "protocol_version": "P12200",
-    "request_key": "p124__grid_code",
+    "request_key": "p122__battery_warm_up",
     "response_names": [
-      "GridCode"
+      "Battery1WarmUpFunctionEnableFlag",
+      "Battery2WarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "p122__battery_warm_up__battery_warm_up_function_enable_flag_1",
+      "p122__battery_warm_up__battery_warm_up_function_enable_flag_2"
     ]
   },
   {
-    "protocol_version": "P12200",
-    "request_key": "p124__27",
+    "protocol_version": "K11400",
+    "request_key": "k114__battery_warm_up",
     "response_names": [
-      "G100Enable",
-      "State"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__27__00",
-      "p124__27__03"
+      "k114__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P11300",
-    "request_key": "p124__grid_code",
+    "protocol_version": "K10803",
+    "request_key": "k108__battery_warm_up",
     "response_names": [
-      "GridCode"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "k108__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P11300",
-    "request_key": "p124__27",
+    "protocol_version": "P12400",
+    "request_key": "p124__battery_warm_up",
     "response_names": [
-      "G100Enable",
-      "State"
+      "Battery1WarmUpFunctionEnableFlag",
+      "Battery2WarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__27__00",
-      "p124__27__03"
+      "p124__battery_warm_up__battery_warm_up_function_enable_flag_1",
+      "p124__battery_warm_up__battery_warm_up_function_enable_flag_2"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p124__grid_code",
+    "protocol_version": "K11302",
+    "request_key": "k113__battery_warm_up",
     "response_names": [
-      "GridCode"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__grid_code__safety"
+      "k113__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p124__27",
+    "protocol_version": "K11704",
+    "request_key": "k117__battery_warm_up",
     "response_names": [
-      "G100Enable",
-      "State"
+      "BatteryWarmUpFunctionEnableFlag"
     ],
     "response_key": [
-      "p124__27__00",
-      "p124__27__03"
+      "k117__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11101",
+    "request_key": "k111__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k111__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10700",
+    "request_key": "q107__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q107__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11600",
+    "request_key": "q116__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q116__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10900",
+    "request_key": "q109__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q109__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11000",
+    "request_key": "q110__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q110__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11500",
+    "request_key": "q115__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q115__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11100",
+    "request_key": "q111__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q111__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11300",
+    "request_key": "q113__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q113__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11400",
+    "request_key": "q114__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q114__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11200",
+    "request_key": "q112__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q112__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12103",
+    "request_key": "k121__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k121__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11100",
+    "request_key": "k111__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k111__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10800",
+    "request_key": "q108__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q108__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "F10000",
+    "request_key": "f100__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "f100__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11103",
+    "request_key": "k111__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k111__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10400",
+    "request_key": "zaa104__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa104__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10600",
+    "request_key": "j106__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j106__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10500",
+    "request_key": "i105__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i105__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10500",
+    "request_key": "j105__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j105__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10600",
+    "request_key": "i106__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i106__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11305",
+    "request_key": "k113__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k113__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10300",
+    "request_key": "i103__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i103__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "N10000",
+    "request_key": "n100__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "n100__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11700",
+    "request_key": "q117__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "q117__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "N10100",
+    "request_key": "n101__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "n101__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12104",
+    "request_key": "k121__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k121__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11706",
+    "request_key": "k117__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k117__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10002",
+    "request_key": "zaa100__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa100__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10400",
+    "request_key": "i104__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i104__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10400",
+    "request_key": "j104__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j104__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10200",
+    "request_key": "i102__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i102__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10102",
+    "request_key": "zaa101__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa101__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10300",
+    "request_key": "j103__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j103__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10200",
+    "request_key": "zaa102__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa102__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10301",
+    "request_key": "zaa103__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa103__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "P12100",
+    "request_key": "p121__battery_warm_up",
+    "response_names": [
+      "Battery1WarmUpFunctionEnableFlag",
+      "Battery2WarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "p121__battery_warm_up__battery_warm_up_function_enable_flag_1",
+      "p121__battery_warm_up__battery_warm_up_function_enable_flag_2"
+    ]
+  },
+  {
+    "protocol_version": "I10001",
+    "request_key": "i100__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i100__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10100",
+    "request_key": "j101__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j101__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAC10500",
+    "request_key": "zac105__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zac105__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10200",
+    "request_key": "j102__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "j102__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10501",
+    "request_key": "zaa105__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa105__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAC10300",
+    "request_key": "zac103__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zac103__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10500",
+    "request_key": "zaa105__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zaa105__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11803",
+    "request_key": "k118__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "k118__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAC10400",
+    "request_key": "zac104__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zac104__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAC10600",
+    "request_key": "zac106__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zac106__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10100",
+    "request_key": "i101__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "i101__battery_warm_up__battery_warm_up_function_enable_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAD10100",
+    "request_key": "zad101__battery_warm_up",
+    "response_names": [
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    "response_key": [
+      "zad101__battery_warm_up__battery_warm_up_function_enable_flag"
     ]
   }
 ]

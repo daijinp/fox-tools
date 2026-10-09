@@ -1,0 +1,27 @@
+{
+    "domain": "https://www.foxesscloud.com",
+    "debug": false,
+    "sleep_time": 1,
+    "login": {
+        "user": "daijinpeng",
+        "password": "c8522ba359b4e819f6064d7df23e881f"
+    },
+    "getui": {
+        "read_names": [
+            [
+                "BatteryWarmUpFunctionEnableFlag"
+            ],
+            [
+                "Battery1WarmUpFunctionEnableFlag",
+                "Battery2WarmUpFunctionEnableFlag"
+            ]
+        ]
+    },
+    "get_setting": {
+        "input_file": "260928-812-all.csv",
+        "concurrency": 12,
+        "request_timeout": 300,
+        "skip_protocols": [],
+        "persistent_skip_protocols": []
+    }
+}

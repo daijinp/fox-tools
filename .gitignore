@@ -160,3 +160,9 @@ volume_test_amber/backup/*
 *arm64
 *bak
 *rice-code*
+/get_setting/device_data/checkpoints/
+/get_setting/device_data/archive/
+/get_setting/device_data/run.lock
+/get_setting/device_data/active_run.json
+/get_setting/device_data/run_status.json
+/get_setting/device_data/launch.json

@@ -13,6 +13,9 @@
         "input_file": "all_812_260730.csv",
         "concurrency": 100,
         "request_timeout": 300,
-        "skip_protocols": []
+        "skip_protocols": [
+        ],
+        "persistent_skip_protocols": [
+        ]
     }
 }

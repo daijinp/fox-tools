@@ -1,11 +1,2313 @@
 {
-  "generated_at": "2026-09-18T10:36:07",
+  "generated_at": "2026-10-06T03:03:00",
   "requested_names": [
     [
-      "GridCode",
-      "G100Enable",
-      "State"
+      "BatteryWarmUpFunctionEnableFlag"
+    ],
+    [
+      "Battery1WarmUpFunctionEnableFlag",
+      "Battery2WarmUpFunctionEnableFlag"
     ]
   ],
-  "skipped_protocols": []
+  "skipped_protocols": [
+    {
+      "protocol_version": "A10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 18,
+      "device_count": 18,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 13,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "6f1f912e-47a5-4c27-86ce-07a3e2f98fc4",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "A10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2892,
+      "device_count": 2892,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2887,
+      "failure_counts": {
+        "接口返回失败": 2,
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "f0061844-67fa-45e2-b84f-5fa2b937e87b",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "A10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 45824,
+      "device_count": 45824,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 45819,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "dbe3e76c-4db2-43c6-88e8-c959269efe9e",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "A10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 10897,
+      "device_count": 10897,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 10892,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "7b7624a8-4961-4539-a58a-f09b095aac2e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "A10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 92238,
+      "device_count": 92238,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 92233,
+      "failure_counts": {
+        "接口返回失败": 3,
+        "未找到目标 KEY": 2
+      },
+      "last_failure": {
+        "device_id": "5e462f0f-b0aa-42ce-8529-3cf4611d6782",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B00100",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3,
+      "device_count": 3,
+      "selected_candidate_count": 3,
+      "attempted_count": 3,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "接口返回失败": 1,
+        "未找到目标 KEY": 2
+      },
+      "last_failure": {
+        "device_id": "5cfeece1-7de6-429e-b7f1-83436fa59c87",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 668,
+      "device_count": 668,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 663,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "ebe5c504-c33a-4949-bd7f-b79c82126153",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3184,
+      "device_count": 3184,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3179,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "2ac69b99-6f8d-43a3-8c78-9f1a0c31abde",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1398,
+      "device_count": 1398,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1393,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "d9a37177-d7ec-4d33-bdd7-1c72e128b3bb",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3209,
+      "device_count": 3209,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3204,
+      "failure_counts": {
+        "未找到目标 KEY": 3,
+        "接口返回失败": 2
+      },
+      "last_failure": {
+        "device_id": "4e24610d-d31a-4a14-b089-dc75d97bc1df",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "B10602",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2474,
+      "device_count": 2474,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2469,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "d93baf19-4e66-4086-8142-4474a6467a90",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "B10701",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2130,
+      "device_count": 2130,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2125,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "22dc0a6d-7b40-47a2-b2df-dea1398193f1",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "B10702",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 23233,
+      "device_count": 23233,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 23228,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "63a79e17-e0d1-4b22-8429-17e59a14614a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3454,
+      "device_count": 3454,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3449,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "31cf78ad-8f0d-419f-ae87-c8f7768aa71f",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10801",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 7261,
+      "device_count": 7261,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 7256,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "e32edb2c-7593-456d-b93c-ef7d6fed5de8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B10901",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 10634,
+      "device_count": 10634,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 10629,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "186b9316-c978-451b-9406-7694bf1b5b15",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "B11000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3127,
+      "device_count": 3127,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3122,
+      "failure_counts": {
+        "接口返回失败": 3,
+        "未找到目标 KEY": 2
+      },
+      "last_failure": {
+        "device_id": "a465fd5d-78f2-4f38-885c-b45584a4cfd5",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "C10000",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1,
+      "device_count": 1,
+      "selected_candidate_count": 1,
+      "attempted_count": 1,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "8a8a706f-987a-4127-8e46-8d2bedf9a323",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 142,
+      "device_count": 142,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 137,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "e52e105c-3ed8-4d46-a7a3-e7907ff3ac30",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D10001",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 247,
+      "device_count": 247,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 242,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "cb97e1aa-1945-49d5-918c-ecc0e9e4db6e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D10800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3207,
+      "device_count": 3207,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3202,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "3d094be7-c4fe-486b-bff6-4a805a7e65a0",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D10900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 961,
+      "device_count": 961,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 956,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "03ce541e-51e8-416d-bfeb-741d84a62452",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D11200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 9471,
+      "device_count": 9471,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 9466,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "05314bf0-a6ea-44e5-95e2-89d03f48f760",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D11400",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3,
+      "device_count": 3,
+      "selected_candidate_count": 3,
+      "attempted_count": 3,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "06097596-d1d7-4130-be45-16256687f8b8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D11501",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1077,
+      "device_count": 1077,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1072,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "ab68a696-827c-4704-aa70-5ad86423c504",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D11700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 131,
+      "device_count": 131,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 126,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "64b3b8b2-b9dc-4271-811d-673fba322fba",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D11900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1010,
+      "device_count": 1010,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1005,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "32eae290-352a-48e3-90e1-477fcbe45d14",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2202,
+      "device_count": 2202,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2197,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "05ff5415-9551-4a8e-b137-7d5458cc7efa",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 582,
+      "device_count": 582,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 577,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "d9f850c5-bbb5-43af-9587-857b940995a4",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 941,
+      "device_count": 941,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 936,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "faa310cb-989d-48c5-939b-5405c48cab20",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12301",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 5107,
+      "device_count": 5107,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 5102,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "61c22a62-68a4-496b-a863-43d1ddd01842",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12403",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1948,
+      "device_count": 1948,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1943,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "3f4b21b4-2ffa-4f62-9383-bbaad149e7ae",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2533,
+      "device_count": 2533,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2528,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "ddba3486-e18f-4e01-9ea7-5bd2fd91f8d7",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 4040,
+      "device_count": 4040,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 4035,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "e898147e-bdd8-484b-b942-1eb2f5bda99d",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2598,
+      "device_count": 2598,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2593,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "35fa0f44-c274-4c14-bb7e-c2a162bdf59a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12801",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1523,
+      "device_count": 1523,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1518,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "ffa178a9-f5ae-45ab-ba51-b977fd3af02a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D12900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 36933,
+      "device_count": 36933,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 36928,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "264c8f4c-4f61-4145-a175-7a6c26f65295",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D13100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 303,
+      "device_count": 303,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 298,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "f1b10290-6767-4a51-8389-71759a3eeace",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "D13200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3834,
+      "device_count": 3834,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3829,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "eeb49439-6910-4aa2-ac37-1ab419070b3c",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "E10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 722,
+      "device_count": 722,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 717,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "150249d2-3818-4c2f-9d91-5faf15c1b23e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "G10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 397,
+      "device_count": 397,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 392,
+      "failure_counts": {
+        "接口返回失败": 2,
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "ca2b3a89-c3da-41d9-8e93-7e324e26dd60",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "H10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 9,
+      "device_count": 9,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 4,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "92c4d748-8c85-4778-9f4c-f3b560d485c9",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10300",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 5,
+      "device_count": 5,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "f59c2ec9-9797-4cdb-9e02-0840164fcaca",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 17,
+      "device_count": 17,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 12,
+      "failure_counts": {
+        "接口返回失败": 1,
+        "未找到目标 KEY": 4
+      },
+      "last_failure": {
+        "device_id": "d3fb8627-cb93-4b9d-882b-83a0c4cf8214",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 27,
+      "device_count": 27,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 22,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "6f76dbb6-e2aa-48eb-a7ed-c37dcbd6b9b1",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 989,
+      "device_count": 989,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 984,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "d1c83cb0-1155-4428-9eea-68dc9746820d",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1552,
+      "device_count": 1552,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1547,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "b7d4b3af-69a3-4bb7-bdf2-ddd956ca2cd1",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "H10800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1520,
+      "device_count": 1520,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1515,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "eead8365-184c-4447-95da-2d343e0b916c",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H10900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 257,
+      "device_count": 257,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 252,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "e8a4c54d-df07-40d3-9a8e-23af1163bba0",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 280,
+      "device_count": 280,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 275,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "b96d7356-061b-4d59-a37c-09acf44636c8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1061,
+      "device_count": 1061,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1056,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "9d3abb9b-dc68-474c-bb71-1f06aa057536",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 529,
+      "device_count": 529,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 524,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "78e4ee94-1354-4b4f-a9e1-8d6de2e2398e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11302",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1884,
+      "device_count": 1884,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1879,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "bb1a707c-e435-4ff2-97ff-94479601f6bd",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 312,
+      "device_count": 312,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 307,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "09e59d6c-dfdc-4f38-92df-cf372a31df6f",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2666,
+      "device_count": 2666,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2661,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9e476b7c-ccce-4c9b-86b8-133b13dd854d",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2918,
+      "device_count": 2918,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2913,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "93ce0bde-d72a-4059-bada-163b0c2e9d87",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2088,
+      "device_count": 2088,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2083,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "b2ef176c-26e6-459c-ba27-410679adeeae",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "H11800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 27879,
+      "device_count": 27879,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 27874,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "af9f52fa-61f4-440f-933a-27668d53ed1b",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10000",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3,
+      "device_count": 3,
+      "selected_candidate_count": 3,
+      "attempted_count": 3,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "d476edb4-a6db-4008-aa34-b3d09546f33e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10101",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 168,
+      "device_count": 168,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 163,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "62c68f8f-68ff-47af-a25f-80a83f4243e7",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10102",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 473,
+      "device_count": 473,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 468,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "92253967-8c40-4913-bfd7-e69f6e9c0441",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 973,
+      "device_count": 973,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 968,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9ad7f679-9053-4a1e-8699-cbc982d0a00e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10201",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 28,
+      "device_count": 28,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 23,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "2362051b-49d4-40f7-9bf5-f5b9b2c93944",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 103,
+      "device_count": 103,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 98,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "eba5e06e-b441-4498-b23c-fa4bbd5374f8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 151,
+      "device_count": 151,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 146,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "0e272017-4fda-498a-b0aa-85c041b55c4e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1518,
+      "device_count": 1518,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1513,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "35838d9a-8812-456a-b615-e74037540734",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10501",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 23,
+      "device_count": 23,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 18,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "2b52e894-141d-4f1a-ae95-27d1a7465d1a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 124,
+      "device_count": 124,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 119,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "5851a290-8303-41de-bb88-62c415bacb9d",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10601",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 646,
+      "device_count": 646,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 641,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "23a31abd-112a-4c89-bac3-b37ada833e9f",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10602",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 5402,
+      "device_count": 5402,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 5397,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "7db33120-1dba-467e-ac2b-c9f62e47805d",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10700",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3,
+      "device_count": 3,
+      "selected_candidate_count": 3,
+      "attempted_count": 3,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "2c0bc8e1-a8cd-4d9e-b35a-038bbcdff0ff",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "K10702",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 579,
+      "device_count": 579,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 574,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "618ef932-7478-4ce7-a87c-b5aa0a012f45",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "M10000",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1,
+      "device_count": 1,
+      "selected_candidate_count": 1,
+      "attempted_count": 1,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "1a9e60b3-3e3b-4aaf-bb13-5ca74bfb15b8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "M10100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 237,
+      "device_count": 237,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 232,
+      "failure_counts": {
+        "接口返回失败": 1,
+        "未找到目标 KEY": 4
+      },
+      "last_failure": {
+        "device_id": "ccefb606-935d-4702-850a-ef25c8327867",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "M10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 88347,
+      "device_count": 88347,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 88342,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "99083096-26cf-41b8-90fd-50e62fe5d730",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "M10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 58817,
+      "device_count": 58817,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 58812,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "33e33858-99cb-4a9d-bde6-15bc89a44b1a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10000",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1,
+      "device_count": 1,
+      "selected_candidate_count": 1,
+      "attempted_count": 1,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "947fc900-14f5-4a03-8c71-ee8644bd7ebf",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10200",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1,
+      "device_count": 1,
+      "selected_candidate_count": 1,
+      "attempted_count": 1,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "19606f23-8caa-477d-acc5-474116128450",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 18,
+      "device_count": 18,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 13,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "cbc902ec-ff6a-475c-9717-2899d5cf71fc",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 14,
+      "device_count": 14,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 9,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9840ee60-35f6-4a4f-a230-040fcff40ef5",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 107,
+      "device_count": 107,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 102,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "15f54e32-c83c-4a8f-95be-0b2d41b41bae",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 94,
+      "device_count": 94,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 89,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "41554d69-34e4-4008-97ae-14bfc9d054fb",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 31,
+      "device_count": 31,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 26,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "31bd1fb5-d5c1-4ccb-9a24-fb06ef205c08",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P10900",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2,
+      "device_count": 2,
+      "selected_candidate_count": 2,
+      "attempted_count": 2,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 2
+      },
+      "last_failure": {
+        "device_id": "f5cf35e5-a0a1-475e-af7f-2350fc3107cb",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 110,
+      "device_count": 110,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 105,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9cb3e9da-4995-40ae-8017-84ed4520c796",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 4684,
+      "device_count": 4684,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 4679,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "5f6e38a3-4bca-4c28-8cc8-735962315d49",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11400",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 5,
+      "device_count": 5,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "f0655e9c-9b44-4f03-aa1a-856beffe0cc1",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 431,
+      "device_count": 431,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 426,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "ff3d3f2c-466f-426c-83d0-44b082181f4b",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1039,
+      "device_count": 1039,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1034,
+      "failure_counts": {
+        "接口返回失败": 1,
+        "未找到目标 KEY": 4
+      },
+      "last_failure": {
+        "device_id": "c4ff3a71-5344-44f9-8037-109f702e839a",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "P11900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 8614,
+      "device_count": 8614,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 8609,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9f852975-15bd-4585-8e37-27e99021302c",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10100",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1,
+      "device_count": 1,
+      "selected_candidate_count": 1,
+      "attempted_count": 1,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "d4ecf377-fd50-4892-b31e-aef09d3fcc46",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 932,
+      "device_count": 932,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 927,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "f6f71000-8052-4d89-a627-8a5b38da9b1e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 696,
+      "device_count": 696,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 691,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "ecc9ee52-0d29-45ba-9abe-a35d96003be0",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 221,
+      "device_count": 221,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 216,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "d3606e81-dfd2-4d67-863e-fc9d5abcaeda",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1829,
+      "device_count": 1829,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1824,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "a12f7ae0-f990-4935-b104-9a55c76637ef",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "Q10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3647,
+      "device_count": 3647,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3642,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "aaa1d7a4-28b8-4bea-80e4-7cbc876e27ae",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 108,
+      "device_count": 108,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 103,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "667ef0bb-b044-46a7-b304-aa5964af599e",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 130,
+      "device_count": 130,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 125,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "19c4fc77-1615-4a26-866e-ab51e05c9be8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 29,
+      "device_count": 29,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 24,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "71a30a2c-895a-4c4c-9325-ecc523ca247c",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 217,
+      "device_count": 217,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 212,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9441c5dd-c6b4-4d09-b2ab-8aef47882ed4",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 218,
+      "device_count": 218,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 213,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "7e6fb59e-5246-40d5-9d04-9b7abfcf1c15",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 373,
+      "device_count": 373,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 368,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "9e5f4ebc-acc6-43ab-800a-dce13e41e88f",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 208,
+      "device_count": 208,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 203,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "5a7be512-c522-41ae-b8a3-1ffb6f5d3a71",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10700",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 196,
+      "device_count": 196,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 191,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "917e2d3b-e060-4ca6-ae8d-fd332abf28f4",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R10800",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 543,
+      "device_count": 543,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 538,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "cb98f9f1-34b4-4b47-9b64-5ffd7a26cd51",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "R10900",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 3764,
+      "device_count": 3764,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 3759,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "931ad2ed-d57c-4f15-8941-7a01a1a42d61",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "R11000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 456,
+      "device_count": 456,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 451,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "b4a0e4ac-f537-47d5-a255-6a8777c15c56",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "V10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 859,
+      "device_count": 859,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 854,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "bebb17f5-9749-4352-bfcb-59cf0ebfb5a8",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "V10100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 711,
+      "device_count": 711,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 706,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "8fcb1819-93de-4a1a-912f-f4896cc1542c",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "V10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2846,
+      "device_count": 2846,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 2841,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "4c142349-9f03-4349-9bec-4a78724b2efc",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "V10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 512,
+      "device_count": 512,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 507,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "bf032e40-1d30-4940-b7e0-a10511a465a6",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "X10000",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 5915,
+      "device_count": 5915,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 5910,
+      "failure_counts": {
+        "接口返回失败": 4,
+        "未找到目标 KEY": 1
+      },
+      "last_failure": {
+        "device_id": "6d7ee29b-7182-4808-bdb0-e52effc4dad5",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "X10100",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 384,
+      "device_count": 384,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 379,
+      "failure_counts": {
+        "未找到目标 KEY": 3,
+        "接口返回失败": 2
+      },
+      "last_failure": {
+        "device_id": "b5e9f364-172b-4b7a-abaa-c8d697a5ac01",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "X10400",
+      "skip_source": "skip_protocols",
+      "reason": "所有候选设备均未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 2,
+      "device_count": 2,
+      "selected_candidate_count": 2,
+      "attempted_count": 2,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 0,
+      "failure_counts": {
+        "未找到目标 KEY": 2
+      },
+      "last_failure": {
+        "device_id": "8c4fa4e0-5071-4bab-ab92-9879c0a88473",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "X10500",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 1532,
+      "device_count": 1532,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 1527,
+      "failure_counts": {
+        "未找到目标 KEY": 3,
+        "接口返回失败": 2
+      },
+      "last_failure": {
+        "device_id": "b8b37de9-3f1f-43ea-95a6-dfed8b1fb712",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "X10600",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 6963,
+      "device_count": 6963,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 6958,
+      "failure_counts": {
+        "接口返回失败": 2,
+        "未找到目标 KEY": 3
+      },
+      "last_failure": {
+        "device_id": "40e186ca-2815-4128-9173-787bc442aab0",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "ZAD10200",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 39,
+      "device_count": 39,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 34,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "3f32f66f-bcb6-469d-bd7a-156d0ae6f107",
+        "reason": "未找到目标 KEY"
+      }
+    },
+    {
+      "protocol_version": "ZAD10300",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 39,
+      "device_count": 39,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 34,
+      "failure_counts": {
+        "未找到目标 KEY": 4,
+        "接口返回失败": 1
+      },
+      "last_failure": {
+        "device_id": "2c86bd08-6215-44ea-a3ca-c8fef91259fd",
+        "reason": "接口返回失败",
+        "detail": "Device offline, Please connect and retry"
+      }
+    },
+    {
+      "protocol_version": "ZAD10400",
+      "skip_source": "skip_protocols",
+      "reason": "达到 getui 尝试上限（5 次），仍未生成目标 KEY 映射",
+      "stage": "getui",
+      "candidate_count": 263,
+      "device_count": 263,
+      "selected_candidate_count": 5,
+      "attempted_count": 5,
+      "max_attempts_per_protocol": 5,
+      "remaining_candidate_count": 258,
+      "failure_counts": {
+        "未找到目标 KEY": 5
+      },
+      "last_failure": {
+        "device_id": "12634ab0-e776-4995-ac00-d23b397bf7f1",
+        "reason": "未找到目标 KEY"
+      }
+    }
+  ]
 }

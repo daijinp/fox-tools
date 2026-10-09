@@ -42,7 +42,7 @@ class GetAuth:
 urllib3.disable_warnings()
 
 
-def fr_requests(method, path, token='', param=None, max_retries=3):
+def fr_requests(method, path, token='', param=None, max_retries=3, timeout=30):
     url = domain + path
     headers = GetAuth().get_signature(token=token, path=path)
     time.sleep(sleep_time)
@@ -50,9 +50,11 @@ def fr_requests(method, path, token='', param=None, max_retries=3):
     for attempt in range(1, max_retries + 1):
         try:
             if method == 'get':
-                response = requests.get(url=url, params=param, headers=headers, verify=False)
+                response = requests.get(url=url, params=param, headers=headers,
+                                        verify=False, timeout=timeout)
             elif method == 'post':
-                response = requests.post(url=url, json=param, headers=headers, verify=False)
+                response = requests.post(url=url, json=param, headers=headers,
+                                         verify=False, timeout=timeout)
             else:
                 raise Exception('request method error')
 

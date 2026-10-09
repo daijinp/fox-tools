@@ -2,12 +2,16 @@ import os
 import csv
 import json
 import asyncio
+import hashlib
+import time
+import uuid
+from itertools import islice
 import aiohttp
-import aiofiles
 import urllib3
 from datetime import datetime
 from jsonpath import jsonpath
 from fr_requests import fr_requests, GetAuth
+from checkpoint import Checkpoint, ResultWriter, RunLock, write_json_atomic
 
 urllib3.disable_warnings()
 
@@ -99,26 +103,31 @@ def get_ui_keys(token):
     if (isinstance(max_attempts, bool) or not isinstance(max_attempts, int)
             or max_attempts <= 0):
         raise ValueError('getui.max_attempts_per_protocol 必须为大于 0 的整数')
+    ui_timeout = getui_cfg.get('request_timeout', 30)
+    if (isinstance(ui_timeout, bool) or not isinstance(ui_timeout, (int, float))
+            or ui_timeout <= 0):
+        raise ValueError('getui.request_timeout 必须大于 0')
 
     input_csv = _get_input_csv_path()
-    devices = _read_device_csv(input_csv)
-    if not devices:
-        raise Exception('输入文件中没有可处理的设备')
-    missing_protocol_devices = [device[0] for device in devices if not device[2]]
-    if missing_protocol_devices:
-        raise Exception(
-            '以下设备缺少第三列协议版本: '
-            f'{missing_protocol_devices[:10]}'
-        )
-
     devices_by_protocol = {}
-    seen_devices = set()
-    for device_id, _, protocol, _ in devices:
-        dedup_key = (protocol, device_id)
-        if dedup_key in seen_devices:
+    protocol_counts = {}
+    extra_candidates = set()
+    missing_protocol_devices = []
+    for device_id, _, protocol, _ in _iter_device_csv(input_csv):
+        if not protocol:
+            if len(missing_protocol_devices) < 10:
+                missing_protocol_devices.append(device_id)
             continue
-        seen_devices.add(dedup_key)
-        devices_by_protocol.setdefault(protocol, []).append(device_id)
+        protocol_counts[protocol] = protocol_counts.get(protocol, 0) + 1
+        candidates = devices_by_protocol.setdefault(protocol, [])
+        if device_id in candidates:
+            continue
+        if len(candidates) < max_attempts:
+            candidates.append(device_id)
+        else:
+            extra_candidates.add(protocol)
+    if missing_protocol_devices:
+        raise ValueError(f'以下设备缺少第三列协议版本: {missing_protocol_devices}')
 
     read_names = getui_cfg['read_names']
     result = []
@@ -130,7 +139,7 @@ def get_ui_keys(token):
         protocol_mappings = None
         failure_counts = {}
         last_failure = None
-        print(f'getui 协议 {protocol}: 共 {len(candidate_ids)} 个候选设备，'
+        print(f'getui 协议 {protocol}: 共 {protocol_counts[protocol]} 条设备记录，'
               f'最多尝试 {attempt_limit} 个')
 
         def record_failure(category, device_id, detail=None):
@@ -147,7 +156,8 @@ def get_ui_keys(token):
             try:
                 response = fr_requests(
                     'get', path='/generic/v0/device/setting/ui', token=token,
-                    param={'id': device_id})
+                    param={'id': device_id}, max_retries=1,
+                    timeout=ui_timeout)
                 data = response.json()
                 if data.get('errno') != 0:
                     reason = data.get('msg', data)
@@ -188,7 +198,8 @@ def get_ui_keys(token):
                       f'个设备 {device_id} 异常: {exc}')
 
         if protocol_mappings is None:
-            remaining_count = len(candidate_ids) - attempt_limit
+            remaining_count = (protocol_counts[protocol] - attempt_limit
+                               if protocol in extra_candidates else 0)
             reason = (
                 f'达到 getui 尝试上限（{max_attempts} 次），仍未生成目标 KEY 映射'
                 if remaining_count else '所有候选设备均未生成目标 KEY 映射'
@@ -197,7 +208,9 @@ def get_ui_keys(token):
             failed_protocol_details[protocol] = {
                 'stage': 'getui',
                 'reason': reason,
-                'candidate_count': len(candidate_ids),
+                'candidate_count': protocol_counts[protocol],
+                'device_count': protocol_counts[protocol],
+                'selected_candidate_count': len(candidate_ids),
                 'attempted_count': attempt_limit,
                 'max_attempts_per_protocol': max_attempts,
                 'remaining_candidate_count': remaining_count,
@@ -205,7 +218,7 @@ def get_ui_keys(token):
                 'last_failure': last_failure,
             }
             print(f'getui 跳过协议 {protocol}: {reason}，'
-                  f'已尝试 {attempt_limit}/{len(candidate_ids)} 个设备，'
+                  f'已尝试 {attempt_limit} 个设备，'
                   '将加入 skip_protocols，继续处理其他协议')
 
     mapping_path = os.path.join(_config_dir, 'protocol_key_mapping.json')
@@ -224,23 +237,12 @@ def get_ui_keys(token):
 # ==================== get_setting (async) ====================
 
 
-class _BatchState:
-    """一轮批处理的共享状态"""
-    def __init__(self):
-        self.log_lock = asyncio.Lock()
-        self.record_lock = asyncio.Lock()
-        self.fail_records = []
-        self.success_records = []
-        self.success_count = 0
-
-
-def _read_device_csv(file_path, report_skipped=True):
+def _iter_device_csv(file_path, report_skipped=True):
     """读取设备 CSV，并跳过自动或永久配置的协议版本。"""
     automatic_skips = set(_setting_cfg.get('skip_protocols', []))
     persistent_skips = set(
         _setting_cfg.get('persistent_skip_protocols', []))
     skip_protocols = automatic_skips | persistent_skips
-    devices = []
     skipped_count = 0
     with open(file_path, 'r', encoding='utf-8-sig') as f:
         for row in csv.reader(f):
@@ -252,44 +254,17 @@ def _read_device_csv(file_path, report_skipped=True):
             if protocol in skip_protocols:
                 skipped_count += 1
                 continue
-            devices.append((
+            yield (
                 row[0].strip(),
                 row[1].strip() if len(row) > 1 else '',
                 protocol,
                 row[3].strip() if len(row) > 3 else '',
-            ))
+            )
     if skipped_count and report_skipped:
         print(f'已跳过 {skipped_count} 条记录 '
               f'(自动跳过: {sorted(automatic_skips)}, '
               f'永久跳过: {sorted(persistent_skips)})')
-    return devices
 
-
-def _skip_unmapped_protocols(devices, mapping_by_protocol):
-    """跳过缺少 KEY 映射的协议并记录原因，返回其余可处理设备。"""
-    missing_counts = {}
-    for device in devices:
-        protocol = device[2]
-        if not mapping_by_protocol.get(protocol):
-            missing_counts[protocol] = missing_counts.get(protocol, 0) + 1
-    if not missing_counts:
-        return devices
-
-    automatic_skips = set(_setting_cfg.get('skip_protocols', []))
-    _set_skip_protocols(automatic_skips | set(missing_counts))
-    reason_path = _save_skip_protocol_reasons({
-        protocol: {
-            'stage': 'get_setting',
-            'reason': 'protocol_key_mapping.json 中没有对应协议的 KEY 映射',
-            'device_count': count,
-        }
-        for protocol, count in missing_counts.items()
-    }, merge=True)
-    for protocol, count in sorted(missing_counts.items()):
-        print(f'爬取跳过协议 {protocol!r}: 缺少 KEY 映射，'
-              f'跳过 {count} 个设备，继续处理其他协议')
-    print(f'跳过协议原因已保存到: {reason_path}')
-    return [device for device in devices if device[2] not in missing_counts]
 
 
 def _get_input_csv_path():
@@ -304,15 +279,16 @@ def _get_input_csv_path():
     return input_csv
 
 
+
 def _set_skip_protocols(protocols):
     """更新内存及 config.json 中的自动跳过协议列表。"""
     normalized = sorted({protocol for protocol in protocols if protocol})
     _setting_cfg['skip_protocols'] = normalized
-    temp_path = f'{_config_path}.tmp'
-    with open(temp_path, 'w', encoding='utf-8') as f:
-        json.dump(config, f, ensure_ascii=False, indent=4)
-        f.write('\n')
-    os.replace(temp_path, _config_path)
+    with open(_config_path, encoding='utf-8') as source:
+        latest = json.load(source)
+    latest.setdefault('get_setting', {})['skip_protocols'] = normalized
+    write_json_atomic(_config_path, latest)
+
 
 
 def _save_skip_protocol_reasons(failed_protocol_details, merge=False):
@@ -357,6 +333,7 @@ def _save_skip_protocol_reasons(failed_protocol_details, merge=False):
     return reason_path
 
 
+
 def _clear_skip_protocols():
     """每次启动时仅清空自动跳过协议，保留永久跳过协议。"""
     previous = list(_setting_cfg.get('skip_protocols', []))
@@ -367,121 +344,6 @@ def _clear_skip_protocols():
         _setting_cfg['skip_protocols'] = []
         print('启动清理: skip_protocols 原本为空')
 
-
-async def _write_logs(state, message, log_files, output_dir):
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-    line = f'[{timestamp}] {message}\n'
-    async with state.log_lock:
-        for name in log_files:
-            async with aiofiles.open(os.path.join(output_dir, name), 'a', encoding='utf-8') as f:
-                await f.write(line)
-
-
-def _save_records_csv(records, csv_path, info_field, value_columns=None,
-                      append=False):
-    if not records and append:
-        return
-    exists = os.path.exists(csv_path) and os.path.getsize(csv_path) > 0
-    fieldnames = [
-        'device_id',
-        'device_sn',
-        'protocol_version',
-        'master_version',
-    ]
-    if value_columns:
-        fieldnames.extend(value_columns)
-    fieldnames.append(info_field)
-    with open(csv_path, 'a' if append else 'w', encoding='utf-8-sig', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
-        if not append or not exists:
-            writer.writeheader()
-        for r in records:
-            row = dict(r)
-            if value_columns:
-                for col in value_columns:
-                    row.setdefault(col, 'N/A')
-            writer.writerow(row)
-    print(f'{"追加" if append else "保存"}记录到: {csv_path} ({len(records)} 条)')
-
-
-async def _process_device(session, semaphore, device_data, token,
-                          mapping_by_protocol, state, output_dir):
-    device_id, device_sn, pv, mv = device_data
-    mappings = mapping_by_protocol[pv]
-
-    async def fail(reason):
-        await _write_logs(state, f'{device_id} 失败: {reason}',
-                          ['fail.log', 'all.log'], output_dir)
-        async with state.record_lock:
-            state.fail_records.append({
-                'device_id': device_id, 'device_sn': device_sn,
-                'protocol_version': pv, 'master_version': mv,
-                'err_info': reason
-            })
-
-    async with semaphore:
-        try:
-            path = '/generic/v0/device/setting/get'
-            url = config['domain'] + path
-            timeout = aiohttp.ClientTimeout(
-                total=_setting_cfg.get('request_timeout', 300))
-            name_values = {}
-            success_info = []
-
-            for mapping in mappings:
-                request_key = mapping['request_key']
-                headers = GetAuth().get_signature(token=token, path=path)
-                param = {'id': device_id, 'key': request_key}
-                try:
-                    async with session.get(
-                            url, params=param, headers=headers,
-                            ssl=False, timeout=timeout) as resp:
-                        if resp.status != 200:
-                            return await fail(
-                                f'key={request_key} HTTP {resp.status}')
-
-                        try:
-                            data = await resp.json()
-                        except Exception as e:
-                            return await fail(
-                                f'key={request_key} 响应解析失败: {e}')
-                except asyncio.TimeoutError:
-                    return await fail(f'key={request_key} 请求超时')
-                except Exception as e:
-                    return await fail(f'key={request_key} 请求异常: {e}')
-
-                if data.get('errno') != 0:
-                    return await fail(
-                        f'key={request_key} errno={data.get("errno")}: '
-                        f'{data.get("msg", "")}')
-
-                values = data.get('result', {}).get('values', {})
-                names = mapping['response_names']
-                keys = mapping['response_key']
-                key_values = {}
-                for name, key in zip(names, keys):
-                    val = values.get(key, 'N/A')
-                    name_values[name] = val
-                    key_values[key] = val
-                success_info.append({
-                    'request_key': request_key,
-                    'values': key_values,
-                })
-
-            success_info_json = json.dumps(success_info, ensure_ascii=False)
-            await _write_logs(state, f'{device_id} 成功: {success_info_json}',
-                              ['success.log', 'all.log'], output_dir)
-            async with state.record_lock:
-                state.success_records.append({
-                    'device_id': device_id, 'device_sn': device_sn,
-                    'protocol_version': pv, 'master_version': mv,
-                    **name_values,
-                    'success_info': success_info_json,
-                })
-                state.success_count += 1
-
-        except Exception as e:
-            await fail(f'异常: {e}')
 
 
 def _get_value_columns():
@@ -494,40 +356,6 @@ def _get_value_columns():
     return columns
 
 
-async def _run_batch(input_csv, token, mapping_by_protocol, output_dir,
-                     append_success=False):
-    state = _BatchState()
-    devices = _skip_unmapped_protocols(
-        _read_device_csv(input_csv), mapping_by_protocol)
-    if not devices:
-        print('没有设备需要处理')
-        return 0, 0
-
-    concurrency = _setting_cfg.get('concurrency', 2000)
-    print(f'开始处理 {len(devices)} 个设备, 并发: {concurrency}')
-
-    semaphore = asyncio.Semaphore(concurrency)
-    connector = aiohttp.TCPConnector(limit=concurrency, limit_per_host=concurrency)
-
-    async with aiohttp.ClientSession(connector=connector) as session:
-        tasks = [
-            _process_device(session, semaphore, d, token,
-                            mapping_by_protocol, state, output_dir)
-            for d in devices
-        ]
-        await asyncio.gather(*tasks, return_exceptions=True)
-
-    value_columns = _get_value_columns()
-    _save_records_csv(state.fail_records,
-                      os.path.join(output_dir, 'fail.csv'), 'err_info')
-    _save_records_csv(state.success_records,
-                      os.path.join(output_dir, 'success.csv'), 'success_info',
-                      value_columns=value_columns,
-                      append=append_success)
-
-    print(f'本轮完成! 成功: {state.success_count}, 失败: {len(state.fail_records)}')
-    return state.success_count, len(state.fail_records)
-
 
 def _load_protocol_key_mapping():
     """从 config/protocol_key_mapping.json 加载协议-key 映射"""
@@ -539,44 +367,300 @@ def _load_protocol_key_mapping():
         return json.load(f)
 
 
-async def get_setting(token):
-    """异步批量读取设备配置，自动重试失败设备"""
+
+def _options():
+    values = {
+        'concurrency': _setting_cfg.get('concurrency', 12),
+        'write_batch_size': _setting_cfg.get('write_batch_size', 500),
+        'flush_interval': _setting_cfg.get('flush_interval', 5),
+        'request_timeout': _setting_cfg.get('request_timeout', 300),
+        'resume': _setting_cfg.get('resume', True),
+    }
+    for key in ('concurrency', 'write_batch_size'):
+        value = values[key]
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f'get_setting.{key} 必须为大于 0 的整数')
+    for key in ('flush_interval', 'request_timeout'):
+        value = values[key]
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+            raise ValueError(f'get_setting.{key} 必须大于 0')
+    if not isinstance(values['resume'], bool):
+        raise ValueError('get_setting.resume 必须为 true 或 false')
+    return values
+
+
+def _publish_status(phase, **details):
+    write_json_atomic(os.path.join(_data_dir, 'run_status.json'), {
+        'pid': os.getpid(), 'phase': phase,
+        'updated_at': datetime.now().isoformat(timespec='seconds'), **details,
+    })
+
+
+def _prepare_checkpoint():
+    options = _options()
     input_csv = _get_input_csv_path()
+    digest = hashlib.sha256()
+    with open(input_csv, 'rb') as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b''):
+            digest.update(chunk)
+    signature = {
+        'version': 1, 'input_sha256': digest.hexdigest(),
+        'input_file': os.path.abspath(input_csv), 'domain': config['domain'],
+        'user': config.get('login', {}).get('user'),
+        'columns': _get_value_columns(),
+        'persistent_skip_protocols': sorted(_setting_cfg.get('persistent_skip_protocols', [])),
+    }
+    run_id = hashlib.sha256(json.dumps(
+        signature, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()
+    if not options['resume']:
+        run_id += '-' + uuid.uuid4().hex[:8]
+    checkpoint = Checkpoint(os.path.join(_data_dir, 'checkpoints', run_id + '.sqlite3'))
+    if checkpoint.get_meta('signature') is None:
+        checkpoint.set_meta(signature=signature, round_num=1, complete=False)
+    print(f'任务: {run_id[:12]}, 已保存进度: {checkpoint.counts()}', flush=True)
+    return checkpoint, run_id
 
-    os.makedirs(_data_dir, exist_ok=True)
-    protocol_key_mapping = _load_protocol_key_mapping()
+
+def _record_missing_protocols(counts):
+    if not counts:
+        return
+    _set_skip_protocols(set(_setting_cfg.get('skip_protocols', [])) | set(counts))
+    _save_skip_protocol_reasons({protocol: {
+        'stage': 'get_setting',
+        'reason': 'protocol_key_mapping.json 中没有对应协议的 KEY 映射',
+        'device_count': count,
+    } for protocol, count in counts.items()}, merge=True)
+
+
+async def _process_device(session, device_data, token, mapping_by_protocol):
+    device_id, device_sn, pv, mv = device_data
+    base = {'device_id': device_id, 'device_sn': device_sn,
+            'protocol_version': pv, 'master_version': mv}
+
+    def fail(reason):
+        return {'status': 'fail', 'record': {**base, 'err_info': reason}}
+
+    try:
+        path = '/generic/v0/device/setting/get'
+        url = config['domain'] + path
+        timeout = aiohttp.ClientTimeout(total=_setting_cfg.get('request_timeout', 300))
+        name_values, success_info = {}, []
+        for mapping in mapping_by_protocol[pv]:
+            request_key = mapping['request_key']
+            headers = GetAuth().get_signature(token=token, path=path)
+            try:
+                async with session.get(url, params={'id': device_id, 'key': request_key},
+                                       headers=headers, ssl=False, timeout=timeout) as resp:
+                    if resp.status != 200:
+                        return fail(f'key={request_key} HTTP {resp.status}')
+                    try:
+                        data = await resp.json()
+                    except Exception as exc:
+                        return fail(f'key={request_key} 响应解析失败: {exc}')
+            except asyncio.TimeoutError:
+                return fail(f'key={request_key} 请求超时')
+            except Exception as exc:
+                return fail(f'key={request_key} 请求异常: {exc}')
+            if data.get('errno') != 0:
+                return fail(f'key={request_key} errno={data.get("errno")}: {data.get("msg", "")}')
+            values = data.get('result', {}).get('values', {})
+            key_values = {}
+            for name, key in zip(mapping['response_names'], mapping['response_key']):
+                value = values.get(key, 'N/A')
+                name_values[name] = value
+                key_values[key] = value
+            success_info.append({'request_key': request_key, 'values': key_values})
+        return {'status': 'success', 'record': {
+            **base, **name_values,
+            'success_info': json.dumps(success_info, ensure_ascii=False),
+        }}
+    except Exception as exc:
+        return fail(f'异常: {exc}')
+
+
+async def _run_batch(input_csv, token, mapping_by_protocol, checkpoint, writer,
+                     round_num, options):
+    concurrency = options['concurrency']
+    batch_size = options['write_batch_size']
+    devices_queue = asyncio.Queue(maxsize=concurrency * 2)
+    results_queue = asyncio.Queue(maxsize=batch_size * 2)
+    inflight = set()
+    stats = {'scheduled': 0, 'already_processed': 0, 'unmapped': 0}
+
+    async def produce():
+        iterator = _iter_device_csv(input_csv)
+        missing_counts = {}
+        try:
+            while True:
+                chunk = await asyncio.to_thread(lambda: list(islice(iterator, 500)))
+                if not chunk:
+                    break
+                completed = await asyncio.to_thread(
+                    checkpoint.completed_keys, chunk, round_num)
+                new_missing = False
+                for device in chunk:
+                    protocol = device[2]
+                    if not mapping_by_protocol.get(protocol):
+                        new_missing |= protocol not in missing_counts
+                        missing_counts[protocol] = missing_counts.get(protocol, 0) + 1
+                        stats['unmapped'] += 1
+                        continue
+                    key = (device[0], protocol)
+                    if key in completed or key in inflight:
+                        stats['already_processed'] += 1
+                        continue
+                    inflight.add(key)
+                    completed.add(key)
+                    await devices_queue.put(device)
+                    stats['scheduled'] += 1
+                if new_missing:
+                    _record_missing_protocols(missing_counts)
+            _record_missing_protocols(missing_counts)
+        finally:
+            iterator.close()
+        for _ in range(concurrency):
+            await devices_queue.put(None)
+
+    async def consume(session):
+        while True:
+            device = await devices_queue.get()
+            if device is None:
+                await results_queue.put(None)
+                return
+            result = await _process_device(session, device, token, mapping_by_protocol)
+            await results_queue.put(result)
+
+    async def persist():
+        buffer = []
+        finished = 0
+        deadline = time.monotonic() + options['flush_interval']
+
+        async def flush():
+            nonlocal buffer, deadline
+            if buffer:
+                batch, buffer = buffer, []
+                totals = await asyncio.to_thread(writer.save_batch, batch, round_num)
+                for result in batch:
+                    record = result['record']
+                    inflight.discard((record['device_id'], record['protocol_version']))
+                print(f'已保存: 成功 {totals["success"]}, 失败 {totals["fail"]}, '
+                      f'本轮已调度 {stats["scheduled"]}', flush=True)
+                _publish_status('querying', round_num=round_num, **totals, **stats)
+            deadline = time.monotonic() + options['flush_interval']
+
+        while finished < concurrency:
+            try:
+                result = await asyncio.wait_for(
+                    results_queue.get(), timeout=max(0.01, deadline - time.monotonic()))
+            except asyncio.TimeoutError:
+                await flush()
+                continue
+            if result is None:
+                finished += 1
+            else:
+                buffer.append(result)
+            if len(buffer) >= batch_size or time.monotonic() >= deadline:
+                await flush()
+        await flush()
+
+    connector = aiohttp.TCPConnector(limit=concurrency, limit_per_host=concurrency)
+    print(f'第 {round_num} 轮: 并发 {concurrency}, 每 {batch_size} 条或 '
+          f'{options["flush_interval"]} 秒保存一次', flush=True)
+    writer.open()
+    tasks = []
+    try:
+        async with aiohttp.ClientSession(connector=connector) as session:
+            tasks = [asyncio.create_task(produce()), asyncio.create_task(persist())]
+            tasks.extend(asyncio.create_task(consume(session)) for _ in range(concurrency))
+            try:
+                await asyncio.gather(*tasks)
+            finally:
+                for task in tasks:
+                    if not task.done():
+                        task.cancel()
+                await asyncio.gather(*tasks, return_exceptions=True)
+    finally:
+        await asyncio.to_thread(writer.close)
+    await asyncio.to_thread(writer.export, ('fail',))
+    counts = checkpoint.counts(round_num)
+    print(f'本轮完成: 成功 {counts["success"]}, 失败 {counts["fail"]}, {stats}', flush=True)
+    return counts['success'], counts['fail']
+
+
+async def get_setting(token, checkpoint, run_id):
+    options = _options()
     mapping_by_protocol = {}
-    for mapping in protocol_key_mapping:
-        mapping_by_protocol.setdefault(
-            mapping['protocol_version'], []).append(mapping)
-
-    round_num = 1
-    current_input = input_csv
-    fail_csv = os.path.join(_data_dir, 'fail.csv')
-
+    for mapping in _load_protocol_key_mapping():
+        mapping_by_protocol.setdefault(mapping['protocol_version'], []).append(mapping)
+    writer = ResultWriter(checkpoint, _data_dir, _get_value_columns(), run_id)
+    await asyncio.to_thread(writer.prepare)
+    if checkpoint.get_meta('complete', False):
+        print('此任务已经完成；无需重复查询。需要重新查询时设置 resume=false。', flush=True)
+        _publish_status('complete', run_id=run_id, **checkpoint.counts())
+        return
+    round_num = checkpoint.get_meta('round_num', 1)
     while True:
-        print(f'\n{"=" * 20} 第 {round_num} 轮处理 {"=" * 20}')
+        checkpoint.set_meta(round_num=round_num)
+        _publish_status('querying', run_id=run_id, round_num=round_num, **checkpoint.counts())
         success, fail_count = await _run_batch(
-            current_input, token, mapping_by_protocol, _data_dir,
-            append_success=round_num > 1)
+            _get_input_csv_path(), token, mapping_by_protocol, checkpoint,
+            writer, round_num, options)
+        checkpoint.set_meta(automatic_skips=_setting_cfg.get('skip_protocols', []))
+        if fail_count == 0 or success == 0:
+            remaining_failures = checkpoint.counts()['fail']
+            phase = 'complete' if remaining_failures == 0 else 'finished_with_failures'
+            # Failed devices can be attempted again after a restart.
+            checkpoint.set_meta(complete=remaining_failures == 0,
+                                round_num=round_num if remaining_failures == 0 else round_num + 1)
+            _publish_status(phase, run_id=run_id, **checkpoint.counts())
+            print(f'处理结束: {checkpoint.counts()}，跳过原因见配置目录的原因文件。', flush=True)
+            return
+        round_num += 1
+        print(f'准备第 {round_num} 轮重试；已成功设备不会重复请求。', flush=True)
 
-        if fail_count == 0:
-            print('\n本轮处理完成，没有失败设备需要重试。')
-            break
 
-        if success > 0:
-            print(f'\n{success} 成功, {fail_count} 失败, 准备重试...')
-            current_input = fail_csv
-            round_num += 1
-        else:
-            print(f'\n全部失败 ({fail_count} 个), 停止重试')
-            break
-
-    print('\n处理完成!')
+def main():
+    os.makedirs(_data_dir, exist_ok=True)
+    with RunLock(os.path.join(_data_dir, 'run.lock')):
+        checkpoint = None
+        try:
+            _publish_status('initializing')
+            checkpoint, run_id = _prepare_checkpoint()
+            previous_skips = checkpoint.get_meta('automatic_skips', [])
+            if checkpoint.get_meta('complete', False) and not previous_skips:
+                asyncio.run(get_setting(None, checkpoint, run_id))
+                return
+            _publish_status('logging_in', run_id=run_id)
+            token = login()
+            mappings = checkpoint.get_meta('protocol_key_mapping')
+            if mappings is None or previous_skips:
+                if checkpoint.get_meta('complete', False):
+                    checkpoint.set_meta(complete=False,
+                                        round_num=checkpoint.get_meta('round_num', 1) + 1)
+                _clear_skip_protocols()
+                _publish_status('getui', run_id=run_id)
+                mappings = get_ui_keys(token)
+                with open(os.path.join(_config_dir, 'skip_protocol_reasons.json'),
+                          encoding='utf-8') as source:
+                    reasons = json.load(source)
+                checkpoint.set_meta(protocol_key_mapping=mappings,
+                                    automatic_skips=_setting_cfg.get('skip_protocols', []),
+                                    skip_reasons=reasons)
+            else:
+                print('恢复同一任务，使用已保存的协议映射。', flush=True)
+                _set_skip_protocols(checkpoint.get_meta('automatic_skips', []))
+                write_json_atomic(os.path.join(_config_dir, 'protocol_key_mapping.json'), mappings)
+                write_json_atomic(os.path.join(_config_dir, 'skip_protocol_reasons.json'),
+                                  checkpoint.get_meta('skip_reasons'))
+            asyncio.run(get_setting(token, checkpoint, run_id))
+        except BaseException as exc:
+            _publish_status('interrupted' if isinstance(exc, KeyboardInterrupt) else 'error',
+                            error=str(exc))
+            raise
+        finally:
+            if checkpoint:
+                checkpoint.close()
 
 
 if __name__ == '__main__':
-    _clear_skip_protocols()
-    _token = login()
-    get_ui_keys(_token)
-    asyncio.run(get_setting(_token))
+    main()
