@@ -1,27 +1,62 @@
 {
-    "domain": "https://www.foxesscloud.com",
-    "debug": false,
-    "sleep_time": 1,
-    "login": {
-        "user": "daijinpeng",
-        "password": "c8522ba359b4e819f6064d7df23e881f"
-    },
-    "getui": {
-        "read_names": [
-            [
-                "BatteryWarmUpFunctionEnableFlag"
-            ],
-            [
-                "Battery1WarmUpFunctionEnableFlag",
-                "Battery2WarmUpFunctionEnableFlag"
-            ]
-        ]
-    },
-    "get_setting": {
-        "input_file": "260928-812-all.csv",
-        "concurrency": 12,
-        "request_timeout": 300,
-        "skip_protocols": [],
-        "persistent_skip_protocols": []
-    }
+  "domain": "https://www.foxesscloud.com",
+  "debug": false,
+  "sleep_time": 1,
+  "login": {
+    "user": "daijinpeng",
+    "password": "c8522ba359b4e819f6064d7df23e881f"
+  },
+  "getui": {
+    "max_attempts_per_protocol": 5,
+    "request_timeout": 30,
+    "read_names": [
+      [
+        "BatteryWarmUpFunctionEnableFlag"
+      ],
+      [
+        "Battery1WarmUpFunctionEnableFlag",
+        "Battery2WarmUpFunctionEnableFlag"
+      ]
+    ]
+  },
+  "get_setting": {
+    "write_batch_size": 500,
+    "flush_interval": 5,
+    "resume": true,
+    "input_file": "h3p-20261009.csv",
+    "concurrency": 14,
+    "request_timeout": 300,
+    "skip_protocols": [
+      "D10001",
+      "D11200",
+      "D11501",
+      "D12301",
+      "D12403",
+      "D12500",
+      "D12600",
+      "D12801",
+      "D12900",
+      "D13100",
+      "D13200",
+      "H11200",
+      "H11300",
+      "H11302",
+      "H11600",
+      "H11800",
+      "K10102",
+      "K10500",
+      "K10501",
+      "K10601",
+      "K10602",
+      "K11100",
+      "P10700",
+      "P11300",
+      "P11700",
+      "P11800",
+      "P11900",
+      "Q10200",
+      "Q10600"
+    ],
+    "persistent_skip_protocols": []
+  }
 }

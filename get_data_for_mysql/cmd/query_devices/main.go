@@ -763,7 +763,7 @@ func queryDevices(q queryer, deviceSNs []string, cfg queryConfig) ([]allDeviceRe
 			})
 			batchRows++
 
-			if communication.Valid && communication.Int64 == 0 && deviceIDValue != "" {
+			if communication.Valid && communication.Int64 != 11 && deviceIDValue != "" {
 				currentMinimum, exists := onlineMinimums[protocolVersionValue]
 				if !exists || deviceIDLess(deviceIDValue, currentMinimum, deviceIDIsNumeric) {
 					onlineMinimums[protocolVersionValue] = deviceIDValue
