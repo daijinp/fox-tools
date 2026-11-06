@@ -375,6 +375,7 @@ def _options():
         'flush_interval': _setting_cfg.get('flush_interval', 5),
         'request_timeout': _setting_cfg.get('request_timeout', 300),
         'resume': _setting_cfg.get('resume', True),
+        'max_retries': _setting_cfg.get('max_retries', 15),
     }
     for key in ('concurrency', 'write_batch_size'):
         value = values[key]
@@ -384,6 +385,9 @@ def _options():
         value = values[key]
         if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
             raise ValueError(f'get_setting.{key} 必须大于 0')
+    retries = values['max_retries']
+    if isinstance(retries, bool) or not isinstance(retries, int) or not 0 <= retries <= 15:
+        raise ValueError('get_setting.max_retries 必须为 0 到 15 的整数')
     if not isinstance(values['resume'], bool):
         raise ValueError('get_setting.resume 必须为 true 或 false')
     return values
@@ -437,8 +441,9 @@ async def _process_device(session, device_data, token, mapping_by_protocol):
     base = {'device_id': device_id, 'device_sn': device_sn,
             'protocol_version': pv, 'master_version': mv}
 
-    def fail(reason):
-        return {'status': 'fail', 'record': {**base, 'err_info': reason}}
+    def fail(reason, retryable=True):
+        return {'status': 'fail', 'retryable': retryable,
+                'record': {**base, 'err_info': reason}}
 
     try:
         path = '/generic/v0/device/setting/get'
@@ -461,6 +466,8 @@ async def _process_device(session, device_data, token, mapping_by_protocol):
                 return fail(f'key={request_key} 请求超时')
             except Exception as exc:
                 return fail(f'key={request_key} 请求异常: {exc}')
+            if str(data.get('errno')) == '41935':
+                return fail(f'设备离线，key={request_key} errno=41935', retryable=False)
             if data.get('errno') != 0:
                 return fail(f'key={request_key} errno={data.get("errno")}: {data.get("msg", "")}')
             values = data.get('result', {}).get('values', {})
@@ -545,7 +552,8 @@ async def _run_batch(input_csv, token, mapping_by_protocol, checkpoint, writer,
                     inflight.discard((record['device_id'], record['protocol_version']))
                 print(f'已保存: 成功 {totals["success"]}, 失败 {totals["fail"]}, '
                       f'本轮已调度 {stats["scheduled"]}', flush=True)
-                _publish_status('querying', round_num=round_num, **totals, **stats)
+                _publish_status('querying', round_num=round_num,
+                                max_retries=options['max_retries'], **totals, **stats)
             deadline = time.monotonic() + options['flush_interval']
 
         while finished < concurrency:
@@ -599,24 +607,43 @@ async def get_setting(token, checkpoint, run_id):
         _publish_status('complete', run_id=run_id, **checkpoint.counts())
         return
     round_num = checkpoint.get_meta('round_num', 1)
+    max_round = options['max_retries'] + 1
+    if round_num > max_round:
+        _publish_status('finished_with_failures', run_id=run_id,
+                        max_retries=options['max_retries'], round_num=round_num - 1,
+                        stop_reason='retry_limit', **checkpoint.counts())
+        print(f'已达到最大重试次数 {options["max_retries"]}，已保存结果保留。', flush=True)
+        return
     while True:
         checkpoint.set_meta(round_num=round_num)
-        _publish_status('querying', run_id=run_id, round_num=round_num, **checkpoint.counts())
-        success, fail_count = await _run_batch(
+        _publish_status('querying', run_id=run_id, round_num=round_num,
+                        max_retries=options['max_retries'], **checkpoint.counts())
+        success, _ = await _run_batch(
             _get_input_csv_path(), token, mapping_by_protocol, checkpoint,
             writer, round_num, options)
         checkpoint.set_meta(automatic_skips=_setting_cfg.get('skip_protocols', []))
-        if fail_count == 0 or success == 0:
+        retryable_failures = checkpoint.retryable_failures()
+        if retryable_failures == 0 or success == 0 or round_num >= max_round:
             remaining_failures = checkpoint.counts()['fail']
             phase = 'complete' if remaining_failures == 0 else 'finished_with_failures'
-            # Failed devices can be attempted again after a restart.
+            if retryable_failures == 0:
+                reason = 'no_retryable_failures'
+            elif success == 0:
+                reason = 'no_success'
+            else:
+                reason = 'retry_limit'
+            # Preserve round numbers so restarting cannot bypass this task's limit.
             checkpoint.set_meta(complete=remaining_failures == 0,
                                 round_num=round_num if remaining_failures == 0 else round_num + 1)
-            _publish_status(phase, run_id=run_id, **checkpoint.counts())
-            print(f'处理结束: {checkpoint.counts()}，跳过原因见配置目录的原因文件。', flush=True)
+            _publish_status(phase, run_id=run_id, round_num=round_num,
+                            max_retries=options['max_retries'], stop_reason=reason,
+                            **checkpoint.counts())
+            print(f'处理结束: {checkpoint.counts()}，重试 {round_num - 1}/{options["max_retries"]} 次，'
+                  f'停止原因 {reason}。', flush=True)
             return
         round_num += 1
-        print(f'准备第 {round_num} 轮重试；已成功设备不会重复请求。', flush=True)
+        print(f'准备第 {round_num - 1}/{options["max_retries"]} 次重试；'
+              '已成功和离线设备会跳过。', flush=True)
 
 
 def main():

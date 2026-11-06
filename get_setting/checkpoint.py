@@ -3,6 +3,7 @@
 import csv
 import json
 import os
+import re
 import shutil
 import sqlite3
 import threading
@@ -73,6 +74,24 @@ class Checkpoint:
             PRIMARY KEY (device_id, protocol_version))''')
         self.connection.execute('''CREATE INDEX IF NOT EXISTS results_status_round
             ON results(status, round_num)''')
+        columns = {row[1] for row in self.connection.execute('PRAGMA table_info(results)')}
+        if 'retryable' not in columns:
+            with self.connection:
+                self.connection.execute('ALTER TABLE results ADD COLUMN retryable INTEGER NOT NULL DEFAULT 1')
+                # Older checkpoints already identify offline replies in err_info.
+                cursor = self.connection.execute(
+                    "SELECT device_id,protocol_version,record FROM results WHERE status='fail'")
+                while True:
+                    rows = cursor.fetchmany(500)
+                    if not rows:
+                        break
+                    for device_id, protocol, record in rows:
+                        reason = json.loads(record).get('err_info', '')
+                        if re.search(r'errno\s*=\s*41935(?:\D|$)', reason):
+                            self.connection.execute(
+                                'UPDATE results SET retryable=0 WHERE device_id=? AND protocol_version=?',
+                                (device_id, protocol))
+                cursor.close()
         self.connection.commit()
         self.totals = {'success': 0, 'fail': 0}
         self.totals.update(self.connection.execute(
@@ -104,7 +123,7 @@ class Checkpoint:
                 rows = self.connection.execute(
                     f'''SELECT device_id, protocol_version FROM results
                         WHERE (device_id, protocol_version) IN (VALUES {placeholders})
-                        AND (status='success' OR round_num>=?)''', parameters)
+                        AND (status='success' OR retryable=0 OR round_num>=?)''', parameters)
                 completed.update(rows)
         return completed
 
@@ -121,14 +140,15 @@ class Checkpoint:
                         continue
                     seen.add(key)
                     previous = self.connection.execute(
-                        'SELECT status, round_num FROM results WHERE device_id=? '
+                        'SELECT status, round_num, retryable FROM results WHERE device_id=? '
                         'AND protocol_version=?', key).fetchone()
-                    if previous and (previous[0] == 'success' or previous[1] >= round_num):
+                    if previous and (previous[0] == 'success' or not previous[2] or previous[1] >= round_num):
                         continue
                     self.connection.execute(
-                        'INSERT OR REPLACE INTO results VALUES (?, ?, ?, ?, ?)',
+                        'INSERT OR REPLACE INTO results '
+                        '(device_id,protocol_version,status,round_num,record,retryable) VALUES (?, ?, ?, ?, ?, ?)',
                         (*key, result['status'], round_num,
-                         json.dumps(record, ensure_ascii=False)))
+                         json.dumps(record, ensure_ascii=False), bool(result.get('retryable', True))))
                     if previous:
                         changes[previous[0]] -= 1
                     changes[result['status']] += 1
@@ -136,6 +156,11 @@ class Checkpoint:
             for status, change in changes.items():
                 self.totals[status] += change
         return accepted
+
+    def retryable_failures(self):
+        with self.lock:
+            return self.connection.execute(
+                "SELECT COUNT(*) FROM results WHERE status='fail' AND retryable=1").fetchone()[0]
 
     def counts(self, round_num=None):
         with self.lock:

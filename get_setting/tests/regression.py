@@ -4,6 +4,7 @@ import csv
 import io
 import json
 import os
+import sqlite3
 import sys
 import tempfile
 import tracemalloc
@@ -207,6 +208,96 @@ class RuntimeTests(unittest.TestCase):
         asyncio.run(run.get_setting('offline', store, 'retry'))
         self.assertEqual(store.counts(), {'success': 1, 'fail': 0})
         self.assertEqual(self.records('fail.csv'), [])
+
+
+    def test_offline_devices_are_not_retried_in_later_rounds_or_after_restart(self):
+        self.devices([('offline', 'P_OK'), ('offline-string', 'P_OK'),
+                      ('flaky', 'P_OK'), ('good', 'P_OK')])
+        self.mappings()
+        self.responses[('offline', 'switch')] = deque([{'errno': 41935}])
+        self.responses[('offline-string', 'switch')] = deque([{'errno': '41935'}])
+        self.responses[('flaky', 'switch')] = deque([{'errno': 1}, self.good()])
+        store = self.store()
+        asyncio.run(run.get_setting('offline', store, 'offline'))
+        self.assertEqual(store.counts(), {'success': 2, 'fail': 2})
+        self.assertEqual(store.retryable_failures(), 0)
+        self.assertEqual(Counter(self.calls), {
+            ('offline', 'switch'): 1, ('offline-string', 'switch'): 1,
+            ('flaky', 'switch'): 2, ('good', 'switch'): 1})
+        failures = self.records('fail.csv')
+        self.assertEqual({row['device_id'] for row in failures}, {'offline', 'offline-string'})
+        self.assertTrue(all('41935' in row['err_info'] for row in failures))
+        reopened = self.store()
+        calls = len(self.calls)
+        asyncio.run(run.get_setting('offline', reopened, 'offline'))
+        self.assertEqual(len(self.calls), calls)
+
+    def test_retry_limit_stops_despite_progress_and_survives_restart(self):
+        self.cfg['get_setting']['max_retries'] = 2
+        self.devices([(str(index), 'P_OK') for index in range(5)])
+        self.mappings()
+        for index in range(5):
+            self.responses[(str(index), 'switch')] = deque(
+                [{'errno': 1}] * index + [self.good()])
+        store = self.store()
+        asyncio.run(run.get_setting('offline', store, 'limited'))
+        self.assertEqual(store.counts(), {'success': 3, 'fail': 2})
+        self.assertEqual(Counter(self.calls)[('4', 'switch')], 3)
+        status = json.loads((self.data_dir/'run_status.json').read_text(encoding='utf-8'))
+        self.assertEqual(status['stop_reason'], 'retry_limit')
+        self.assertEqual(status['max_retries'], 2)
+        calls = len(self.calls)
+        reopened = self.store()
+        asyncio.run(run.get_setting('offline', reopened, 'limited'))
+        self.assertEqual(len(self.calls), calls)
+
+    def test_default_allows_at_most_fifteen_retry_rounds(self):
+        self.assertEqual(run._options()['max_retries'], 15)
+        self.devices([(str(index), 'P_OK') for index in range(18)])
+        self.mappings()
+        for index in range(18):
+            self.responses[(str(index), 'switch')] = deque(
+                [{'errno': 1}] * index + [self.good()])
+        store = self.store()
+        asyncio.run(run.get_setting('offline', store, 'default-limit'))
+        self.assertEqual(store.counts(), {'success': 16, 'fail': 2})
+        self.assertEqual(max(Counter(self.calls).values()), 16)
+
+    def test_zero_retry_limit_runs_only_initial_round(self):
+        self.cfg['get_setting']['max_retries'] = 0
+        self.devices([('good', 'P_OK'), ('failure', 'P_OK')])
+        self.mappings()
+        self.responses[('failure', 'switch')] = deque([{'errno': 1}, self.good()])
+        store = self.store()
+        asyncio.run(run.get_setting('offline', store, 'no-retries'))
+        self.assertEqual(store.counts(), {'success': 1, 'fail': 1})
+        self.assertEqual(len(self.calls), 2)
+
+    def test_retry_limit_rejects_invalid_options(self):
+        for value in (-1, 16, True, 1.5, '5', None):
+            with self.subTest(value=value):
+                self.cfg['get_setting']['max_retries'] = value
+                with self.assertRaises(ValueError):
+                    run._options()
+
+    def test_legacy_offline_failures_migrate_as_nonretryable(self):
+        path = self.data_dir/'legacy.sqlite3'
+        with contextlib.closing(sqlite3.connect(path)) as db:
+            db.execute("CREATE TABLE results(device_id TEXT,protocol_version TEXT,status TEXT,"
+                       "round_num INTEGER,record TEXT,PRIMARY KEY(device_id,protocol_version))")
+            for device, errno in [('offline', 41935), ('temporary', 41203)]:
+                db.execute('INSERT INTO results VALUES (?,?,?,?,?)',
+                           (device, 'P_OK', 'fail', 1, json.dumps(
+                               {'device_id': device, 'protocol_version': 'P_OK',
+                                'err_info': f'key=switch errno={errno}: error'})))
+            db.commit()
+        with contextlib.closing(Checkpoint(str(path))) as store:
+            devices = [('offline', '', 'P_OK', ''), ('temporary', '', 'P_OK', '')]
+            self.assertEqual(store.completed_keys(devices, 2), {('offline', 'P_OK')})
+            self.assertEqual(store.retryable_failures(), 1)
+            self.assertEqual(store.save_batch([{'status': 'success',
+                             'record': {'device_id': 'offline', 'protocol_version': 'P_OK'}}], 3), [])
+            self.assertEqual(store.counts(), {'success': 0, 'fail': 2})
 
     def test_input_and_fields_select_independent_checkpoints(self):
         self.devices([('one', 'P_OK')])
