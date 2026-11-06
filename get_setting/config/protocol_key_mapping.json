@@ -1,220 +1,2112 @@
 [
   {
-    "protocol_version": "P12400",
-    "request_key": "p124__export_limit",
+    "protocol_version": "P11300",
+    "request_key": "p113__operation_mode",
     "response_names": [
-      "ExportLimit"
+      "WorkMode"
     ],
     "response_key": [
-      "p124__export_limit__export_limit"
-    ]
-  },
-  {
-    "protocol_version": "P12400",
-    "request_key": "p124__advance_parameters",
-    "response_names": [
-      "BalanceLoad",
-      "StandByState"
-    ],
-    "response_key": [
-      "p124__advance_parameters__00",
-      "p124__advance_parameters__02"
-    ]
-  },
-  {
-    "protocol_version": "P12400",
-    "request_key": "p124__27",
-    "response_names": [
-      "G100Enable",
-      "State",
-      "ExportLimit"
-    ],
-    "response_key": [
-      "p124__27__00",
-      "p124__27__03",
-      "p124__27__01"
-    ]
-  },
-  {
-    "protocol_version": "P11900",
-    "request_key": "p119__export_limit",
-    "response_names": [
-      "ExportLimit"
-    ],
-    "response_key": [
-      "p119__export_limit__export_limit"
-    ]
-  },
-  {
-    "protocol_version": "P11900",
-    "request_key": "p119__advance_parameters",
-    "response_names": [
-      "BalanceLoad",
-      "StandByState"
-    ],
-    "response_key": [
-      "p119__advance_parameters__00",
-      "p119__advance_parameters__02"
+      "p113__operation_mode__work_mode"
     ]
   },
   {
     "protocol_version": "P11300",
-    "request_key": "p113__export_limit",
+    "request_key": "p113__segmented_time_enable",
     "response_names": [
-      "ExportLimit"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p113__export_limit__export_limit"
+      "p113__segmented_time_enable__time_mode_flag"
     ]
   },
   {
-    "protocol_version": "P11300",
-    "request_key": "p113__advance_parameters",
+    "protocol_version": "P11900",
+    "request_key": "p119__operation_mode",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "WorkMode"
     ],
     "response_key": [
-      "p113__advance_parameters__00",
-      "p113__advance_parameters__03"
+      "p119__operation_mode__work_mode"
     ]
   },
   {
-    "protocol_version": "P10700",
-    "request_key": "p107__export_limit",
+    "protocol_version": "P11900",
+    "request_key": "p119__segmented_time_enable",
     "response_names": [
-      "ExportLimit"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p107__export_limit__export_limit"
+      "p119__segmented_time_enable__time_mode_flag"
     ]
   },
   {
-    "protocol_version": "P10700",
-    "request_key": "p107__advance_parameters",
+    "protocol_version": "K10501",
+    "request_key": "k105__operation_mode",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "WorkMode"
     ],
     "response_key": [
-      "p107__advance_parameters__00",
-      "p107__advance_parameters__03"
+      "k105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10501",
+    "request_key": "k105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k105__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D13200",
+    "request_key": "d132__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d132__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D13200",
+    "request_key": "d132__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d132__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12301",
+    "request_key": "d123__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d123__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12100",
+    "request_key": "d121__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d121__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12900",
+    "request_key": "d129__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d129__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12900",
+    "request_key": "d129__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d129__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12103",
+    "request_key": "k121__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k121__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12103",
+    "request_key": "k121__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k121__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10600",
+    "request_key": "q106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10600",
+    "request_key": "q106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11300",
+    "request_key": "q113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11300",
+    "request_key": "q113__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q113__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10800",
+    "request_key": "q108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10800",
+    "request_key": "q108__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q108__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10900",
+    "request_key": "q109__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q109__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10900",
+    "request_key": "q109__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q109__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11500",
+    "request_key": "q115__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q115__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11500",
+    "request_key": "q115__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q115__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11200",
+    "request_key": "q112__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q112__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11200",
+    "request_key": "q112__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q112__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10500",
+    "request_key": "q105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11100",
+    "request_key": "q111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11100",
+    "request_key": "q111__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q111__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10102",
+    "request_key": "k101__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k101__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11600",
+    "request_key": "k116__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k116__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11600",
+    "request_key": "k116__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k116__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10602",
+    "request_key": "k106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10602",
+    "request_key": "k106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10200",
+    "request_key": "k102__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k102__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12700",
+    "request_key": "d127__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d127__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12700",
+    "request_key": "d127__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d127__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12801",
+    "request_key": "d128__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d128__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12801",
+    "request_key": "d128__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d128__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12600",
+    "request_key": "d126__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d126__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12600",
+    "request_key": "d126__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d126__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11902",
+    "request_key": "k119__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k119__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11902",
+    "request_key": "k119__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k119__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11601",
+    "request_key": "k116__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k116__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11601",
+    "request_key": "k116__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k116__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11600",
+    "request_key": "q116__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q116__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11600",
+    "request_key": "q116__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q116__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11700",
+    "request_key": "q117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11700",
+    "request_key": "q117__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q117__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11706",
+    "request_key": "k117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11706",
+    "request_key": "k117__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k117__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11309",
+    "request_key": "k113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11309",
+    "request_key": "k113__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k113__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11502",
+    "request_key": "k115__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k115__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11502",
+    "request_key": "k115__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k115__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11400",
+    "request_key": "q114__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q114__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11400",
+    "request_key": "q114__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q114__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q11000",
+    "request_key": "q110__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q110__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q11000",
+    "request_key": "q110__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q110__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10200",
+    "request_key": "q102__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q102__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12002",
+    "request_key": "k120__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k120__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12002",
+    "request_key": "k120__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k120__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12104",
+    "request_key": "k121__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k121__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12104",
+    "request_key": "k121__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k121__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "Q10300",
+    "request_key": "q103__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q103__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10700",
+    "request_key": "q107__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q107__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10700",
+    "request_key": "q107__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "q107__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D11200",
+    "request_key": "d112__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d112__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D11501",
+    "request_key": "d115__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d115__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10600",
+    "request_key": "i106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "i106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10600",
+    "request_key": "i106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "i106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10500",
+    "request_key": "i105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "i105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10500",
+    "request_key": "i105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "i105__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10400",
+    "request_key": "i104__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "i104__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10400",
+    "request_key": "i104__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "i104__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10300",
+    "request_key": "i103__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "i103__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10300",
+    "request_key": "i103__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "i103__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "I10200",
+    "request_key": "i102__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "i102__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "I10200",
+    "request_key": "i102__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "i102__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11800",
+    "request_key": "k118__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k118__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11800",
+    "request_key": "k118__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k118__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11000",
+    "request_key": "k110__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k110__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11000",
+    "request_key": "k110__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k110__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11500",
+    "request_key": "k115__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k115__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11500",
+    "request_key": "k115__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k115__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10301",
+    "request_key": "zaa103__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa103__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10301",
+    "request_key": "zaa103__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa103__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10400",
+    "request_key": "zaa104__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa104__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10400",
+    "request_key": "zaa104__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa104__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10501",
+    "request_key": "zaa105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10501",
+    "request_key": "zaa105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa105__segmented_time_enable__time_mode_flag"
     ]
   },
   {
     "protocol_version": "P12200",
-    "request_key": "p122__export_limit",
+    "request_key": "p122__operation_mode",
     "response_names": [
-      "ExportLimit"
+      "WorkMode"
     ],
     "response_key": [
-      "p122__export_limit__export_limit"
+      "p122__operation_mode__work_mode"
     ]
   },
   {
     "protocol_version": "P12200",
-    "request_key": "p122__advance_parameters",
+    "request_key": "p122__segmented_time_enable",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p122__advance_parameters__00",
-      "p122__advance_parameters__02"
+      "p122__segmented_time_enable__time_mode_flag"
     ]
   },
   {
-    "protocol_version": "P12200",
-    "request_key": "p122__27",
+    "protocol_version": "ZAC10400",
+    "request_key": "zac104__operation_mode",
     "response_names": [
-      "G100Enable",
-      "State",
-      "ExportLimit"
+      "WorkMode"
     ],
     "response_key": [
-      "p122__27__00",
-      "p122__27__03",
-      "p122__27__01"
+      "zac104__operation_mode__work_mode"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p118__export_limit",
+    "protocol_version": "ZAC10400",
+    "request_key": "zac104__segmented_time_enable",
     "response_names": [
-      "ExportLimit"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p118__export_limit__export_limit"
+      "zac104__segmented_time_enable__time_mode_flag"
     ]
   },
   {
-    "protocol_version": "P11800",
-    "request_key": "p118__advance_parameters",
+    "protocol_version": "ZAC10600",
+    "request_key": "zac106__operation_mode",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "WorkMode"
     ],
     "response_key": [
-      "p118__advance_parameters__00",
-      "p118__advance_parameters__03"
+      "zac106__operation_mode__work_mode"
     ]
   },
   {
-    "protocol_version": "P12500",
-    "request_key": "p125__export_limit",
+    "protocol_version": "ZAC10600",
+    "request_key": "zac106__segmented_time_enable",
     "response_names": [
-      "ExportLimit"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p125__export_limit__export_limit"
+      "zac106__segmented_time_enable__time_mode_flag"
     ]
   },
   {
-    "protocol_version": "P12500",
-    "request_key": "p125__advance_parameters",
+    "protocol_version": "D13100",
+    "request_key": "d131__operation_mode",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "WorkMode"
     ],
     "response_key": [
-      "p125__advance_parameters__00",
-      "p125__advance_parameters__02"
+      "d131__operation_mode__work_mode"
     ]
   },
   {
-    "protocol_version": "P12500",
-    "request_key": "p125__27",
+    "protocol_version": "D13100",
+    "request_key": "d131__segmented_time_enable",
     "response_names": [
-      "G100Enable",
-      "State",
-      "ExportLimit"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p125__27__00",
-      "p125__27__03",
-      "p125__27__01"
+      "d131__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10600",
+    "request_key": "j106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10500",
+    "request_key": "j105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j105__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10400",
+    "request_key": "j104__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j104__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10700",
+    "request_key": "j107__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j107__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10200",
+    "request_key": "j102__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j102__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "J10300",
+    "request_key": "j103__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "j103__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12000",
+    "request_key": "d120__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d120__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D11900",
+    "request_key": "d119__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d119__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D10900",
+    "request_key": "d109__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d109__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12403",
+    "request_key": "d124__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d124__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12403",
+    "request_key": "d124__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d124__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11400",
+    "request_key": "k114__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k114__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11400",
+    "request_key": "k114__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k114__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11705",
+    "request_key": "k117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11705",
+    "request_key": "k117__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k117__segmented_time_enable__time_mode_flag"
     ]
   },
   {
     "protocol_version": "P11700",
-    "request_key": "p117__export_limit",
+    "request_key": "p117__operation_mode",
     "response_names": [
-      "ExportLimit"
+      "WorkMode"
     ],
     "response_key": [
-      "p117__export_limit__export_limit"
+      "p117__operation_mode__work_mode"
     ]
   },
   {
     "protocol_version": "P11700",
-    "request_key": "p117__advance_parameters",
+    "request_key": "p117__segmented_time_enable",
     "response_names": [
-      "BalanceLoad",
-      "StandByState"
+      "TimeModeFlag"
     ],
     "response_key": [
-      "p117__advance_parameters__00",
-      "p117__advance_parameters__03"
+      "p117__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "P11800",
+    "request_key": "p118__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p118__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P11800",
+    "request_key": "p118__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "p118__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "P11100",
+    "request_key": "p111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P11100",
+    "request_key": "p111__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "p111__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "P12400",
+    "request_key": "p124__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p124__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P12400",
+    "request_key": "p124__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "p124__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "P10600",
+    "request_key": "p106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P10700",
+    "request_key": "p107__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p107__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P10800",
+    "request_key": "p108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P10500",
+    "request_key": "p105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11305",
+    "request_key": "k113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11305",
+    "request_key": "k113__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k113__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10702",
+    "request_key": "k107__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k107__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10702",
+    "request_key": "k107__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k107__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11103",
+    "request_key": "k111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11103",
+    "request_key": "k111__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k111__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12000",
+    "request_key": "k120__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k120__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12000",
+    "request_key": "k120__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k120__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10002",
+    "request_key": "zaa100__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa100__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10002",
+    "request_key": "zaa100__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa100__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10102",
+    "request_key": "zaa101__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa101__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10102",
+    "request_key": "zaa101__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa101__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10200",
+    "request_key": "zaa102__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa102__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10200",
+    "request_key": "zaa102__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa102__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10803",
+    "request_key": "k108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10803",
+    "request_key": "k108__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k108__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11704",
+    "request_key": "k117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11704",
+    "request_key": "k117__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k117__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11101",
+    "request_key": "k111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11101",
+    "request_key": "k111__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k111__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11302",
+    "request_key": "k113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11302",
+    "request_key": "k113__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k113__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H11800",
+    "request_key": "h118__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h118__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11800",
+    "request_key": "h118__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "h118__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H11600",
+    "request_key": "h116__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h116__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11600",
+    "request_key": "h116__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "h116__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H11500",
+    "request_key": "h115__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h115__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11500",
+    "request_key": "h115__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "h115__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H11700",
+    "request_key": "h117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11700",
+    "request_key": "h117__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "h117__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H11302",
+    "request_key": "h113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11200",
+    "request_key": "h112__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h112__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11300",
+    "request_key": "h113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H10800",
+    "request_key": "h108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H10900",
+    "request_key": "h109__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h109__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11400",
+    "request_key": "h114__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h114__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11400",
+    "request_key": "h114__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "h114__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H10700",
+    "request_key": "h107__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h107__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H11100",
+    "request_key": "h111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P12500",
+    "request_key": "p125__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p125__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P12500",
+    "request_key": "p125__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "p125__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12500",
+    "request_key": "d125__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d125__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D12500",
+    "request_key": "d125__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "d125__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "F10000",
+    "request_key": "f100__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "f100__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10700",
+    "request_key": "zaa107__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "zaa107__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAA10700",
+    "request_key": "zaa107__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zaa107__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D10800",
+    "request_key": "d108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D11700",
+    "request_key": "d117__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d117__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "Q10400",
+    "request_key": "q104__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "q104__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10500",
+    "request_key": "k105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10500",
+    "request_key": "k105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k105__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10601",
+    "request_key": "k106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10601",
+    "request_key": "k106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10400",
+    "request_key": "k104__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k104__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10400",
+    "request_key": "k104__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k104__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11200",
+    "request_key": "k112__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k112__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11200",
+    "request_key": "k112__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k112__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K11307",
+    "request_key": "k113__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k113__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11307",
+    "request_key": "k113__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k113__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10101",
+    "request_key": "k101__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k101__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10600",
+    "request_key": "k106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10600",
+    "request_key": "k106__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k106__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10804",
+    "request_key": "k108__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k108__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10804",
+    "request_key": "k108__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k108__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10900",
+    "request_key": "k109__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k109__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10900",
+    "request_key": "k109__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k109__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K12106",
+    "request_key": "k121__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k121__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K12106",
+    "request_key": "k121__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k121__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "K10201",
+    "request_key": "k102__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k102__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K10300",
+    "request_key": "k103__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k103__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11100",
+    "request_key": "k111__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "k111__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "K11100",
+    "request_key": "k111__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "k111__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "P12100",
+    "request_key": "p121__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "p121__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "P12100",
+    "request_key": "p121__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "p121__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "D12200",
+    "request_key": "d122__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d122__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D11400",
+    "request_key": "d114__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d114__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "ZAD10500",
+    "request_key": "zad105__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zad105__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAD10200",
+    "request_key": "zad103__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zad103__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAD10300",
+    "request_key": "zad103__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zad103__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "ZAD10400",
+    "request_key": "zad104__segmented_time_enable",
+    "response_names": [
+      "TimeModeFlag"
+    ],
+    "response_key": [
+      "zad104__segmented_time_enable__time_mode_flag"
+    ]
+  },
+  {
+    "protocol_version": "H10600",
+    "request_key": "h106__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h106__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D10001",
+    "request_key": "d100__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d100__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H10500",
+    "request_key": "h105__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h105__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "H10400",
+    "request_key": "h104__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "h104__operation_mode__work_mode"
+    ]
+  },
+  {
+    "protocol_version": "D10000",
+    "request_key": "d100__operation_mode",
+    "response_names": [
+      "WorkMode"
+    ],
+    "response_key": [
+      "d100__operation_mode__work_mode"
     ]
   }
 ]

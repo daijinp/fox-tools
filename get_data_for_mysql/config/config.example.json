@@ -26,6 +26,8 @@
   "query": {
     "batch_size": 200,
     "batch_interval_seconds": 1,
-    "timeout_seconds": 60
+    "timeout_seconds": 60,
+    "max_attempts": 5,
+    "retry_interval_seconds": 2
   }
 }

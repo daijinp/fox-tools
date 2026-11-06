@@ -166,3 +166,16 @@ volume_test_amber/backup/*
 /get_setting/device_data/active_run.json
 /get_setting/device_data/run_status.json
 /get_setting/device_data/launch.json
+
+# Generated query output, checkpoints and runtime responses
+/get_data_for_mysql/output/
+gitui_res.json
+
+# Local checkout of an independent repository
+/flow_setting/friday/
+
+# Operating system metadata
+.DS_Store
+__MACOSX/
+Thumbs.db
+Desktop.ini

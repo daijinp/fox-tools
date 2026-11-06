@@ -1,0 +1,32 @@
+{
+  "domain": "https://www.foxesscloud.com",
+  "debug": false,
+  "sleep_time": 1,
+  "login": {
+    "user": "daijinpeng",
+    "password": "8930951eff11ee59059169a016032663"
+  },
+  "getui": {
+    "max_attempts_per_protocol": 5,
+    "request_timeout": 30,
+    "read_names": [
+      [
+        "G100Enable",
+        "State",
+        "ExportLimit",
+        "BalanceLoad",
+        "StandByState"
+      ]
+    ]
+  },
+  "get_setting": {
+    "write_batch_size": 500,
+    "flush_interval": 5,
+    "resume": true,
+    "input_file": "H3P-UA-261029.csv",
+    "concurrency": 14,
+    "request_timeout": 300,
+    "skip_protocols": [],
+    "persistent_skip_protocols": []
+  }
+}

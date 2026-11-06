@@ -13,6 +13,7 @@ import (
 	"math/big"
 	"net"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"runtime"
 	"sort"
@@ -71,6 +72,8 @@ type queryConfig struct {
 	BatchSize            int `json:"batch_size"`
 	BatchIntervalSeconds int `json:"batch_interval_seconds"`
 	TimeoutSeconds       int `json:"timeout_seconds"`
+	MaxAttempts          int `json:"max_attempts"`
+	RetryIntervalSeconds int `json:"retry_interval_seconds"`
 }
 
 type inputStats struct {
@@ -111,13 +114,16 @@ type queryer interface {
 
 func main() {
 	configPathFlag := flag.String("config", "", "配置文件路径；默认自动查找 config/config.json")
+	freshFlag := flag.Bool("fresh", false, "归档旧断点并重新查询全部数据")
 	flag.Parse()
 
 	configPath, err := locateConfig(*configPathFlag)
 	if err != nil {
 		fatal(err)
 	}
-	if err := run(configPath); err != nil {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
+	if err := runTask(ctx, configPath, *freshFlag); err != nil {
 		fatal(err)
 	}
 }
@@ -128,6 +134,10 @@ func fatal(err error) {
 }
 
 func run(configPath string) error {
+	return runTask(context.Background(), configPath, false)
+}
+
+func runTask(ctx context.Context, configPath string, fresh bool) error {
 	cfg, configDir, err := loadConfig(configPath)
 	if err != nil {
 		return err
@@ -151,56 +161,48 @@ func run(configPath string) error {
 		)
 	}
 
-	fmt.Printf("正在连接 SSH：%s\n", cfg.SSH.Address)
-	sshClient, err := connectSSH(cfg.SSH, configDir)
-	if err != nil {
-		return err
-	}
-	defer sshClient.Close()
-
-	db, err := connectMySQL(cfg, sshClient)
-	if err != nil {
-		return err
-	}
-	defer db.Close()
-	fmt.Printf("SSH 隧道和 MySQL 连接成功：%s/%s\n", cfg.MySQL.Address, cfg.MySQL.Database)
-
-	if err := checkRequiredIndexes(db, cfg.Query.TimeoutSeconds); err != nil {
-		return err
-	}
-	fmt.Println("索引检查通过：devices(device_sn)、versions(model_id)")
-
-	results := make([]groupQueryResult, 0, len(groups))
-	for index, group := range groups {
-		if len(group.DeviceSNs) == 0 {
-			fmt.Printf("分组 %s 没有有效 SN，将生成只有表头的结果文件\n", group.Name)
-			results = append(results, groupQueryResult{Group: group})
-			continue
-		}
-		if index > 0 && cfg.Query.BatchIntervalSeconds > 0 {
-			fmt.Printf("切换分组前等待 %d 秒...\n", cfg.Query.BatchIntervalSeconds)
-			time.Sleep(time.Duration(cfg.Query.BatchIntervalSeconds) * time.Second)
-		}
-
-		fmt.Printf("开始查询分组：%s（来源：%s）\n", group.Name, group.SourceCSV)
-		allDevices, onlineDevices, err := queryDevices(db, group.DeviceSNs, cfg.Query)
-		if err != nil {
-			return fmt.Errorf("查询分组 %s：%w", group.Name, err)
-		}
-		fmt.Printf("分组 %s 全部设备：%d 行，在线协议设备：%d 行\n", group.Name, len(allDevices), len(onlineDevices))
-		results = append(results, groupQueryResult{
-			Group:         group,
-			AllDevices:    allDevices,
-			OnlineDevices: onlineDevices,
-		})
-	}
-
 	outputDir := resolvePath(configDir, cfg.Output.Directory)
 	if err := os.MkdirAll(outputDir, 0o755); err != nil {
 		return fmt.Errorf("创建输出目录：%w", err)
 	}
+	unlock, err := lockOutput(outputDir)
+	if err != nil {
+		return err
+	}
+	defer unlock()
+	stores := make([]*checkpointStore, len(groups))
+	for i, group := range groups {
+		stores[i], err = openCheckpoint(cfg, group, outputDir, fresh)
+		if err != nil {
+			return err
+		}
+	}
+	session := &querySession{cfg: cfg, configDir: configDir}
+	defer session.close()
 	var outputPaths []string
-	for _, result := range results {
+	for i, group := range groups {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+		fmt.Printf("开始查询分组：%s（断点目录：%s）\n", group.Name, stores[i].directory)
+		session.planChecked = false
+		if i > 0 {
+			if err := waitContext(ctx, time.Duration(cfg.Query.BatchIntervalSeconds)*time.Second); err != nil {
+				return err
+			}
+		}
+		result, err := queryGroup(ctx, group, cfg.Query, stores[i], func(ctx context.Context, batch []string) (batchResult, error) {
+			var result batchResult
+			err := session.execute(ctx, batch, func(ctx context.Context, q queryer) error {
+				var err error
+				result, err = queryBatch(ctx, q, batch)
+				return err
+			})
+			return result, err
+		})
+		if err != nil {
+			return fmt.Errorf("查询分组 %s：%w；已提交批次保存在 %s，重新执行相同命令可续跑", group.Name, err, stores[i].directory)
+		}
 		allDevicePath := filepath.Join(outputDir, result.Group.Name+"_"+allDeviceOutputName)
 		if err := writeAllDevices(allDevicePath, result.AllDevices); err != nil {
 			return err
@@ -210,6 +212,7 @@ func run(configPath string) error {
 			return err
 		}
 		outputPaths = append(outputPaths, allDevicePath, onlineDevicePath)
+		fmt.Printf("分组 %s 已导出：全部设备 %d 行，在线协议设备 %d 行\n", group.Name, len(result.AllDevices), len(result.OnlineDevices))
 	}
 	archivedPaths, err := archiveLegacyCombinedOutputs(outputDir)
 	if err != nil {
@@ -378,6 +381,15 @@ func validateConfig(cfg *config, configDir string) error {
 	if cfg.Query.TimeoutSeconds <= 0 {
 		cfg.Query.TimeoutSeconds = defaultTimeoutSeconds
 	}
+	if cfg.Query.MaxAttempts < 0 || cfg.Query.RetryIntervalSeconds < 0 {
+		return errors.New("query.max_attempts 和 retry_interval_seconds 不能小于 0")
+	}
+	if cfg.Query.MaxAttempts == 0 {
+		cfg.Query.MaxAttempts = 5
+	}
+	if cfg.Query.RetryIntervalSeconds == 0 {
+		cfg.Query.RetryIntervalSeconds = 2
+	}
 	return nil
 }
 
@@ -494,7 +506,7 @@ func sanitizeFilenameComponent(value string) string {
 	return strings.Trim(value, " .")
 }
 
-func connectSSH(cfg sshConfig, configDir string) (*ssh.Client, error) {
+func connectSSH(ctx context.Context, cfg sshConfig, configDir string) (*ssh.Client, error) {
 	privateKeyPath := resolvePath(configDir, cfg.PrivateKey)
 	privateKey, err := os.ReadFile(privateKeyPath)
 	if err != nil {
@@ -526,11 +538,27 @@ func connectSSH(cfg sshConfig, configDir string) (*ssh.Client, error) {
 		Timeout:         time.Duration(cfg.TimeoutSeconds) * time.Second,
 	}
 
-	client, err := ssh.Dial("tcp", cfg.Address, clientConfig)
+	dialer := net.Dialer{Timeout: time.Duration(cfg.TimeoutSeconds) * time.Second}
+	connection, err := dialer.DialContext(ctx, "tcp", cfg.Address)
 	if err != nil {
 		return nil, fmt.Errorf("连接 SSH %s：%w", cfg.Address, err)
 	}
-	return client, nil
+	stop := context.AfterFunc(ctx, func() { connection.Close() })
+	defer stop()
+	if err := connection.SetDeadline(time.Now().Add(time.Duration(cfg.TimeoutSeconds) * time.Second)); err != nil {
+		connection.Close()
+		return nil, err
+	}
+	transport, channels, requests, err := ssh.NewClientConn(connection, cfg.Address, clientConfig)
+	if err != nil {
+		connection.Close()
+		return nil, fmt.Errorf("SSH 握手 %s：%w", cfg.Address, err)
+	}
+	if err := connection.SetDeadline(time.Time{}); err != nil {
+		transport.Close()
+		return nil, err
+	}
+	return ssh.NewClient(transport, channels, requests), nil
 }
 
 func makeHostKeyCallback(cfg sshConfig, configDir string) (ssh.HostKeyCallback, error) {
@@ -601,7 +629,7 @@ func ensureKnownHostsFile(path string) error {
 	return nil
 }
 
-func connectMySQL(cfg config, sshClient *ssh.Client) (*sql.DB, error) {
+func connectMySQL(ctx context.Context, cfg config, sshClient *ssh.Client) (*sql.DB, error) {
 	mysql.RegisterDialContext(mysqlNetworkName, func(ctx context.Context, address string) (net.Conn, error) {
 		connection, err := sshClient.DialContext(ctx, "tcp", address)
 		if err != nil {
@@ -627,7 +655,7 @@ func connectMySQL(cfg config, sshClient *ssh.Client) (*sql.DB, error) {
 	db.SetMaxIdleConns(1)
 
 	pingContext, cancel := context.WithTimeout(
-		context.Background(),
+		ctx,
 		time.Duration(cfg.MySQL.ConnectTimeoutSeconds)*time.Second,
 	)
 	defer cancel()
@@ -696,125 +724,50 @@ LIMIT 1`
 	return nil
 }
 
-func queryDevices(q queryer, deviceSNs []string, cfg queryConfig) ([]allDeviceRecord, []onlineDeviceRecord, error) {
-	firstBatchEnd := cfg.BatchSize
-	if firstBatchEnd > len(deviceSNs) {
-		firstBatchEnd = len(deviceSNs)
+// queryBatch publishes nothing until the complete result set has been read and closed.
+func queryBatch(ctx context.Context, q queryer, batch []string) (batchResult, error) {
+	rows, err := q.QueryContext(ctx, buildDeviceQuery(len(batch)), stringsToArgs(batch)...)
+	if err != nil {
+		return batchResult{}, fmt.Errorf("查询设备：%w", err)
 	}
-	if err := checkQueryPlan(q, deviceSNs[:firstBatchEnd], cfg.TimeoutSeconds); err != nil {
-		return nil, nil, err
+	defer rows.Close()
+	columnTypes, err := rows.ColumnTypes()
+	if err != nil {
+		return batchResult{}, fmt.Errorf("读取 device_id 字段类型：%w", err)
 	}
-
-	var allResults []allDeviceRecord
-	onlineMinimums := make(map[string]string)
-	totalBatches := (len(deviceSNs) + cfg.BatchSize - 1) / cfg.BatchSize
-
-	for start := 0; start < len(deviceSNs); start += cfg.BatchSize {
-		end := start + cfg.BatchSize
-		if end > len(deviceSNs) {
-			end = len(deviceSNs)
+	result := batchResult{DeviceIDIsNumeric: len(columnTypes) > 0 && isNumericDatabaseType(columnTypes[0].DatabaseTypeName())}
+	minimums := make(map[string]string)
+	for rows.Next() {
+		var deviceID, deviceSN, protocolVersion, masterVersion, productType sql.NullString
+		var communication sql.NullInt64
+		if err := rows.Scan(&deviceID, &deviceSN, &protocolVersion, &masterVersion, &productType, &communication); err != nil {
+			return batchResult{}, fmt.Errorf("读取设备查询结果：%w", err)
 		}
-		batch := deviceSNs[start:end]
-
-		query := buildDeviceQuery(len(batch))
-		args := stringsToArgs(batch)
-		queryContext, cancel := context.WithTimeout(
-			context.Background(),
-			time.Duration(cfg.TimeoutSeconds)*time.Second,
-		)
-		rows, err := q.QueryContext(queryContext, query, args...)
-		if err != nil {
-			cancel()
-			return nil, nil, fmt.Errorf("查询设备（批次 %d-%d）：%w", start+1, end, err)
-		}
-
-		columnTypes, err := rows.ColumnTypes()
-		if err != nil {
-			rows.Close()
-			cancel()
-			return nil, nil, fmt.Errorf("读取 device_id 字段类型：%w", err)
-		}
-		deviceIDIsNumeric := len(columnTypes) > 0 && isNumericDatabaseType(columnTypes[0].DatabaseTypeName())
-		batchRows := 0
-		for rows.Next() {
-			var deviceID, deviceSN, protocolVersion, masterVersion, productType sql.NullString
-			var communication sql.NullInt64
-			if err := rows.Scan(
-				&deviceID,
-				&deviceSN,
-				&protocolVersion,
-				&masterVersion,
-				&productType,
-				&communication,
-			); err != nil {
-				rows.Close()
-				cancel()
-				return nil, nil, fmt.Errorf("读取设备查询结果：%w", err)
-			}
-
-			deviceIDValue := nullStringValue(deviceID)
-			protocolVersionValue := nullStringValue(protocolVersion)
-			allResults = append(allResults, allDeviceRecord{
-				DeviceID:        deviceIDValue,
-				DeviceSN:        nullStringValue(deviceSN),
-				ProtocolVersion: protocolVersionValue,
-				MasterVersion:   nullStringValue(masterVersion),
-				ProductType:     nullStringValue(productType),
-			})
-			batchRows++
-
-			if communication.Valid && communication.Int64 != 11 && deviceIDValue != "" {
-				currentMinimum, exists := onlineMinimums[protocolVersionValue]
-				if !exists || deviceIDLess(deviceIDValue, currentMinimum, deviceIDIsNumeric) {
-					onlineMinimums[protocolVersionValue] = deviceIDValue
-				}
-			}
-		}
-		rowsErr := rows.Err()
-		closeErr := rows.Close()
-		cancel()
-		if rowsErr != nil {
-			return nil, nil, fmt.Errorf("遍历设备查询结果：%w", rowsErr)
-		}
-		if closeErr != nil {
-			return nil, nil, fmt.Errorf("关闭设备查询结果：%w", closeErr)
-		}
-
-		batchNumber := start/cfg.BatchSize + 1
-		fmt.Printf(
-			"查询批次 %d/%d 完成（SN：%d，结果：%d）\n",
-			batchNumber,
-			totalBatches,
-			len(batch),
-			batchRows,
-		)
-		if end < len(deviceSNs) && cfg.BatchIntervalSeconds > 0 {
-			fmt.Printf("等待 %d 秒后执行下一批...\n", cfg.BatchIntervalSeconds)
-			time.Sleep(time.Duration(cfg.BatchIntervalSeconds) * time.Second)
-		}
-	}
-
-	sort.Slice(allResults, func(i, j int) bool {
-		if allResults[i].DeviceSN != allResults[j].DeviceSN {
-			return allResults[i].DeviceSN < allResults[j].DeviceSN
-		}
-		if allResults[i].ProtocolVersion != allResults[j].ProtocolVersion {
-			return allResults[i].ProtocolVersion < allResults[j].ProtocolVersion
-		}
-		return allResults[i].DeviceID < allResults[j].DeviceID
-	})
-
-	onlineResults := make([]onlineDeviceRecord, 0, len(onlineMinimums))
-	for protocolVersion, deviceID := range onlineMinimums {
-		onlineResults = append(onlineResults, onlineDeviceRecord{
-			ProtocolVersion: protocolVersion,
-			DeviceID:        deviceID,
+		id, protocol := nullStringValue(deviceID), nullStringValue(protocolVersion)
+		result.AllDevices = append(result.AllDevices, allDeviceRecord{
+			DeviceID: id, DeviceSN: nullStringValue(deviceSN), ProtocolVersion: protocol,
+			MasterVersion: nullStringValue(masterVersion), ProductType: nullStringValue(productType),
 		})
+		if communication.Valid && communication.Int64 != 11 && id != "" {
+			current, exists := minimums[protocol]
+			if !exists || deviceIDLess(id, current, result.DeviceIDIsNumeric) {
+				minimums[protocol] = id
+			}
+		}
 	}
-	sort.Slice(onlineResults, func(i, j int) bool {
-		return onlineResults[i].ProtocolVersion < onlineResults[j].ProtocolVersion
+	if err := rows.Err(); err != nil {
+		return batchResult{}, fmt.Errorf("遍历设备查询结果：%w", err)
+	}
+	if err := rows.Close(); err != nil {
+		return batchResult{}, fmt.Errorf("关闭设备查询结果：%w", err)
+	}
+	for protocol, id := range minimums {
+		result.OnlineDevices = append(result.OnlineDevices, onlineDeviceRecord{ProtocolVersion: protocol, DeviceID: id})
+	}
+	sort.Slice(result.OnlineDevices, func(i, j int) bool {
+		return result.OnlineDevices[i].ProtocolVersion < result.OnlineDevices[j].ProtocolVersion
 	})
-	return allResults, onlineResults, nil
+	return result, nil
 }
 
 func buildDeviceQuery(snCount int) string {
@@ -1010,16 +963,14 @@ func archiveLegacyCombinedOutputs(outputDir string) ([]string, error) {
 	return archivedPaths, nil
 }
 
-func writeCSV(path string, rows [][]string) (returnedErr error) {
-	file, err := os.Create(path)
+func writeCSV(path string, rows [][]string) error {
+	file, err := os.CreateTemp(filepath.Dir(path), ".query-devices-csv-*")
 	if err != nil {
 		return fmt.Errorf("创建结果文件 %s：%w", path, err)
 	}
-	defer func() {
-		if closeErr := file.Close(); returnedErr == nil && closeErr != nil {
-			returnedErr = fmt.Errorf("关闭结果文件 %s：%w", path, closeErr)
-		}
-	}()
+	temporaryPath := file.Name()
+	defer os.Remove(temporaryPath)
+	defer file.Close()
 
 	bufferedWriter := bufio.NewWriterSize(file, 64*1024)
 	writer := csv.NewWriter(bufferedWriter)
@@ -1035,6 +986,12 @@ func writeCSV(path string, rows [][]string) (returnedErr error) {
 	}
 	if err := file.Sync(); err != nil {
 		return fmt.Errorf("同步结果文件 %s：%w", path, err)
+	}
+	if err := file.Close(); err != nil {
+		return fmt.Errorf("关闭结果文件 %s：%w", path, err)
+	}
+	if err := replaceFile(temporaryPath, path); err != nil {
+		return fmt.Errorf("替换结果文件 %s：%w", path, err)
 	}
 	return nil
 }
