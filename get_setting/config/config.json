@@ -11,8 +11,8 @@
     "request_timeout": 30,
     "read_names": [
       [
-        "WorkMode",
-        "TimeModeFlag"
+        "Modbus-RTU.Status",
+        "Modbus-TCP.Status"
       ]
     ]
   },

@@ -10,6 +10,19 @@
 
 `config/config.json` 保留现有登录、查询字段和输入文件配置。新增设置如下：
 
+`getui.read_names` 支持字段名和以 `.` 连接的完整名称路径。例如分别读取两个同名的 `Status`：
+
+```json
+"read_names": [
+  ["Modbus-RTU.Status", "Modbus-TCP.Status"]
+]
+```
+
+路径按 UI 响应中的 `name` 精确匹配，区分大小写；更深层级可写成 `配置组.子组.字段`。
+CSV 使用配置中的完整名称作为列名，上例会生成 `Modbus-RTU.Status`、`Modbus-TCP.Status` 两列，分别保留各自的值。
+原来的 `WorkMode` 等单独字段名仍然可用；如果同一名称匹配到不同 KEY，则该候选设备的映射生成失败并记录原因，继续按候选设备和协议跳过规则处理，避免同名值被覆盖。此时需改用完整路径。
+内层数组仅用于整理查询项，不表示父子路径。查询列名变化会创建独立检查点，不复用旧列的结果。
+
 | 配置 | 默认值 | 含义 |
 | --- | --- | --- |
 | `getui.max_attempts_per_protocol` | 5 | 每个协议最多尝试的候选设备数 |
@@ -18,6 +31,10 @@
 | `get_setting.flush_interval` | 5 | 未满一批时，最多等待多少秒就提交 |
 | `get_setting.max_retries` | 15 | 首次读取后的最大重试轮数，可设 0～15 |
 | `get_setting.resume` | true | 恢复相同输入和查询字段的已保存进度 |
+
+getui 正常返回非空 `parameters`，但未匹配到目标 KEY 时，立即跳过该协议，不再尝试该协议的其他设备。
+跳过原因、实际尝试次数和剩余候选数记录在 `config/skip_protocol_reasons.json`；后续配置读取也跳过该协议。
+接口失败、超时、解析异常或 `parameters` 为空时，仍按 `max_attempts_per_protocol` 尝试其他候选设备。
 
 输入逐行读取；工作协程和队列数量固定，不随输入行数增加。SQLite 检查点在 `device_data/checkpoints/`，每批先提交检查点，再刷新 CSV 和日志。突然中断后，已提交的设备不会重复查询；尚未提交或正在请求的少量设备可能重查。
 

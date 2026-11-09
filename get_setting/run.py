@@ -40,15 +40,19 @@ def login():
     return token
 
 
-def _find_props_recursive(properties, names):
-    """递归搜索所有层级的 properties，精确匹配 name，返回 (name, key) 列表"""
+def _find_props_recursive(properties, names, parent_path=()):
+    """按字段名或完整名称路径匹配，返回 (配置中的名称, key) 列表。"""
     results = []
     for prop in properties:
-        if prop.get('name') in names:
-            results.append((prop['name'], prop['key']))
+        name = prop.get('name', '')
+        current_path = parent_path + (name,)
+        full_name = '.'.join(current_path)
+        for requested_name in names:
+            if requested_name == name or requested_name == full_name:
+                results.append((requested_name, prop['key']))
         sub_props = prop.get('properties')
         if sub_props:
-            results.extend(_find_props_recursive(sub_props, names))
+            results.extend(_find_props_recursive(sub_props, names, current_path))
     return results
 
 
@@ -60,17 +64,26 @@ def _build_protocol_mappings(protocol, parameters, read_names):
             if name not in requested_names:
                 requested_names.append(name)
 
-    names_set = set(requested_names)
     mappings = []
     mappings_by_request_key = {}
+    selected_keys = {}
     for group in parameters:
         request_key = group.get('key')
         if not request_key:
             continue
         matched = _find_props_recursive(
-            group.get('properties', []), names_set)
+            group.get('properties', []), requested_names, (group.get('name', ''),))
         if not matched:
             continue
+
+        for name, response_key in matched:
+            target = (request_key, response_key)
+            if name in selected_keys and selected_keys[name] != target:
+                raise ValueError(
+                    f'协议 {protocol} 的查询字段 {name!r} 匹配到多个 KEY: '
+                    f'{selected_keys[name]} 和 {target}；'
+                    '请在 read_names 中使用完整名称路径（如 Modbus-RTU.Status）')
+            selected_keys[name] = target
 
         mapping = mappings_by_request_key.get(request_key)
         if mapping is None:
@@ -96,7 +109,8 @@ def _build_protocol_mappings(protocol, parameters, read_names):
 def get_ui_keys(token):
     """
     按协议分组，在 max_attempts_per_protocol 上限内依次尝试候选设备。
-    找到目标 KEY 后停止尝试；候选耗尽或达到上限仍失败则自动跳过该协议。
+    找到目标 KEY 后停止尝试；UI 中未找到目标 KEY 时立即跳过该协议。
+    请求或解析失败则尝试其他候选，候选耗尽或达到上限后自动跳过。
     """
     getui_cfg = config['getui']
     max_attempts = getui_cfg.get('max_attempts_per_protocol', 5)
@@ -139,6 +153,8 @@ def get_ui_keys(token):
         protocol_mappings = None
         failure_counts = {}
         last_failure = None
+        attempted_count = 0
+        immediate_skip_reason = None
         print(f'getui 协议 {protocol}: 共 {protocol_counts[protocol]} 条设备记录，'
               f'最多尝试 {attempt_limit} 个')
 
@@ -153,6 +169,7 @@ def get_ui_keys(token):
                 last_failure['detail'] = str(detail)
 
         for attempt, device_id in enumerate(candidate_ids[:attempt_limit], start=1):
+            attempted_count = attempt
             try:
                 response = fr_requests(
                     'get', path='/generic/v0/device/setting/ui', token=token,
@@ -178,9 +195,10 @@ def get_ui_keys(token):
                     protocol, parameters, read_names)
                 if not candidate_mappings:
                     record_failure('未找到目标 KEY', device_id)
+                    immediate_skip_reason = '未找到目标 KEY，直接跳过该协议'
                     print(f'getui 协议 {protocol} 第 {attempt}/{attempt_limit} '
                           f'个设备 {device_id} 失败: 未找到目标 KEY')
-                    continue
+                    break
 
                 protocol_mappings = candidate_mappings
                 result.extend(candidate_mappings)
@@ -200,7 +218,8 @@ def get_ui_keys(token):
         if protocol_mappings is None:
             remaining_count = (protocol_counts[protocol] - attempt_limit
                                if protocol in extra_candidates else 0)
-            reason = (
+            remaining_count += attempt_limit - attempted_count
+            reason = immediate_skip_reason or (
                 f'达到 getui 尝试上限（{max_attempts} 次），仍未生成目标 KEY 映射'
                 if remaining_count else '所有候选设备均未生成目标 KEY 映射'
             )
@@ -211,14 +230,14 @@ def get_ui_keys(token):
                 'candidate_count': protocol_counts[protocol],
                 'device_count': protocol_counts[protocol],
                 'selected_candidate_count': len(candidate_ids),
-                'attempted_count': attempt_limit,
+                'attempted_count': attempted_count,
                 'max_attempts_per_protocol': max_attempts,
                 'remaining_candidate_count': remaining_count,
                 'failure_counts': failure_counts,
                 'last_failure': last_failure,
             }
             print(f'getui 跳过协议 {protocol}: {reason}，'
-                  f'已尝试 {attempt_limit} 个设备，'
+                  f'已尝试 {attempted_count} 个设备，'
                   '将加入 skip_protocols，继续处理其他协议')
 
     mapping_path = os.path.join(_config_dir, 'protocol_key_mapping.json')
