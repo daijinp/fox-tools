@@ -299,6 +299,35 @@ class RuntimeTests(unittest.TestCase):
                              'record': {'device_id': 'offline', 'protocol_version': 'P_OK'}}], 3), [])
             self.assertEqual(store.counts(), {'success': 0, 'fail': 2})
 
+
+    def test_first_match_output_columns_survive_csv_and_checkpoint_resume(self):
+        self.cfg['getui']['read_names'] = [['Status']]
+        self.devices([('one', 'P_ONE'), ('two', 'P_TWO')])
+        parameters = [
+            {'name': 'Modbus-RTU', 'key': 'rtu', 'properties': [{'name': 'Status', 'key': 'switch'}]},
+            {'name': 'Modbus-TCP', 'key': 'tcp', 'properties': [{'name': 'Status', 'key': 'grid'}]},
+        ]
+        mappings = (run._build_protocol_mappings('P_ONE', parameters, [['Status']]) +
+                    run._build_protocol_mappings('P_TWO', list(reversed(parameters)), [['Status']]))
+        self.mappings(mappings)
+        store = self.store()
+        asyncio.run(run.get_setting('offline', store, 'first-matches'))
+        self.assertEqual(self.calls, [('one', 'rtu'), ('two', 'tcp')])
+        rows = {row['device_id']: row for row in self.records('success.csv')}
+        self.assertNotIn('Status', rows['one'])
+        self.assertEqual(rows['one']['Modbus-RTU.Status'], '1')
+        self.assertEqual(rows['two']['Modbus-TCP.Status'], '27')
+        expected = ['Modbus-RTU.Status', 'Modbus-TCP.Status']
+        self.assertEqual(store.get_meta('output_columns'), expected)
+        calls = len(self.calls)
+        # Simulate CSV recovery after an interrupted export.
+        (self.data_dir/'success.csv').write_text('partial', encoding='utf-8')
+        reopened = self.store()
+        asyncio.run(run.get_setting('offline', reopened, 'first-matches'))
+        self.assertEqual(len(self.calls), calls)
+        recovered = {row['device_id']: row for row in self.records('success.csv')}
+        self.assertEqual(recovered, rows)
+
     def test_input_and_fields_select_independent_checkpoints(self):
         self.devices([('one', 'P_OK')])
         store, first_id = run._prepare_checkpoint()

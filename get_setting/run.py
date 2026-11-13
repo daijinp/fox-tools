@@ -41,7 +41,7 @@ def login():
 
 
 def _find_props_recursive(properties, names, parent_path=()):
-    """按字段名或完整名称路径匹配，返回 (配置中的名称, key) 列表。"""
+    """Preserve UI order and retain the complete name of each matched field."""
     results = []
     for prop in properties:
         name = prop.get('name', '')
@@ -49,7 +49,7 @@ def _find_props_recursive(properties, names, parent_path=()):
         full_name = '.'.join(current_path)
         for requested_name in names:
             if requested_name == name or requested_name == full_name:
-                results.append((requested_name, prop['key']))
+                results.append((requested_name, prop['key'], full_name))
         sub_props = prop.get('properties')
         if sub_props:
             results.extend(_find_props_recursive(sub_props, names, current_path))
@@ -57,52 +57,41 @@ def _find_props_recursive(properties, names, parent_path=()):
 
 
 def _build_protocol_mappings(protocol, parameters, read_names):
-    """从一个设备的 UI 参数中提取当前协议所需的 KEY 映射。"""
-    requested_names = []
-    for name_group in read_names:
-        for name in name_group:
-            if name not in requested_names:
-                requested_names.append(name)
-
-    mappings = []
-    mappings_by_request_key = {}
-    selected_keys = {}
+    """Select the first distinct UI target for each configured name."""
+    requested_names = list(dict.fromkeys(name for group in read_names for name in group))
+    candidates = {name: {} for name in requested_names}
     for group in parameters:
         request_key = group.get('key')
         if not request_key:
             continue
-        matched = _find_props_recursive(
-            group.get('properties', []), requested_names, (group.get('name', ''),))
-        if not matched:
+        for name, response_key, full_name in _find_props_recursive(
+                group.get('properties', []), requested_names, (group.get('name', ''),)):
+            candidates[name].setdefault((request_key, response_key), full_name)
+
+    mappings_by_request_key = {}
+    for name in requested_names:
+        matches = candidates[name]
+        if not matches:
             continue
-
-        for name, response_key in matched:
-            target = (request_key, response_key)
-            if name in selected_keys and selected_keys[name] != target:
-                raise ValueError(
-                    f'协议 {protocol} 的查询字段 {name!r} 匹配到多个 KEY: '
-                    f'{selected_keys[name]} 和 {target}；'
-                    '请在 read_names 中使用完整名称路径（如 Modbus-RTU.Status）')
-            selected_keys[name] = target
-
-        mapping = mappings_by_request_key.get(request_key)
-        if mapping is None:
-            mapping = {
-                'protocol_version': protocol,
-                'request_key': request_key,
-                'response_names': [],
-                'response_key': [],
-            }
-            mappings_by_request_key[request_key] = mapping
-            mappings.append(mapping)
-
-        matched_dict = dict(matched)
-        existing_names = set(mapping['response_names'])
-        for name in requested_names:
-            if name in matched_dict and name not in existing_names:
-                mapping['response_names'].append(name)
-                mapping['response_key'].append(matched_dict[name])
-                existing_names.add(name)
+        (request_key, response_key), full_name = next(iter(matches.items()))
+        output_name = full_name if len(matches) > 1 else name
+        if len(matches) > 1:
+            print(f'协议 {protocol} 的字段 {name!r} 匹配到 {len(matches)} 个 KEY，'
+                  f'默认读取第一个 {full_name}', flush=True)
+        mapping = mappings_by_request_key.setdefault(request_key, {
+            'protocol_version': protocol,
+            'request_key': request_key,
+            'response_names': [],
+            'response_key': [],
+            'response_columns': [],
+        })
+        mapping['response_names'].append(name)
+        mapping['response_key'].append(response_key)
+        mapping['response_columns'].append(output_name)
+    mappings = list(mappings_by_request_key.values())
+    for mapping in mappings:
+        if mapping['response_columns'] == mapping['response_names']:
+            del mapping['response_columns']
     return mappings
 
 
@@ -365,15 +354,22 @@ def _clear_skip_protocols():
 
 
 
-def _get_value_columns():
-    """从 read_names 配置中提取动态列名（保持配置顺序）"""
+def _get_value_columns(mappings=None):
+    """Resolve actual output columns while retaining the configured field order."""
+    columns_by_name = {}
+    for mapping in mappings or []:
+        output_names = mapping.get('response_columns', mapping['response_names'])
+        for name, output_name in zip(mapping['response_names'], output_names):
+            resolved = columns_by_name.setdefault(name, [])
+            if output_name not in resolved:
+                resolved.append(output_name)
     columns = []
     for group in config.get('getui', {}).get('read_names', []):
         for name in group:
-            if name not in columns:
-                columns.append(name)
+            for output_name in columns_by_name.get(name, [name]):
+                if output_name not in columns:
+                    columns.append(output_name)
     return columns
-
 
 
 def _load_protocol_key_mapping():
@@ -491,9 +487,10 @@ async def _process_device(session, device_data, token, mapping_by_protocol):
                 return fail(f'key={request_key} errno={data.get("errno")}: {data.get("msg", "")}')
             values = data.get('result', {}).get('values', {})
             key_values = {}
-            for name, key in zip(mapping['response_names'], mapping['response_key']):
+            output_names = mapping.get('response_columns', mapping['response_names'])
+            for output_name, key in zip(output_names, mapping['response_key']):
                 value = values.get(key, 'N/A')
-                name_values[name] = value
+                name_values[output_name] = value
                 key_values[key] = value
             success_info.append({'request_key': request_key, 'values': key_values})
         return {'status': 'success', 'record': {
@@ -616,10 +613,13 @@ async def _run_batch(input_csv, token, mapping_by_protocol, checkpoint, writer,
 
 async def get_setting(token, checkpoint, run_id):
     options = _options()
+    mappings = _load_protocol_key_mapping()
     mapping_by_protocol = {}
-    for mapping in _load_protocol_key_mapping():
+    for mapping in mappings:
         mapping_by_protocol.setdefault(mapping['protocol_version'], []).append(mapping)
-    writer = ResultWriter(checkpoint, _data_dir, _get_value_columns(), run_id)
+    columns = _get_value_columns(mappings)
+    checkpoint.set_meta(output_columns=columns)
+    writer = ResultWriter(checkpoint, _data_dir, columns, run_id)
     await asyncio.to_thread(writer.prepare)
     if checkpoint.get_meta('complete', False):
         print('此任务已经完成；无需重复查询。需要重新查询时设置 resume=false。', flush=True)

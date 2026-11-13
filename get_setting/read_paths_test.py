@@ -60,15 +60,31 @@ class MappingTests(unittest.TestCase):
         self.assertEqual([m['response_key'] for m in mappings],
                          [['work_mode'], ['time_flag']])
 
-    def test_ambiguous_plain_status_reports_an_error(self):
-        with self.assertRaisesRegex(ValueError, 'Status.*多个 KEY'):
-            run._build_protocol_mappings('Q113xx', status_parameters(), [['Status']])
+    def test_ambiguous_plain_status_selects_first_and_qualifies_output(self):
+        mappings = run._build_protocol_mappings('Q113xx', status_parameters(), [['Status']])
+        self.assertEqual(len(mappings), 1)
+        self.assertEqual(mappings[0]['request_key'], 'q113__29')
+        self.assertEqual(mappings[0]['response_key'], ['q113__29__00'])
+        self.assertEqual(mappings[0]['response_names'], ['Status'])
+        self.assertEqual(mappings[0]['response_columns'], ['Modbus-RTU.Status'])
 
-    def test_ambiguous_names_within_one_request_report_an_error(self):
+    def test_first_match_follows_ui_order(self):
+        mappings = run._build_protocol_mappings('Q113xx', list(reversed(status_parameters())), [['Status']])
+        self.assertEqual(mappings[0]['request_key'], 'q113__30')
+        self.assertEqual(mappings[0]['response_columns'], ['Modbus-TCP.Status'])
+
+    def test_ambiguous_names_within_one_request_select_first_key(self):
         parameters = status_parameters()[:1]
         parameters[0]['properties'].append({'name': 'Status', 'key': 'another_status'})
-        with self.assertRaisesRegex(ValueError, '多个 KEY'):
-            run._build_protocol_mappings('Q113xx', parameters, [['Modbus-RTU.Status']])
+        mappings = run._build_protocol_mappings('Q113xx', parameters, [['Modbus-RTU.Status']])
+        self.assertEqual(mappings[0]['response_key'], ['q113__29__00'])
+        self.assertEqual(mappings[0]['response_names'], ['Modbus-RTU.Status'])
+
+    def test_bare_and_explicit_aliases_share_one_output_column(self):
+        mappings = run._build_protocol_mappings(
+            'Q113xx', status_parameters(), [['Status', 'Modbus-RTU.Status']])
+        with patch.dict(run.config, {'getui': {'read_names': [['Status', 'Modbus-RTU.Status']]}}):
+            self.assertEqual(run._get_value_columns(mappings), ['Modbus-RTU.Status'])
 
     def test_repeated_identical_target_is_deduplicated(self):
         parameters = status_parameters()[:1] * 2
